@@ -47,16 +47,23 @@ This version does not yet derive timber design resistances from characteristic s
 
 ## Run locally
 
-Install dependencies:
+Desde la raíz del repositorio, crea un entorno virtual (recomendado) e instala dependencias:
+
+```bash
+python -m venv .venv
+```
+
+En Windows (PowerShell): `.\.venv\Scripts\Activate.ps1`  
+En macOS/Linux: `source .venv/bin/activate`
 
 ```bash
 pip install -e .[dev]
 ```
 
-Start the API:
+Arranca la API (usa el módulo de Python para que funcione aunque `uvicorn` no esté en el PATH):
 
 ```bash
-uvicorn app.main:app --reload
+python -m uvicorn app.main:app --reload
 ```
 
 Run tests:
@@ -81,6 +88,18 @@ Start the frontend:
 ```bash
 npm run dev
 ```
+
+En **otra terminal**, desde la raíz del repositorio (con el mismo entorno virtual activado si usas uno), arranca la API:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+Desde `frontend/` también puedes usar `npm run dev:api` (equivale a subir al directorio padre y ejecutar el comando anterior).
+
+Si PowerShell dice que `uvicorn` no se reconoce, no uses el ejecutable suelto: usa siempre **`python -m uvicorn`** después de `pip install -e .[dev]`.
+
+Si en la consola de Vite aparece `ECONNREFUSED 127.0.0.1:8000` o en la app «Error HTTP 500» con cuerpo vacío, el backend no está en marcha. En desarrollo, Vite reenvía `/calculate` y `/analyze` al puerto 8000.
 
 ## Static design preview
 

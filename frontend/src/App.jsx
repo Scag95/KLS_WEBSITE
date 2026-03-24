@@ -1,6 +1,69 @@
 import { useState, useEffect } from "react";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+/** En desarrollo, URL vacía = mismo origen (Vite reenvía /calculate y /analyze al backend). En build, por defecto 127.0.0.1:8000. */
+const API_BASE =
+  import.meta.env.VITE_API_BASE_URL ??
+  (import.meta.env.DEV ? "" : "http://127.0.0.1:8000");
+
+function apiUrl(path) {
+  const base = API_BASE.replace(/\/$/, "");
+  const p = path.startsWith("/") ? path : `/${path}`;
+  return base ? `${base}${p}` : p;
+}
+
+function apiErrorMessage(error) {
+  const msg = error?.message ?? "";
+  if (msg === "Failed to fetch" || error?.name === "TypeError") {
+    return (
+      "No se pudo conectar con la API. En la raíz del repo: pip install -e .[dev] y luego " +
+      "python -m uvicorn app.main:app --reload (puerto 8000)."
+    );
+  }
+  return msg || "Error al comunicarse con la API.";
+}
+
+/** Evita fallos al llamar response.json() con cuerpo vacío o no JSON (p. ej. proxy o error HTML). */
+async function readJsonFromResponse(response) {
+  const text = await response.text();
+  const trimmed = text.trim();
+  if (!trimmed) {
+    return null;
+  }
+  try {
+    return JSON.parse(trimmed);
+  } catch {
+    const preview = trimmed.length > 200 ? `${trimmed.slice(0, 200)}…` : trimmed;
+    throw new Error(
+      response.ok
+        ? "La API devolvió un cuerpo que no es JSON válido."
+        : `Error ${response.status}: ${preview}`,
+    );
+  }
+}
+
+const BACKEND_HINT =
+  "Arranca la API en otra terminal (desde la raíz del repo): python -m uvicorn app.main:app --reload (si falla, ejecuta antes: pip install -e .[dev]).";
+
+function formatHttpErrorDetail(status, data) {
+  if (data == null) {
+    if (status >= 500 && status < 600) {
+      return (
+        "El proxy de Vite no pudo hablar con el backend (suele ser ECONNREFUSED: nada escucha en 127.0.0.1:8000). " +
+        BACKEND_HINT
+      );
+    }
+    return `Error HTTP ${status} (respuesta vacía o sin JSON).`;
+  }
+  if (Array.isArray(data.detail)) {
+    const msgs = data.detail
+      .map((item) => (typeof item === "string" ? item : item?.msg))
+      .filter(Boolean);
+    if (msgs.length) return msgs.join(" | ");
+  }
+  if (typeof data.detail === "string") return data.detail;
+  if (data.message != null) return String(data.message);
+  return `Error HTTP ${status}`;
+}
 
 const initialForm = {
   project_name: "Vivienda unifamiliar",
@@ -175,7 +238,7 @@ function App() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/calculate/floor-joist`, {
+      const response = await fetch(apiUrl("/calculate/floor-joist"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -183,16 +246,16 @@ function App() {
         body: JSON.stringify(payload),
       });
 
+      const body = await readJsonFromResponse(response);
       if (!response.ok) {
-        const body = await response.json();
-        const detail = body.detail?.map((item) => item.msg).join(" | ") || "La API devolvió un error.";
-        throw new Error(detail);
+        throw new Error(formatHttpErrorDetail(response.status, body));
       }
-
-      const body = await response.json();
+      if (body == null) {
+        throw new Error("La API devolvió una respuesta vacía.");
+      }
       setResult(body);
     } catch (error) {
-      setRequestError(error.message || "No se pudo conectar con la API.");
+      setRequestError(apiErrorMessage(error));
     } finally {
       setIsSubmitting(false);
     }
@@ -620,7 +683,7 @@ function DiagramsSection({ result, view = "results", form }) {
     };
 
     try {
-      const response = await fetch(`${API_BASE_URL}/analyze/beam`, {
+      const response = await fetch(apiUrl("/analyze/beam"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -628,11 +691,13 @@ function DiagramsSection({ result, view = "results", form }) {
         body: JSON.stringify(payload),
       });
 
+      const data = await readJsonFromResponse(response);
       if (!response.ok) {
-        throw new Error("Error en la API de análisis de viga");
+        throw new Error(formatHttpErrorDetail(response.status, data));
       }
-
-      const data = await response.json();
+      if (data == null) {
+        throw new Error("La API de análisis devolvió una respuesta vacía.");
+      }
       setDiagramData(data);
     } catch (err) {
       setError(err.message);
@@ -960,8 +1025,8 @@ function CrossSectionView({ widthMm, depthMm }) {
     <svg viewBox={`0 0 ${width} ${height}`} className="section-svg" aria-label="Vista de sección transversal">
       <defs>
         <linearGradient id="sectionFill" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#ffd4a8" stopOpacity="0.95" />
-          <stop offset="100%" stopColor="#d87c45" stopOpacity="0.88" />
+          <stop offset="0%" stopColor="#c4b896" stopOpacity="0.92" />
+          <stop offset="100%" stopColor="#86764f" stopOpacity="0.9" />
         </linearGradient>
       </defs>
 
