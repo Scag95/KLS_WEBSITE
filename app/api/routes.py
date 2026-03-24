@@ -1,9 +1,16 @@
 from fastapi import APIRouter
 
 from app.domain.combinations import generate_combinations
-from app.domain.calculator import calculate_floor_joist
+from app.domain.calculator import calculate_floor_joist, calculate_floor_joist_with_combinations
+from app.domain.fem import analyze_beam
 from app.schemas.actions import GeneratedCombinationSet, ProjectActionCatalog
-from app.schemas.floor_joist import FloorJoistCalculationRequest, FloorJoistCalculationResponse
+from app.schemas.fem import BeamAnalysisRequest, BeamAnalysisResponse
+from app.schemas.floor_joist import (
+    FloorJoistCalculationRequest,
+    FloorJoistCalculationResponse,
+    FloorJoistCombinationCalculationRequest,
+    FloorJoistCombinationCalculationResponse,
+)
 
 router = APIRouter()
 
@@ -22,6 +29,26 @@ def calculate_floor_joist_endpoint(
     payload: FloorJoistCalculationRequest,
 ) -> FloorJoistCalculationResponse:
     return calculate_floor_joist(payload)
+
+
+@router.post(
+    "/calculate/floor-joist/combinations",
+    response_model=FloorJoistCombinationCalculationResponse,
+    tags=["calculations"],
+)
+def calculate_floor_joist_with_combinations_endpoint(
+    payload: FloorJoistCombinationCalculationRequest,
+) -> FloorJoistCombinationCalculationResponse:
+    return calculate_floor_joist_with_combinations(payload)
+
+
+@router.post(
+    "/analyze/beam",
+    response_model=BeamAnalysisResponse,
+    tags=["analysis"],
+)
+def analyze_beam_endpoint(payload: BeamAnalysisRequest) -> BeamAnalysisResponse:
+    return analyze_beam(payload)
 
 
 @router.post(

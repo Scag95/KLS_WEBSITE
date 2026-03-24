@@ -1,12 +1,21 @@
 from __future__ import annotations
 
+from app.domain.combinations import generate_combinations
+from app.schemas.actions import ActionType, CombinationType, GeneratedCombination
 from app.schemas.floor_joist import (
+    ActiveDeflectionCriterion,
     AppliedLoads,
+    CombinationCalculationCase,
     CheckResult,
     FloorJoistCalculationRequest,
+    FloorJoistCombinationCalculationRequest,
+    FloorJoistCombinationCalculationResponse,
     FloorJoistCalculationResponse,
     FloorJoistGeometry,
     IntermediateValues,
+    LimitStateSummary,
+    NationalAnnexProfile,
+    ServiceabilitySummary,
     TimberProperties,
     WarningMessage,
 )
@@ -69,7 +78,7 @@ def utilization_ratio(demand: float, capacity: float) -> float:
 def _warning_messages(
     geometry: FloorJoistGeometry,
     timber: TimberProperties,
-    loads: AppliedLoads,
+    variable_area_load_kN_per_m2: float,
     deflection_mm_value: float,
 ) -> list[WarningMessage]:
     warnings: list[WarningMessage] = []
@@ -86,7 +95,7 @@ def _warning_messages(
             )
         )
 
-    if loads.imposed_load_kN_per_m2 == 0:
+    if variable_area_load_kN_per_m2 == 0:
         warnings.append(
             WarningMessage(
                 code="ZERO_IMPOSED_LOAD",
@@ -113,17 +122,18 @@ def _warning_messages(
     return warnings
 
 
-def calculate_floor_joist(
-    request: FloorJoistCalculationRequest,
-) -> FloorJoistCalculationResponse:
-    geometry = request.geometry
-    timber = request.timber
-    loads = request.loads
-    criteria = request.criteria
+def _build_calculation_response(
+    geometry: FloorJoistGeometry,
+    timber: TimberProperties,
+    criteria,
+    total_area_load_kN_per_m2: float,
+    variable_area_load_kN_per_m2: float,
+    check_names: tuple[str, ...] = ("bending", "shear", "deflection"),
+):
+    line_load_kN_per_m = total_area_load_kN_per_m2 * geometry.spacing_m
 
     inertia_mm4 = rectangular_section_inertia_mm4(geometry.width_mm, geometry.depth_mm)
     section_modulus_mm3 = rectangular_section_modulus_mm3(geometry.width_mm, geometry.depth_mm)
-    line_load_kN_per_m = joist_line_load_kN_per_m(loads, geometry)
     moment_kNm = max_bending_moment_kNm(line_load_kN_per_m, geometry.span_m)
     shear_kN = max_shear_force_kN(line_load_kN_per_m, geometry.span_m)
     bending_mpa = bending_stress_mpa(moment_kNm, section_modulus_mm3)
@@ -143,8 +153,8 @@ def calculate_floor_joist(
     shear_ratio = utilization_ratio(shear_mpa, timber.allowable_shear_stress_mpa)
     deflection_ratio = utilization_ratio(deflection_mm_value, allowable_deflection_value)
 
-    checks = [
-        CheckResult(
+    check_templates = {
+        "bending": CheckResult(
             check="bending",
             demand=bending_mpa,
             capacity=timber.allowable_bending_stress_mpa,
@@ -152,7 +162,7 @@ def calculate_floor_joist(
             unit="MPa",
             passed=bending_ratio <= 1.0,
         ),
-        CheckResult(
+        "shear": CheckResult(
             check="shear",
             demand=shear_mpa,
             capacity=timber.allowable_shear_stress_mpa,
@@ -160,7 +170,7 @@ def calculate_floor_joist(
             unit="MPa",
             passed=shear_ratio <= 1.0,
         ),
-        CheckResult(
+        "deflection": CheckResult(
             check="deflection",
             demand=deflection_mm_value,
             capacity=allowable_deflection_value,
@@ -168,18 +178,18 @@ def calculate_floor_joist(
             unit="mm",
             passed=deflection_ratio <= 1.0,
         ),
-    ]
+    }
+    checks = [check_templates[name] for name in check_names]
 
-    warnings = _warning_messages(geometry, timber, loads, deflection_mm_value)
+    warnings = _warning_messages(geometry, timber, variable_area_load_kN_per_m2, deflection_mm_value)
     passed = all(check.passed for check in checks)
 
-    return FloorJoistCalculationResponse(
-        summary={
+    return {
+        "summary": {
             "passed": passed,
-            "governing_check": max(checks, key=lambda item: item.utilization).check,
+            "governing_check": max(checks, key=lambda item: item.utilization).check if checks else "deflection",
         },
-        inputs=request,
-        results=IntermediateValues(
+        "results": IntermediateValues(
             line_load_kN_per_m=line_load_kN_per_m,
             max_moment_kNm=moment_kNm,
             max_shear_kN=shear_kN,
@@ -190,6 +200,211 @@ def calculate_floor_joist(
             deflection_mm=deflection_mm_value,
             allowable_deflection_mm=allowable_deflection_value,
         ),
-        checks=checks,
-        warnings=warnings,
+        "checks": checks,
+        "warnings": warnings,
+    }
+
+
+def _combination_area_loads(combination: GeneratedCombination) -> tuple[float, float]:
+    total_area_load_kN_per_m2 = sum(term.design_value_kN_per_m2 for term in combination.terms)
+    variable_area_load_kN_per_m2 = sum(
+        term.design_value_kN_per_m2 for term in combination.terms if term.action_type != ActionType.PERMANENT
+    )
+    return total_area_load_kN_per_m2, variable_area_load_kN_per_m2
+
+
+def _active_deflection_ratio(criteria) -> float:
+    return {
+        ActiveDeflectionCriterion.FRAGILE_ELEMENTS: 500.0,
+        ActiveDeflectionCriterion.ORDINARY_ELEMENTS: 400.0,
+        ActiveDeflectionCriterion.WITH_PLASTER_CEILING: 300.0,
+        ActiveDeflectionCriterion.WITHOUT_PLASTER_CEILING: 200.0,
+    }[criteria.active_deflection_criterion]
+
+
+def _sls_checks_for_combination(
+    combination: GeneratedCombination,
+    geometry: FloorJoistGeometry,
+    timber: TimberProperties,
+    criteria,
+    total_area_load_kN_per_m2: float,
+    variable_area_load_kN_per_m2: float,
+) -> tuple[IntermediateValues, list[CheckResult], list[WarningMessage], bool]:
+    calculation = _build_calculation_response(
+        geometry,
+        timber,
+        criteria,
+        total_area_load_kN_per_m2,
+        variable_area_load_kN_per_m2,
+        check_names=(),
+    )
+    results = calculation["results"]
+    warnings = calculation["warnings"]
+
+    checks: list[CheckResult] = []
+
+    if combination.combination_type == CombinationType.SLS_CHARACTERISTIC:
+        active_limit = allowable_deflection_mm(geometry.span_m, _active_deflection_ratio(criteria))
+        instantaneous_limit = allowable_deflection_mm(geometry.span_m, 350.0)
+        checks.append(
+            CheckResult(
+                check="deflection_active",
+                demand=results.deflection_mm,
+                capacity=active_limit,
+                utilization=utilization_ratio(results.deflection_mm, active_limit),
+                unit="mm",
+                passed=results.deflection_mm <= active_limit,
+            )
+        )
+        checks.append(
+            CheckResult(
+                check="deflection_instantaneous",
+                demand=results.deflection_mm,
+                capacity=instantaneous_limit,
+                utilization=utilization_ratio(results.deflection_mm, instantaneous_limit),
+                unit="mm",
+                passed=results.deflection_mm <= instantaneous_limit,
+            )
+        )
+    elif combination.combination_type == CombinationType.SLS_QUASI_PERMANENT:
+        final_limit = allowable_deflection_mm(geometry.span_m, 300.0)
+        checks.append(
+            CheckResult(
+                check="deflection_final",
+                demand=results.deflection_mm,
+                capacity=final_limit,
+                utilization=utilization_ratio(results.deflection_mm, final_limit),
+                unit="mm",
+                passed=results.deflection_mm <= final_limit,
+            )
+        )
+
+    passed = all(check.passed for check in checks) if checks else True
+    return results, checks, warnings, passed
+
+
+def _national_annex_notes(criteria) -> list[str]:
+    if criteria.national_annex_profile != NationalAnnexProfile.SPAIN_TIMBER_BUILDINGS:
+        return []
+
+    return [
+        "Spanish timber annex profile enabled for building members under AN/UNE-EN 1995-1-1.",
+        "Service class default kept at class 1, which matches intermediate floors between habitable spaces in the Spanish annex.",
+        "SLS deflection defaults follow the Spanish annex limits for active, floor comfort, and final deflection.",
+        "ULS resistance still uses the user-provided allowable timber stresses; characteristic strengths, kmod, and kdef are not yet modeled in this version.",
+        "For EN 1990 buildings, the Spanish national annex values are not fully fixed in the MITMA annex available publicly, so action combination rules remain on the generic Eurocode basis already implemented.",
+    ]
+
+
+def calculate_floor_joist(
+    request: FloorJoistCalculationRequest,
+) -> FloorJoistCalculationResponse:
+    geometry = request.geometry
+    timber = request.timber
+    loads = request.loads
+    criteria = request.criteria
+
+    calculation = _build_calculation_response(
+        geometry,
+        timber,
+        criteria,
+        loads.total_area_load_kN_per_m2,
+        loads.imposed_load_kN_per_m2,
+    )
+
+    return FloorJoistCalculationResponse(
+        summary=calculation["summary"],
+        inputs=request,
+        results=calculation["results"],
+        checks=calculation["checks"],
+        warnings=calculation["warnings"],
+    )
+
+
+def calculate_floor_joist_with_combinations(
+    request: FloorJoistCombinationCalculationRequest,
+) -> FloorJoistCombinationCalculationResponse:
+    generated_combinations = generate_combinations(request.action_catalog)
+    uls_cases: list[CombinationCalculationCase] = []
+    sls_cases: list[CombinationCalculationCase] = []
+
+    for combination in generated_combinations.combinations:
+        total_area_load_kN_per_m2, variable_area_load_kN_per_m2 = _combination_area_loads(combination)
+        if combination.combination_type == CombinationType.ULS_FUNDAMENTAL:
+            calculation = _build_calculation_response(
+                request.geometry,
+                request.timber,
+                request.criteria,
+                total_area_load_kN_per_m2,
+                variable_area_load_kN_per_m2,
+                check_names=("bending", "shear"),
+            )
+            uls_cases.append(
+                CombinationCalculationCase(
+                    combination=combination,
+                    summary=calculation["summary"],
+                    results=calculation["results"],
+                    checks=calculation["checks"],
+                    warnings=calculation["warnings"],
+                )
+            )
+        elif combination.combination_type in {
+            CombinationType.SLS_CHARACTERISTIC,
+            CombinationType.SLS_QUASI_PERMANENT,
+        }:
+            results, checks, warnings, passed = _sls_checks_for_combination(
+                combination,
+                request.geometry,
+                request.timber,
+                request.criteria,
+                total_area_load_kN_per_m2,
+                variable_area_load_kN_per_m2,
+            )
+            if checks:
+                sls_cases.append(
+                    CombinationCalculationCase(
+                        combination=combination,
+                        summary={
+                            "passed": passed,
+                            "governing_check": max(checks, key=lambda item: item.utilization).check,
+                        },
+                        results=results,
+                        checks=checks,
+                        warnings=warnings,
+                    )
+                )
+
+    governing_uls_case = max(
+        uls_cases,
+        key=lambda case: max(check.utilization for check in case.checks),
+    )
+    governing_uls_check = max(governing_uls_case.checks, key=lambda check: check.utilization)
+    governing_sls_case = max(
+        sls_cases,
+        key=lambda case: max(check.utilization for check in case.checks),
+    )
+    governing_sls_check = max(governing_sls_case.checks, key=lambda check: check.utilization)
+
+    return FloorJoistCombinationCalculationResponse(
+        summary={
+            "passed": all(case.summary.passed for case in uls_cases + sls_cases),
+            "uls_passed": all(case.summary.passed for case in uls_cases),
+            "sls_passed": all(case.summary.passed for case in sls_cases),
+        },
+        inputs=request,
+        national_annex_notes=_national_annex_notes(request.criteria),
+        uls_summary=LimitStateSummary(
+            passed=all(case.summary.passed for case in uls_cases),
+            governing_check=governing_uls_check.check,
+            governing_combination_type=governing_uls_case.combination.combination_type,
+            governing_leading_action_id=governing_uls_case.combination.leading_action_id,
+        ),
+        sls_summary=ServiceabilitySummary(
+            passed=all(case.summary.passed for case in sls_cases),
+            governing_check=governing_sls_check.check,
+            governing_combination_type=governing_sls_case.combination.combination_type,
+            governing_leading_action_id=governing_sls_case.combination.leading_action_id,
+        ),
+        uls_combinations=uls_cases,
+        sls_combinations=sls_cases,
     )

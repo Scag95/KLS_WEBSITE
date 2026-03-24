@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+from enum import StrEnum
 from typing import Literal
 
 from pydantic import BaseModel, Field, computed_field, model_validator
+
+from app.schemas.actions import GeneratedCombination, ProjectActionCatalog
 
 
 class FloorJoistGeometry(BaseModel):
@@ -22,6 +25,24 @@ class TimberProperties(BaseModel):
         gt=0,
         description="Optional density for future self-weight or reporting features.",
     )
+
+
+class NationalAnnexProfile(StrEnum):
+    GENERIC = "generic"
+    SPAIN_TIMBER_BUILDINGS = "spain_timber_buildings"
+
+
+class ServiceClass(StrEnum):
+    SC1 = "service_class_1"
+    SC2 = "service_class_2"
+    SC3 = "service_class_3"
+
+
+class ActiveDeflectionCriterion(StrEnum):
+    FRAGILE_ELEMENTS = "fragile_elements"
+    ORDINARY_ELEMENTS = "ordinary_elements"
+    WITH_PLASTER_CEILING = "with_plaster_ceiling"
+    WITHOUT_PLASTER_CEILING = "without_plaster_ceiling"
 
 
 class AppliedLoads(BaseModel):
@@ -53,6 +74,18 @@ class DesignCriteria(BaseModel):
         default=300.0,
         gt=0,
         description="Span/ratio serviceability limit for deflection checks.",
+    )
+    national_annex_profile: NationalAnnexProfile = Field(
+        default=NationalAnnexProfile.GENERIC,
+        description="Calculation profile used to interpret serviceability checks and defaults.",
+    )
+    service_class: ServiceClass = Field(
+        default=ServiceClass.SC1,
+        description="Timber service class used by the selected national annex profile.",
+    )
+    active_deflection_criterion: ActiveDeflectionCriterion = Field(
+        default=ActiveDeflectionCriterion.ORDINARY_ELEMENTS,
+        description="Spanish timber annex deflection criterion for active deformation checks.",
     )
 
     @model_validator(mode="after")
@@ -86,7 +119,14 @@ class IntermediateValues(BaseModel):
 
 
 class CheckResult(BaseModel):
-    check: Literal["bending", "shear", "deflection"]
+    check: Literal[
+        "bending",
+        "shear",
+        "deflection",
+        "deflection_active",
+        "deflection_instantaneous",
+        "deflection_final",
+    ]
     demand: float
     capacity: float
     utilization: float
@@ -104,9 +144,64 @@ class CalculationSummary(BaseModel):
     governing_check: Literal["bending", "shear", "deflection"]
 
 
+class CombinationCaseSummary(BaseModel):
+    passed: bool
+    governing_check: Literal[
+        "bending",
+        "shear",
+        "deflection",
+        "deflection_active",
+        "deflection_instantaneous",
+        "deflection_final",
+    ]
+
+
 class FloorJoistCalculationResponse(BaseModel):
     summary: CalculationSummary
     inputs: FloorJoistCalculationRequest
     results: IntermediateValues
     checks: list[CheckResult]
     warnings: list[WarningMessage]
+
+
+class FloorJoistCombinationCalculationRequest(BaseModel):
+    project_name: str | None = Field(
+        default=None,
+        description="Optional project or case label for traceability.",
+    )
+    geometry: FloorJoistGeometry
+    timber: TimberProperties
+    criteria: DesignCriteria = Field(default_factory=DesignCriteria)
+    action_catalog: ProjectActionCatalog
+
+
+class CombinationCalculationCase(BaseModel):
+    combination: GeneratedCombination
+    summary: CombinationCaseSummary
+    results: IntermediateValues
+    checks: list[CheckResult]
+    warnings: list[WarningMessage]
+
+
+class LimitStateSummary(BaseModel):
+    passed: bool
+    governing_check: Literal["bending", "shear", "deflection"]
+    governing_combination_type: str
+    governing_leading_action_id: str | None = None
+
+
+class ServiceabilitySummary(BaseModel):
+    passed: bool
+    governing_check: Literal["deflection_active", "deflection_instantaneous", "deflection_final"]
+    governing_combination_type: str
+    governing_leading_action_id: str | None = None
+
+
+class FloorJoistCombinationCalculationResponse(BaseModel):
+    summary: dict[str, bool]
+    inputs: FloorJoistCombinationCalculationRequest
+    national_annex_notes: list[str]
+    uls_summary: LimitStateSummary
+    sls_summary: ServiceabilitySummary
+    uls_combinations: list[CombinationCalculationCase]
+    sls_combinations: list[CombinationCalculationCase]

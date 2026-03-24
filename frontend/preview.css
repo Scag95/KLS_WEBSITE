@@ -100,10 +100,25 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+  margin-bottom: 24px;
 }
 
 .panel-heading {
   margin-bottom: 22px;
+}
+
+.panel-heading-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.diagram-controls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
 .calc-form {
@@ -181,6 +196,10 @@ input {
   margin-bottom: 18px;
 }
 
+.metrics-grid-compact {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .result-card {
   display: flex;
   flex-direction: column;
@@ -226,10 +245,132 @@ input {
   color: var(--fail);
 }
 
+.panel-diagrams {
+  margin-top: 0;
+}
+
+.diagram-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.diagram-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 16px;
+}
+
+.diagram-card-header,
+.diagram-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.diagram-card-header {
+  margin-bottom: 12px;
+}
+
+.diagram-card-footer {
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+.diagram-svg {
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    repeating-linear-gradient(
+      to right,
+      transparent,
+      transparent 44px,
+      rgba(255, 255, 255, 0.04) 44px,
+      rgba(255, 255, 255, 0.04) 45px
+    );
+}
+
+.axis-line {
+  stroke: rgba(255, 249, 238, 0.35);
+  stroke-width: 1.5;
+}
+
+.diagram-line {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.diagram-svg.shear .diagram-line {
+  stroke: #ffb35c;
+}
+
+.diagram-svg.moment .diagram-line {
+  stroke: #8fd18f;
+}
+
+.diagram-svg.deflection .diagram-line {
+  stroke: #8cc8ff;
+}
+
+.diagram-point {
+  fill: #fff4dc;
+}
+
+.beam-view-card {
+  margin-bottom: 18px;
+}
+
+#beam-view {
+  width: 100%;
+}
+
+.beam-svg {
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    radial-gradient(circle at top right, rgba(140, 200, 255, 0.09), transparent 34%);
+}
+
+.beam-baseline {
+  stroke: rgba(255, 244, 220, 0.58);
+  stroke-width: 4;
+}
+
+.beam-deformed {
+  fill: none;
+  stroke: #8cc8ff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.beam-support {
+  fill: rgba(240, 164, 93, 0.2);
+  stroke: #f0a45d;
+  stroke-width: 2;
+}
+
+.beam-node {
+  fill: #fff4dc;
+ }
+
 @media (max-width: 980px) {
   .hero,
   .layout {
     grid-template-columns: 1fr;
+  }
+
+  .diagram-controls,
+  .metrics-grid-compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -241,8 +382,15 @@ input {
 
   .field-grid,
   .metrics-grid,
-  .summary-band {
+  .summary-band,
+  .diagram-controls,
+  .metrics-grid-compact {
     grid-template-columns: 1fr;
+  }
+
+  .panel-heading-inline {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .hero-copy,

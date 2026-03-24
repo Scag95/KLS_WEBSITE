@@ -197,6 +197,77 @@
           </div>
         </section>
       </main>
+
+      <section class="panel panel-diagrams">
+        <div class="panel-heading panel-heading-inline">
+          <div>
+            <h2>Diagramas estructurales</h2>
+            <p id="diagram-source">Cargando datos del backend...</p>
+          </div>
+          <button type="button" id="render-diagrams" class="submit-button">Actualizar diagramas</button>
+        </div>
+
+        <div class="diagram-controls">
+          <label>
+            <span>Luz (m)</span>
+            <input id="beam-length" type="number" step="0.1" value="4.0" />
+          </label>
+          <label>
+            <span>Elementos</span>
+            <input id="beam-elements" type="number" step="1" min="1" value="100" />
+          </label>
+          <label>
+            <span>Carga uniforme (kN/m)</span>
+            <input id="beam-load" type="number" step="0.1" value="-1.6" />
+          </label>
+          <label>
+            <span>Módulo E (MPa)</span>
+            <input id="beam-e" type="number" step="100" value="11000" />
+          </label>
+        </div>
+
+        <div class="metrics-grid metrics-grid-compact">
+          <article class="result-card">
+            <span class="metric-label">Flecha máxima</span>
+            <strong id="max-deflection">-</strong>
+            <span>Euler-Bernoulli</span>
+          </article>
+          <article class="result-card">
+            <span class="metric-label">Momento máximo</span>
+            <strong id="max-moment">-</strong>
+            <span>Diagrama</span>
+          </article>
+          <article class="result-card">
+            <span class="metric-label">Cortante máximo</span>
+            <strong id="max-shear">-</strong>
+            <span>Diagrama</span>
+          </article>
+          <article class="result-card">
+            <span class="metric-label">Nodos</span>
+            <strong id="node-count">-</strong>
+            <span>malla</span>
+          </article>
+          <article class="result-card">
+            <span class="metric-label">Elementos</span>
+            <strong id="element-count">-</strong>
+            <span>subdivisión</span>
+          </article>
+        </div>
+
+        <article class="diagram-card beam-view-card">
+          <div class="diagram-card-header">
+            <h3>Viga y deformada</h3>
+            <span>Vista general</span>
+          </div>
+          <div id="beam-view"></div>
+          <div class="diagram-card-footer">
+            La línea clara representa el eje no deformado y la línea azul la deformada amplificada.
+          </div>
+        </article>
+
+        <div id="diagram-grid" class="diagram-grid"></div>
+      </section>
     </div>
+    <script src="./preview.js"></script>
   </body>
 </html>

@@ -5,9 +5,12 @@ Backend API built with FastAPI for timber floor joist calculations.
 ## What is included
 
 - FastAPI application with `/health` and `/calculate/floor-joist`.
+- Combined floor-joist calculation endpoint at `/calculate/floor-joist/combinations`.
 - Typed request and response schemas with Pydantic.
 - Action pattern schemas for permanent, imposed, snow, and wind actions aligned with EN 1991 parts.
 - Project action catalogs and a combination generator for ULS/SLS action sets.
+- Finite-element input/output schemas for future beam discretization and diagrams.
+- Early FEM core for 1D beam mesh generation, local stiffness, and global assembly.
 - Reusable calculation engine separated from the HTTP layer.
 - Pytest coverage for the domain engine and API contract.
 - React frontend scaffold under `frontend/` for interactive input and result display.
@@ -27,6 +30,20 @@ This first version models a simply supported timber joist under uniformly distri
 - warnings for some common review conditions
 
 The `design_standard` field is included for traceability, but no specific timber design code has been encoded yet.
+
+The combined floor-joist endpoint now separates:
+
+- `ULS` combinations for bending and shear checks
+- `SLS` combinations for deflection checks
+
+When the `spain_timber_buildings` profile is selected, the backend applies Spanish timber annex defaults for serviceability interpretation:
+
+- service class 1 as the default for intermediate floors between habitable spaces
+- active deflection criteria based on the selected finish sensitivity
+- floor comfort deflection limit `L/350`
+- final deflection limit `L/300`
+
+This version does not yet derive timber design resistances from characteristic strengths, `kmod`, `kdef`, and `gamma_M`; ULS resistance still uses the allowable stresses provided in the input.
 
 ## Run locally
 
