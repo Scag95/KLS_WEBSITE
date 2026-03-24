@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from app.api.routes import router
 
@@ -23,5 +25,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+async def read_root():
+    return FileResponse("frontend/preview.html", media_type="text/html")
+
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
 app.include_router(router)
