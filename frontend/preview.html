@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KLS Timber Floor Calculator Preview</title>
+    <link rel="stylesheet" href="./preview.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">KLS Timber Studio</p>
+          <h1>Calculadora de forjado de madera</h1>
+          <p class="hero-text">
+            Esta vista es una maqueta en HTML para revisar el diseño sin instalar herramientas de frontend.
+            Muestra cómo se organizarán entradas, resultados y comprobaciones en la futura aplicación.
+          </p>
+        </div>
+        <div class="hero-card">
+          <span class="hero-card-label">Comprobación gobernante</span>
+          <strong>deflection</strong>
+          <span class="status-pill pass">Cumple</span>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel panel-form">
+          <div class="panel-heading">
+            <h2>Entradas</h2>
+            <p>Formulario visual de referencia para geometría, madera, cargas y criterio.</p>
+          </div>
+
+          <form class="calc-form">
+            <div class="field-grid single">
+              <label>
+                <span>Proyecto</span>
+                <input value="Vivienda unifamiliar" readonly />
+              </label>
+            </div>
+
+            <section class="form-group">
+              <div class="group-title">
+                <h3>Geometría</h3>
+              </div>
+              <div class="field-grid">
+                <label>
+                  <span>Luz (m)</span>
+                  <input value="4.00" readonly />
+                </label>
+                <label>
+                  <span>Separación (m)</span>
+                  <input value="0.40" readonly />
+                </label>
+                <label>
+                  <span>Ancho (mm)</span>
+                  <input value="63" readonly />
+                </label>
+                <label>
+                  <span>Canto (mm)</span>
+                  <input value="200" readonly />
+                </label>
+              </div>
+            </section>
+
+            <section class="form-group">
+              <div class="group-title">
+                <h3>Madera</h3>
+              </div>
+              <div class="field-grid">
+                <label>
+                  <span>Clase</span>
+                  <input value="C24" readonly />
+                </label>
+                <label>
+                  <span>Módulo E (MPa)</span>
+                  <input value="11000" readonly />
+                </label>
+                <label>
+                  <span>Flexión admisible (MPa)</span>
+                  <input value="11.0" readonly />
+                </label>
+                <label>
+                  <span>Cortante admisible (MPa)</span>
+                  <input value="1.2" readonly />
+                </label>
+              </div>
+            </section>
+
+            <section class="form-group">
+              <div class="group-title">
+                <h3>Cargas</h3>
+              </div>
+              <div class="field-grid">
+                <label>
+                  <span>Carga permanente (kN/m2)</span>
+                  <input value="1.5" readonly />
+                </label>
+                <label>
+                  <span>Sobrecarga (kN/m2)</span>
+                  <input value="2.0" readonly />
+                </label>
+                <label>
+                  <span>Carga adicional (kN/m2)</span>
+                  <input value="0.5" readonly />
+                </label>
+                <label>
+                  <span>Límite de flecha L/x</span>
+                  <input value="300" readonly />
+                </label>
+              </div>
+            </section>
+
+            <button type="button" class="submit-button">Calcular forjado</button>
+          </form>
+        </section>
+
+        <section class="panel panel-results">
+          <div class="panel-heading">
+            <h2>Resultados</h2>
+            <p>Representación visual del panel de salida del cálculo.</p>
+          </div>
+
+          <div class="summary-band">
+            <div>
+              <span class="metric-label">Estado</span>
+              <strong>Cumple</strong>
+            </div>
+            <div>
+              <span class="metric-label">Controla</span>
+              <strong>deflection</strong>
+            </div>
+            <div>
+              <span class="metric-label">Norma</span>
+              <strong>concept-v1</strong>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="result-card">
+              <span class="metric-label">Carga lineal</span>
+              <strong>1,6</strong>
+              <span>kN/m</span>
+            </article>
+            <article class="result-card">
+              <span class="metric-label">Momento máximo</span>
+              <strong>3,2</strong>
+              <span>kNm</span>
+            </article>
+            <article class="result-card">
+              <span class="metric-label">Cortante máximo</span>
+              <strong>3,2</strong>
+              <span>kN</span>
+            </article>
+            <article class="result-card">
+              <span class="metric-label">Flecha</span>
+              <strong>11,544</strong>
+              <span>mm</span>
+            </article>
+          </div>
+
+          <div class="checks-list">
+            <article class="check-card">
+              <div class="check-card-header">
+                <h3>Flexión</h3>
+                <span class="status-pill pass">OK</span>
+              </div>
+              <p>Demanda: 7,619 MPa</p>
+              <p>Capacidad: 11,000 MPa</p>
+              <p>Utilización: 0,693</p>
+            </article>
+
+            <article class="check-card">
+              <div class="check-card-header">
+                <h3>Cortante</h3>
+                <span class="status-pill pass">OK</span>
+              </div>
+              <p>Demanda: 0,381 MPa</p>
+              <p>Capacidad: 1,200 MPa</p>
+              <p>Utilización: 0,317</p>
+            </article>
+
+            <article class="check-card">
+              <div class="check-card-header">
+                <h3>Flecha</h3>
+                <span class="status-pill pass">OK</span>
+              </div>
+              <p>Demanda: 11,544 mm</p>
+              <p>Capacidad: 13,333 mm</p>
+              <p>Utilización: 0,866</p>
+            </article>
+          </div>
+
+          <div class="warnings-box">
+            <h3>Advertencias</h3>
+            <p>Sin advertencias en este caso de ejemplo.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
