@@ -50,8 +50,8 @@ class ImposedLoadCategory(StrEnum):
 
 class SnowLoadPattern(StrEnum):
     UNIFORM = "uniform"
-    UNBALANCED = "unbalanced"
-    DRIFT = "drift"
+#    UNBALANCED = "unbalanced"
+#    DRIFT = "drift"
 
 
 class WindLoadPattern(StrEnum):
