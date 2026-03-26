@@ -28,6 +28,10 @@ def test_floor_joist_endpoint_returns_traceable_result():
             "allowable_bending_stress_mpa": 11.0,
             "allowable_shear_stress_mpa": 1.2,
         },
+        "supports": [
+            {"position_m": 0.0, "support_type": "pinned"},
+            {"position_m": 4.0, "support_type": "roller"},
+        ],
         "loads": {
             "dead_load_kN_per_m2": 1.5,
             "imposed_load_kN_per_m2": 2.0,
@@ -64,6 +68,10 @@ def test_floor_joist_endpoint_rejects_invalid_input():
             "allowable_bending_stress_mpa": 11.0,
             "allowable_shear_stress_mpa": 1.2,
         },
+        "supports": [
+            {"position_m": 0.0, "support_type": "pinned"},
+            {"position_m": 4.0, "support_type": "roller"},
+        ],
         "loads": {
             "dead_load_kN_per_m2": 1.5,
             "imposed_load_kN_per_m2": 2.0,
@@ -90,6 +98,10 @@ def test_floor_joist_combination_endpoint_returns_combined_results():
             "allowable_bending_stress_mpa": 11.0,
             "allowable_shear_stress_mpa": 1.2,
         },
+        "supports": [
+            {"position_m": 0.0, "support_type": "pinned"},
+            {"position_m": 4.0, "support_type": "roller"},
+        ],
         "criteria": {
             "design_standard": "concept-v1",
             "max_deflection_ratio": 300.0,

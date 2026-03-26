@@ -183,7 +183,9 @@ class BeamAnalysisSummary(BaseModel):
     max_deflection_mm: float
     max_deflection_position_m: float
     max_moment_kNm: float
+    max_moment_position_m: float
     max_shear_kN: float
+    max_shear_position_m: float
 
 
 class BeamAnalysisResponse(BaseModel):

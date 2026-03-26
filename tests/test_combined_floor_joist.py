@@ -18,6 +18,10 @@ def build_request() -> FloorJoistCombinationCalculationRequest:
                 "allowable_bending_stress_mpa": 11.0,
                 "allowable_shear_stress_mpa": 1.2,
             },
+            "supports": [
+                {"position_m": 0.0, "support_type": "pinned"},
+                {"position_m": 4.0, "support_type": "roller"},
+            ],
             "criteria": {
                 "design_standard": "concept-v1",
                 "max_deflection_ratio": 300.0,

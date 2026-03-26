@@ -1,106 +1,67 @@
-# KLS Timber Floor Joist Backend
+# KLS Timber Floor Joist
 
-Backend API built with FastAPI for timber floor joist calculations.
+Aplicacion con backend en FastAPI y frontend en React/Vite para calculo de vigas de madera.
 
-## What is included
+## Levantar el proyecto localmente
 
-- FastAPI application with `/health` and `/calculate/floor-joist`.
-- Combined floor-joist calculation endpoint at `/calculate/floor-joist/combinations`.
-- Typed request and response schemas with Pydantic.
-- Action pattern schemas for permanent, imposed, snow, and wind actions aligned with EN 1991 parts.
-- Project action catalogs and a combination generator for ULS/SLS action sets.
-- Finite-element input/output schemas for future beam discretization and diagrams.
-- Early FEM core for 1D beam mesh generation, local stiffness, and global assembly.
-- Reusable calculation engine separated from the HTTP layer.
-- Pytest coverage for the domain engine and API contract.
-- React frontend scaffold under `frontend/` for interactive input and result display.
+### 1. Crear y preparar el entorno Python
 
-## Current design assumptions
+Desde la raiz del repositorio:
 
-This first version models a simply supported timber joist under uniformly distributed load. It reports:
-
-- line load
-- maximum bending moment
-- maximum shear
-- rectangular section properties
-- bending stress
-- shear stress
-- instantaneous deflection
-- pass/fail checks for bending, shear, and deflection
-- warnings for some common review conditions
-
-The `design_standard` field is included for traceability, but no specific timber design code has been encoded yet.
-
-The combined floor-joist endpoint now separates:
-
-- `ULS` combinations for bending and shear checks
-- `SLS` combinations for deflection checks
-
-When the `spain_timber_buildings` profile is selected, the backend applies Spanish timber annex defaults for serviceability interpretation:
-
-- service class 1 as the default for intermediate floors between habitable spaces
-- active deflection criteria based on the selected finish sensitivity
-- floor comfort deflection limit `L/350`
-- final deflection limit `L/300`
-
-This version does not yet derive timber design resistances from characteristic strengths, `kmod`, `kdef`, and `gamma_M`; ULS resistance still uses the allowable stresses provided in the input.
-
-## Run locally
-
-Desde la raíz del repositorio, crea un entorno virtual (recomendado) e instala dependencias:
-
-```bash
+```powershell
 python -m venv .venv
-```
-
-En Windows (PowerShell): `.\.venv\Scripts\Activate.ps1`  
-En macOS/Linux: `source .venv/bin/activate`
-
-```bash
+.\.venv\Scripts\Activate.ps1
 pip install -e .[dev]
 ```
 
-Arranca la API (usa el módulo de Python para que funcione aunque `uvicorn` no esté en el PATH):
+### 2. Instalar dependencias del frontend
 
-```bash
-python -m uvicorn app.main:app --reload
-```
+Desde `frontend/`:
 
-Run tests:
-
-```bash
-pytest
-```
-
-## Frontend
-
-The React frontend lives in `frontend/` and is configured to call the backend at `http://127.0.0.1:8000`.
-
-Install frontend dependencies:
-
-```bash
+```powershell
 cd frontend
-npm install
+npm.cmd install
 ```
 
-Start the frontend:
+Nota para Windows PowerShell: se usa `npm.cmd` para evitar problemas con la politica de ejecucion de scripts.
 
-```bash
-npm run dev
+### 3. Arrancar el backend
+
+En una terminal situada en la raiz del proyecto:
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-En **otra terminal**, desde la raíz del repositorio (con el mismo entorno virtual activado si usas uno), arranca la API:
+Backend:
 
-```bash
-python -m uvicorn app.main:app --reload
+```text
+http://127.0.0.1:8000
+http://127.0.0.1:8000/health
 ```
 
-Desde `frontend/` también puedes usar `npm run dev:api` (equivale a subir al directorio padre y ejecutar el comando anterior).
+### 4. Arrancar el frontend
 
-Si PowerShell dice que `uvicorn` no se reconoce, no uses el ejecutable suelto: usa siempre **`python -m uvicorn`** después de `pip install -e .[dev]`.
+En otra terminal, desde `frontend/`:
 
-Si en la consola de Vite aparece `ECONNREFUSED 127.0.0.1:8000` o en la app «Error HTTP 500» con cuerpo vacío, el backend no está en marcha. En desarrollo, Vite reenvía `/calculate` y `/analyze` al puerto 8000.
+```powershell
+npm.cmd run dev -- --host 127.0.0.1 --port 5173
+```
 
-## Static design preview
+Frontend:
 
-If you cannot install Node.js, open `frontend/preview.html` directly in your browser. It is a standalone HTML/CSS mockup of the calculator UI intended for design review without any frontend tooling.
+```text
+http://127.0.0.1:5173
+```
+
+## Flujo recomendado
+
+1. Arranca primero el backend.
+2. Arranca despues el frontend.
+3. Abre `http://127.0.0.1:5173` en el navegador.
+
+## Problemas comunes
+
+- Si el frontend muestra errores de conexion, revisa que el backend siga corriendo en `127.0.0.1:8000`.
+- Si `uvicorn` no se reconoce, usa `python -m uvicorn` o `.\.venv\Scripts\python.exe -m uvicorn`.
+- Si `npm` falla en PowerShell por politicas de ejecucion, usa `npm.cmd` en lugar de `npm`.

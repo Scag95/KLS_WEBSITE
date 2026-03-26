@@ -6,6 +6,7 @@ from typing import Literal
 from pydantic import BaseModel, Field, computed_field, model_validator
 
 from app.schemas.actions import GeneratedCombination, ProjectActionCatalog
+from app.schemas.fem import BeamSupport
 
 
 class FloorJoistGeometry(BaseModel):
@@ -102,8 +103,21 @@ class FloorJoistCalculationRequest(BaseModel):
     )
     geometry: FloorJoistGeometry
     timber: TimberProperties
+    supports: list[BeamSupport] = Field(
+        ...,
+        min_length=2,
+        description="Supports used by the joist model and reused by the beam diagram analysis.",
+    )
     loads: AppliedLoads
     criteria: DesignCriteria = Field(default_factory=DesignCriteria)
+
+    @model_validator(mode="after")
+    def validate_supports(self) -> "FloorJoistCalculationRequest":
+        span_length = self.geometry.span_m
+        for support in self.supports:
+            if support.position_m > span_length:
+                raise ValueError("Support position cannot be beyond the joist span.")
+        return self
 
 
 class IntermediateValues(BaseModel):
@@ -171,8 +185,21 @@ class FloorJoistCombinationCalculationRequest(BaseModel):
     )
     geometry: FloorJoistGeometry
     timber: TimberProperties
+    supports: list[BeamSupport] = Field(
+        ...,
+        min_length=2,
+        description="Supports used by the joist model and reused by the beam diagram analysis.",
+    )
     criteria: DesignCriteria = Field(default_factory=DesignCriteria)
     action_catalog: ProjectActionCatalog
+
+    @model_validator(mode="after")
+    def validate_supports(self) -> "FloorJoistCombinationCalculationRequest":
+        span_length = self.geometry.span_m
+        for support in self.supports:
+            if support.position_m > span_length:
+                raise ValueError("Support position cannot be beyond the joist span.")
+        return self
 
 
 class CombinationCalculationCase(BaseModel):

@@ -17,6 +17,10 @@ def build_request(**overrides) -> FloorJoistCalculationRequest:
             "allowable_bending_stress_mpa": 11.0,
             "allowable_shear_stress_mpa": 1.2,
         },
+        "supports": [
+            {"position_m": 0.0, "support_type": "pinned"},
+            {"position_m": 4.0, "support_type": "roller"},
+        ],
         "loads": {
             "dead_load_kN_per_m2": 1.5,
             "imposed_load_kN_per_m2": 2.0,

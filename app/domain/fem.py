@@ -524,16 +524,18 @@ def build_analysis_summary(
     moment_series = next(series for series in diagrams if series.diagram_type == ResultDiagramType.MOMENT)
 
     max_deflection_point = min(deflection_series.points, key=lambda point: point.value)
-    max_moment = max(abs(point.value) for point in moment_series.points)
-    max_shear = max(abs(point.value) for point in shear_series.points)
+    max_moment_point = max(moment_series.points, key=lambda point: abs(point.value))
+    max_shear_point = max(shear_series.points, key=lambda point: abs(point.value))
 
     return BeamAnalysisSummary(
         total_nodes=len(mesh.nodes),
         total_elements=len(mesh.elements),
         max_deflection_mm=abs(max_deflection_point.value),
         max_deflection_position_m=max_deflection_point.x_m,
-        max_moment_kNm=max_moment,
-        max_shear_kN=max_shear,
+        max_moment_kNm=abs(max_moment_point.value),
+        max_moment_position_m=max_moment_point.x_m,
+        max_shear_kN=abs(max_shear_point.value),
+        max_shear_position_m=max_shear_point.x_m,
     )
 
 
