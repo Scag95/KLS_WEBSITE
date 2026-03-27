@@ -76,6 +76,21 @@ class DesignCriteria(BaseModel):
         gt=0,
         description="Span/ratio serviceability limit for deflection checks.",
     )
+    active_deflection_ratio: float = Field(
+        default=300.0,
+        gt=0,
+        description="Span/ratio limit for active deflection under SLS characteristic combinations.",
+    )
+    instantaneous_deflection_ratio: float = Field(
+        default=300.0,
+        gt=0,
+        description="Span/ratio limit for instantaneous deflection under SLS characteristic combinations.",
+    )
+    final_deflection_ratio: float = Field(
+        default=300.0,
+        gt=0,
+        description="Span/ratio limit for final deflection under SLS quasi-permanent combinations.",
+    )
     national_annex_profile: NationalAnnexProfile = Field(
         default=NationalAnnexProfile.GENERIC,
         description="Calculation profile used to interpret serviceability checks and defaults.",
@@ -93,6 +108,12 @@ class DesignCriteria(BaseModel):
     def validate_ratio(self) -> "DesignCriteria":
         if self.max_deflection_ratio < 150:
             raise ValueError("max_deflection_ratio must be at least 150.")
+        if self.active_deflection_ratio < 150:
+            raise ValueError("active_deflection_ratio must be at least 150.")
+        if self.instantaneous_deflection_ratio < 150:
+            raise ValueError("instantaneous_deflection_ratio must be at least 150.")
+        if self.final_deflection_ratio < 150:
+            raise ValueError("final_deflection_ratio must be at least 150.")
         return self
 
 

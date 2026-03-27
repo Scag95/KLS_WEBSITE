@@ -213,15 +213,6 @@ def _combination_area_loads(combination: GeneratedCombination) -> tuple[float, f
     return total_area_load_kN_per_m2, variable_area_load_kN_per_m2
 
 
-def _active_deflection_ratio(criteria) -> float:
-    return {
-        ActiveDeflectionCriterion.FRAGILE_ELEMENTS: 500.0,
-        ActiveDeflectionCriterion.ORDINARY_ELEMENTS: 400.0,
-        ActiveDeflectionCriterion.WITH_PLASTER_CEILING: 300.0,
-        ActiveDeflectionCriterion.WITHOUT_PLASTER_CEILING: 200.0,
-    }[criteria.active_deflection_criterion]
-
-
 def _sls_checks_for_combination(
     combination: GeneratedCombination,
     geometry: FloorJoistGeometry,
@@ -244,8 +235,8 @@ def _sls_checks_for_combination(
     checks: list[CheckResult] = []
 
     if combination.combination_type == CombinationType.SLS_CHARACTERISTIC:
-        active_limit = allowable_deflection_mm(geometry.span_m, _active_deflection_ratio(criteria))
-        instantaneous_limit = allowable_deflection_mm(geometry.span_m, 350.0)
+        active_limit = allowable_deflection_mm(geometry.span_m, criteria.active_deflection_ratio)
+        instantaneous_limit = allowable_deflection_mm(geometry.span_m, criteria.instantaneous_deflection_ratio)
         checks.append(
             CheckResult(
                 check="deflection_active",
@@ -267,7 +258,7 @@ def _sls_checks_for_combination(
             )
         )
     elif combination.combination_type == CombinationType.SLS_QUASI_PERMANENT:
-        final_limit = allowable_deflection_mm(geometry.span_m, 300.0)
+        final_limit = allowable_deflection_mm(geometry.span_m, criteria.final_deflection_ratio)
         checks.append(
             CheckResult(
                 check="deflection_final",

@@ -523,6 +523,10 @@ input:disabled {
   margin-bottom: 18px;
 }
 
+.material-properties-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
 .result-card {
   display: flex;
   flex-direction: column;
@@ -751,7 +755,7 @@ input:disabled {
 .diagram-line {
   fill: none;
   stroke-width: 3;
-  stroke-linecap: round;
+  stroke-linecap: butt;
   stroke-linejoin: round;
 }
 

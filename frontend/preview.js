@@ -85,8 +85,29 @@ function createLineChart(points, type) {
   const width = 520;
   const height = 220;
   const padding = 26;
-  const xValues = points.map((point) => point.x_m);
-  const yValues = points.map((point) => point.value);
+  const normalizedPoints = (() => {
+    if (type !== "shear" || points.length < 2) {
+      return points;
+    }
+
+    const nextPoints = [...points];
+    const firstPoint = nextPoints[0];
+    const secondPoint = nextPoints[1];
+    if (firstPoint.x_m === secondPoint.x_m && Math.abs(firstPoint.value) > 1e-9) {
+      nextPoints.unshift({ x_m: firstPoint.x_m, value: 0 });
+    }
+
+    const lastPoint = nextPoints[nextPoints.length - 1];
+    const previousPoint = nextPoints[nextPoints.length - 2];
+    if (lastPoint.x_m === previousPoint.x_m && Math.abs(lastPoint.value) > 1e-9) {
+      nextPoints.push({ x_m: lastPoint.x_m, value: 0 });
+    }
+
+    return nextPoints;
+  })();
+
+  const xValues = normalizedPoints.map((point) => point.x_m);
+  const yValues = normalizedPoints.map((point) => point.value);
   const minX = Math.min(...xValues);
   const maxX = Math.max(...xValues);
   const minY = Math.min(...yValues, 0);
@@ -94,36 +115,38 @@ function createLineChart(points, type) {
   const ySpan = maxY - minY || 1;
   const xSpan = maxX - minX || 1;
   const zeroY = padding + ((maxY - 0) / ySpan) * (height - padding * 2);
+  const getChartX = (value) => padding + ((value - minX) / xSpan) * (width - padding * 2);
+  const getChartY = (value) => padding + ((maxY - value) / ySpan) * (height - padding * 2);
+  const axisStartX = normalizedPoints.length ? getChartX(normalizedPoints[0].x_m) : padding;
+  const axisEndX = normalizedPoints.length ? getChartX(normalizedPoints[normalizedPoints.length - 1].x_m) : width - padding;
 
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
   svg.setAttribute("class", `diagram-svg ${type}`);
 
   const axis = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  axis.setAttribute("x1", String(padding));
-  axis.setAttribute("x2", String(width - padding));
+  axis.setAttribute("x1", String(axisStartX));
+  axis.setAttribute("x2", String(axisEndX));
   axis.setAttribute("y1", String(zeroY));
   axis.setAttribute("y2", String(zeroY));
   axis.setAttribute("class", "axis-line");
   svg.appendChild(axis);
+  const pathData = normalizedPoints
+    .map((point, index) => {
+      const x = getChartX(point.x_m);
+      const y = getChartY(point.value);
+      return `${index === 0 ? "M" : "L"} ${x} ${y}`;
+    })
+    .join(" ");
 
-  const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
-  polyline.setAttribute(
-    "points",
-    points
-      .map((point) => {
-        const x = padding + ((point.x_m - minX) / xSpan) * (width - padding * 2);
-        const y = padding + ((maxY - point.value) / ySpan) * (height - padding * 2);
-        return `${x},${y}`;
-      })
-      .join(" "),
-  );
-  polyline.setAttribute("class", "diagram-line");
-  svg.appendChild(polyline);
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", pathData);
+  path.setAttribute("class", "diagram-line");
+  svg.appendChild(path);
 
-  points.forEach((point) => {
-    const x = padding + ((point.x_m - minX) / xSpan) * (width - padding * 2);
-    const y = padding + ((maxY - point.value) / ySpan) * (height - padding * 2);
+  normalizedPoints.forEach((point) => {
+    const x = getChartX(point.x_m);
+    const y = getChartY(point.value);
 
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute("cx", String(x));
@@ -204,6 +227,13 @@ function buildFallbackResponse(payload) {
   const shearPoints = [];
   const momentPoints = [];
   const deflectionPoints = [];
+  const appendPoint = (points, x, value) => {
+    const lastPoint = points[points.length - 1];
+    if (lastPoint && lastPoint.x_m === x && Math.abs(lastPoint.value - value) < 1e-9) {
+      return;
+    }
+    points.push({ x_m: x, value });
+  };
 
   for (let index = 0; index < nodeCount; index += 1) {
     const x = index * step;
@@ -222,8 +252,18 @@ function buildFallbackResponse(payload) {
       vertical_displacement_mm: deflection,
       rotation_rad: 0,
     });
-    shearPoints.push({ x_m: x, value: x === length ? 0 : shear });
-    momentPoints.push({ x_m: x, value: moment });
+    if (index === 0) {
+      appendPoint(shearPoints, x, 0);
+      appendPoint(shearPoints, x, maxShear);
+      appendPoint(momentPoints, x, 0);
+    } else if (index === nodeCount - 1) {
+      appendPoint(shearPoints, x, shear);
+      appendPoint(shearPoints, x, 0);
+      appendPoint(momentPoints, x, 0);
+    } else {
+      appendPoint(shearPoints, x, shear);
+      appendPoint(momentPoints, x, moment);
+    }
     deflectionPoints.push({ x_m: x, value: deflection });
   }
 

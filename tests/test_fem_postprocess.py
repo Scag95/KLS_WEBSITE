@@ -78,3 +78,16 @@ def test_analyze_beam_diagrams_include_midspan_deflection_and_end_moments():
     assert round(midspan_point.value, 3) == -11.544
     assert round(moment_diagram.points[0].value, 3) == 0.0
     assert round(moment_diagram.points[-1].value, 3) == 0.0
+
+
+def test_analyze_beam_shear_diagram_keeps_support_jumps():
+    response = analyze_beam(build_request())
+    shear_diagram = next(
+        diagram for diagram in response.diagrams if diagram.diagram_type == ResultDiagramType.SHEAR
+    )
+
+    start_points = [point for point in shear_diagram.points if point.x_m == 0.0]
+    end_points = [point for point in shear_diagram.points if point.x_m == 4.0]
+
+    assert [round(point.value, 3) for point in start_points] == [0.0, 3.2]
+    assert [round(point.value, 3) for point in end_points] == [-3.2, 0.0]

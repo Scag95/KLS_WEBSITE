@@ -25,6 +25,9 @@ def build_request() -> FloorJoistCombinationCalculationRequest:
             "criteria": {
                 "design_standard": "concept-v1",
                 "max_deflection_ratio": 300.0,
+                "active_deflection_ratio": 400.0,
+                "instantaneous_deflection_ratio": 350.0,
+                "final_deflection_ratio": 300.0,
                 "national_annex_profile": "spain_timber_buildings",
                 "service_class": "service_class_1",
                 "active_deflection_criterion": "ordinary_elements",
@@ -109,3 +112,26 @@ def test_combined_calculation_produces_numeric_results_for_each_combination():
         "deflection_instantaneous",
         "deflection_final",
     }
+
+
+def test_combined_calculation_uses_custom_deflection_ratios():
+    request = build_request()
+    request.criteria.active_deflection_ratio = 500.0
+    request.criteria.instantaneous_deflection_ratio = 420.0
+    request.criteria.final_deflection_ratio = 280.0
+
+    response = calculate_floor_joist_with_combinations(request)
+    characteristic_case = next(
+        case for case in response.sls_combinations if case.combination.combination_type == "sls_characteristic"
+    )
+    quasi_permanent_case = next(
+        case for case in response.sls_combinations if case.combination.combination_type == "sls_quasi_permanent"
+    )
+
+    active_check = next(check for check in characteristic_case.checks if check.check == "deflection_active")
+    instantaneous_check = next(check for check in characteristic_case.checks if check.check == "deflection_instantaneous")
+    final_check = next(check for check in quasi_permanent_case.checks if check.check == "deflection_final")
+
+    assert round(active_check.capacity, 3) == 8.0
+    assert round(instantaneous_check.capacity, 3) == 9.524
+    assert round(final_check.capacity, 3) == 14.286

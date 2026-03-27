@@ -65,6 +65,34 @@ function formatHttpErrorDetail(status, data) {
   return `Error HTTP ${status}`;
 }
 
+const TIMBER_CLASS_DATA = {
+  C14: { bending_strength_mpa: 14, tensile_strength_parallel_mpa: 8, tensile_strength_perpendicular_mpa: 0.4, compressive_strength_parallel_mpa: 16, compressive_strength_perpendicular_mpa: 2.0, shear_strength_mpa: 3.0, modulus_mean_gpa: 7.0, modulus_5_percentile_gpa: 4.7, modulus_perpendicular_mean_gpa: 0.23, shear_modulus_mean_gpa: 0.44, density_characteristic_kg_per_m3: 290, density_mean_kg_per_m3: 350 },
+  C16: { bending_strength_mpa: 16, tensile_strength_parallel_mpa: 10, tensile_strength_perpendicular_mpa: 0.4, compressive_strength_parallel_mpa: 17, compressive_strength_perpendicular_mpa: 2.2, shear_strength_mpa: 3.2, modulus_mean_gpa: 8.0, modulus_5_percentile_gpa: 5.4, modulus_perpendicular_mean_gpa: 0.27, shear_modulus_mean_gpa: 0.50, density_characteristic_kg_per_m3: 310, density_mean_kg_per_m3: 370 },
+  C18: { bending_strength_mpa: 18, tensile_strength_parallel_mpa: 11, tensile_strength_perpendicular_mpa: 0.4, compressive_strength_parallel_mpa: 18, compressive_strength_perpendicular_mpa: 2.2, shear_strength_mpa: 3.4, modulus_mean_gpa: 9.0, modulus_5_percentile_gpa: 6.0, modulus_perpendicular_mean_gpa: 0.30, shear_modulus_mean_gpa: 0.56, density_characteristic_kg_per_m3: 320, density_mean_kg_per_m3: 380 },
+  C20: { bending_strength_mpa: 20, tensile_strength_parallel_mpa: 12, tensile_strength_perpendicular_mpa: 0.4, compressive_strength_parallel_mpa: 19, compressive_strength_perpendicular_mpa: 2.3, shear_strength_mpa: 3.6, modulus_mean_gpa: 9.5, modulus_5_percentile_gpa: 6.4, modulus_perpendicular_mean_gpa: 0.32, shear_modulus_mean_gpa: 0.59, density_characteristic_kg_per_m3: 330, density_mean_kg_per_m3: 390 },
+  C22: { bending_strength_mpa: 22, tensile_strength_parallel_mpa: 13, tensile_strength_perpendicular_mpa: 0.4, compressive_strength_parallel_mpa: 20, compressive_strength_perpendicular_mpa: 2.4, shear_strength_mpa: 3.8, modulus_mean_gpa: 10.0, modulus_5_percentile_gpa: 6.7, modulus_perpendicular_mean_gpa: 0.33, shear_modulus_mean_gpa: 0.63, density_characteristic_kg_per_m3: 340, density_mean_kg_per_m3: 410 },
+  C24: { bending_strength_mpa: 24, tensile_strength_parallel_mpa: 14, tensile_strength_perpendicular_mpa: 0.4, compressive_strength_parallel_mpa: 21, compressive_strength_perpendicular_mpa: 2.5, shear_strength_mpa: 4.0, modulus_mean_gpa: 11.0, modulus_5_percentile_gpa: 7.4, modulus_perpendicular_mean_gpa: 0.37, shear_modulus_mean_gpa: 0.69, density_characteristic_kg_per_m3: 350, density_mean_kg_per_m3: 420 },
+  C27: { bending_strength_mpa: 27, tensile_strength_parallel_mpa: 16, tensile_strength_perpendicular_mpa: 0.4, compressive_strength_parallel_mpa: 22, compressive_strength_perpendicular_mpa: 2.6, shear_strength_mpa: 4.0, modulus_mean_gpa: 11.5, modulus_5_percentile_gpa: 7.7, modulus_perpendicular_mean_gpa: 0.38, shear_modulus_mean_gpa: 0.72, density_characteristic_kg_per_m3: 370, density_mean_kg_per_m3: 450 },
+  C30: { bending_strength_mpa: 30, tensile_strength_parallel_mpa: 18, tensile_strength_perpendicular_mpa: 0.4, compressive_strength_parallel_mpa: 23, compressive_strength_perpendicular_mpa: 2.7, shear_strength_mpa: 4.0, modulus_mean_gpa: 12.0, modulus_5_percentile_gpa: 8.0, modulus_perpendicular_mean_gpa: 0.40, shear_modulus_mean_gpa: 0.75, density_characteristic_kg_per_m3: 380, density_mean_kg_per_m3: 460 },
+  C35: { bending_strength_mpa: 35, tensile_strength_parallel_mpa: 21, tensile_strength_perpendicular_mpa: 0.4, compressive_strength_parallel_mpa: 25, compressive_strength_perpendicular_mpa: 2.8, shear_strength_mpa: 4.0, modulus_mean_gpa: 13.0, modulus_5_percentile_gpa: 8.7, modulus_perpendicular_mean_gpa: 0.43, shear_modulus_mean_gpa: 0.81, density_characteristic_kg_per_m3: 400, density_mean_kg_per_m3: 480 },
+  C40: { bending_strength_mpa: 40, tensile_strength_parallel_mpa: 24, tensile_strength_perpendicular_mpa: 0.4, compressive_strength_parallel_mpa: 26, compressive_strength_perpendicular_mpa: 2.9, shear_strength_mpa: 4.0, modulus_mean_gpa: 14.0, modulus_5_percentile_gpa: 9.4, modulus_perpendicular_mean_gpa: 0.47, shear_modulus_mean_gpa: 0.88, density_characteristic_kg_per_m3: 420, density_mean_kg_per_m3: 500 },
+  C45: { bending_strength_mpa: 45, tensile_strength_parallel_mpa: 27, tensile_strength_perpendicular_mpa: 0.4, compressive_strength_parallel_mpa: 27, compressive_strength_perpendicular_mpa: 3.1, shear_strength_mpa: 4.0, modulus_mean_gpa: 15.0, modulus_5_percentile_gpa: 10.0, modulus_perpendicular_mean_gpa: 0.50, shear_modulus_mean_gpa: 0.94, density_characteristic_kg_per_m3: 440, density_mean_kg_per_m3: 520 },
+  C50: { bending_strength_mpa: 50, tensile_strength_parallel_mpa: 30, tensile_strength_perpendicular_mpa: 0.4, compressive_strength_parallel_mpa: 29, compressive_strength_perpendicular_mpa: 3.2, shear_strength_mpa: 4.0, modulus_mean_gpa: 16.0, modulus_5_percentile_gpa: 10.7, modulus_perpendicular_mean_gpa: 0.53, shear_modulus_mean_gpa: 1.00, density_characteristic_kg_per_m3: 460, density_mean_kg_per_m3: 550 },
+};
+
+const timberClassOptions = Object.keys(TIMBER_CLASS_DATA).map((grade) => ({ value: grade, label: grade }));
+
+function timberFormValuesFromGrade(grade) {
+  const timberClass = TIMBER_CLASS_DATA[grade] ?? TIMBER_CLASS_DATA.C24;
+  return {
+    grade,
+    modulus_of_elasticity_mpa: String(timberClass.modulus_mean_gpa * 1000),
+    allowable_bending_stress_mpa: String(timberClass.bending_strength_mpa),
+    allowable_shear_stress_mpa: String(timberClass.shear_strength_mpa),
+    density_kg_per_m3: String(timberClass.density_mean_kg_per_m3),
+  };
+}
+
 const initialForm = {
   project_name: "Vivienda unifamiliar",
   geometry: {
@@ -73,12 +101,7 @@ const initialForm = {
     width_mm: "63",
     depth_mm: "200",
   },
-  timber: {
-    grade: "C24",
-    modulus_of_elasticity_mpa: "11000",
-    allowable_bending_stress_mpa: "11.0",
-    allowable_shear_stress_mpa: "1.2",
-  },
+  timber: timberFormValuesFromGrade("C24"),
   loads: {
     dead_load_kN_per_m2: "1.5",
     imposed_load_kN_per_m2: "2.0",
@@ -87,6 +110,9 @@ const initialForm = {
   criteria: {
     design_standard: "concept-v1",
     max_deflection_ratio: "300",
+    active_deflection_ratio: "300",
+    instantaneous_deflection_ratio: "300",
+    final_deflection_ratio: "300",
   },
   supports: [
     { id: 1, support_type: "pinned", position_m: "0.00" },
@@ -348,6 +374,8 @@ function getCombinedCases(result) {
 }
 
 function buildCombinationPreview(actions) {
+  const ULS_PERMANENT_GAMMA = 1.35;
+  const ULS_VARIABLE_GAMMA = 1.50;
   const permanent = actions.filter((action) => action.action_type === "permanent");
   const variable = actions.filter((action) => action.action_type !== "permanent");
 
@@ -364,8 +392,8 @@ function buildCombinationPreview(actions) {
       {
         id: "uls-only",
         title: "ULS fundamental",
-        expression: basePrefix,
-        total: permanentTotal,
+        expression: permanent.map((action) => `1.35·${action.id.toUpperCase()}`).join(" + ") || "0",
+        total: permanentTotal * ULS_PERMANENT_GAMMA,
       },
     ];
   }
@@ -376,20 +404,27 @@ function buildCombinationPreview(actions) {
     const leadingId = leading.id.toUpperCase();
     const others = variable.filter((action) => action.id !== leading.id);
     const accompanyingUls = others
-      .map((action) => `psi0·${action.id.toUpperCase()}`)
+      .map((action) => `ψ0·${action.id.toUpperCase()}`)
       .join(" + ");
     const accompanyingFrequent = others
-      .map((action) => `psi2·${action.id.toUpperCase()}`)
+      .map((action) => `ψ2·${action.id.toUpperCase()}`)
       .join(" + ");
 
     combinations.push({
       id: `uls-${leading.id}`,
       title: `ULS fundamental · ${leadingId} principal`,
-      expression: [basePrefix, leadingId, accompanyingUls].filter(Boolean).join(" + "),
+      expression: [
+        permanent.map((action) => `1.35·${action.id.toUpperCase()}`).join(" + "),
+        `1.50·${leadingId}`,
+        others.map((action) => `1.50·ψ0·${action.id.toUpperCase()}`).join(" + "),
+      ].filter(Boolean).join(" + "),
       total:
-        permanentTotal
-        + toNumber(leading.value_kN_per_m2)
-        + others.reduce((sum, action) => sum + toNumber(action.value_kN_per_m2) * toNumber(action.psi0), 0),
+        permanentTotal * ULS_PERMANENT_GAMMA
+        + toNumber(leading.value_kN_per_m2) * ULS_VARIABLE_GAMMA
+        + others.reduce(
+          (sum, action) => sum + toNumber(action.value_kN_per_m2) * toNumber(action.psi0) * ULS_VARIABLE_GAMMA,
+          0,
+        ),
     });
 
     combinations.push({
@@ -405,7 +440,7 @@ function buildCombinationPreview(actions) {
     combinations.push({
       id: `sls-freq-${leading.id}`,
       title: `SLS frequent · ${leadingId} principal`,
-      expression: [basePrefix, `psi1·${leadingId}`, accompanyingFrequent].filter(Boolean).join(" + "),
+      expression: [basePrefix, `ψ1·${leadingId}`, accompanyingFrequent].filter(Boolean).join(" + "),
       total:
         permanentTotal
         + toNumber(leading.value_kN_per_m2) * toNumber(leading.psi1)
@@ -418,7 +453,7 @@ function buildCombinationPreview(actions) {
     title: "SLS quasi-permanent",
     expression: [
       basePrefix,
-      variable.map((action) => `psi2·${action.id.toUpperCase()}`).join(" + "),
+      variable.map((action) => `ψ2·${action.id.toUpperCase()}`).join(" + "),
     ].filter(Boolean).join(" + "),
     total:
       permanentTotal
@@ -501,6 +536,17 @@ function App() {
       return;
     }
 
+    if (section === "timber" && field === "grade") {
+      setForm((current) => ({
+        ...current,
+        timber: {
+          ...current.timber,
+          ...timberFormValuesFromGrade(value),
+        },
+      }));
+      return;
+    }
+
     setForm((current) => ({
       ...current,
       [section]: {
@@ -535,7 +581,7 @@ function App() {
   }
 
   const selectedAction = projectActions.find((action) => action.id === selectedActionId) ?? projectActions[0] ?? null;
-  const loadSummary = summarizeActionsToLegacyLoads(projectActions);
+  const selectedTimberClass = TIMBER_CLASS_DATA[form.timber.grade] ?? TIMBER_CLASS_DATA.C24;
   const combinationPreview = buildCombinationPreview(projectActions);
   const showSplitPreview = activeTab === "geometry" || activeTab === "section";
   const combinedCases = getCombinedCases(result);
@@ -545,6 +591,12 @@ function App() {
     ?? null;
   const displayedResults = selectedCombinedCase?.results ?? result?.results ?? null;
   const displayedChecks = selectedCombinedCase?.checks ?? result?.checks ?? [];
+  const displayedDeflectionCapacity = displayedChecks
+    .filter((check) => check.check.startsWith("deflection"))
+    .reduce(
+      (currentMin, check) => (currentMin == null ? check.capacity : Math.min(currentMin, check.capacity)),
+      null,
+    ) ?? displayedResults?.allowable_deflection_mm;
   const displayedWarnings = selectedCombinedCase?.warnings ?? result?.warnings ?? [];
   const displayedGoverningCheck = selectedCombinedCase?.summary.governing_check ?? result?.summary.governing_check ?? "Sin cÃ¡lculo";
 
@@ -562,7 +614,7 @@ function App() {
       ["geometry", ["span_m", "spacing_m", "width_mm", "depth_mm"]],
       ["timber", ["modulus_of_elasticity_mpa", "allowable_bending_stress_mpa", "allowable_shear_stress_mpa"]],
       ["loads", ["dead_load_kN_per_m2", "imposed_load_kN_per_m2", "additional_dead_load_kN_per_m2"]],
-      ["criteria", ["max_deflection_ratio"]],
+      ["criteria", ["max_deflection_ratio", "active_deflection_ratio", "instantaneous_deflection_ratio", "final_deflection_ratio"]],
     ];
 
     numericGroups.forEach(([section, fields]) => {
@@ -706,6 +758,13 @@ function App() {
           Cargas
         </button>
         <button
+          className={`tab-button ${activeTab === "designBasis" ? "active" : ""}`}
+          onClick={() => setActiveTab("designBasis")}
+        >
+          <span className="tab-icon">≡</span>
+          Bases de cálculo
+        </button>
+        <button
           className={`tab-button ${activeTab === "results" ? "active" : ""}`}
           onClick={() => setActiveTab("results")}
         >
@@ -768,24 +827,36 @@ function App() {
             )}
 
             {activeTab === "material" && (
-              <FormGroup title="Madera">
-                <Field label="Clase" value={form.timber.grade} onChange={(value) => handleChange("timber", "grade", value)} />
-                <Field
-                  label="Módulo E (MPa)"
-                  value={form.timber.modulus_of_elasticity_mpa}
-                  onChange={(value) => handleChange("timber", "modulus_of_elasticity_mpa", value)}
-                />
-                <Field
-                  label="Flexión admisible (MPa)"
-                  value={form.timber.allowable_bending_stress_mpa}
-                  onChange={(value) => handleChange("timber", "allowable_bending_stress_mpa", value)}
-                />
-                <Field
-                  label="Cortante admisible (MPa)"
-                  value={form.timber.allowable_shear_stress_mpa}
-                  onChange={(value) => handleChange("timber", "allowable_shear_stress_mpa", value)}
-                />
-              </FormGroup>
+              <>
+                <FormGroup title="Madera">
+                  <SelectField
+                    label="Clase resistente"
+                    value={form.timber.grade}
+                    onChange={(value) => handleChange("timber", "grade", value)}
+                    options={timberClassOptions}
+                  />
+                </FormGroup>
+                <section className="form-group">
+                  <div className="group-title">
+                    <h3>Propiedades de la clase {form.timber.grade}</h3>
+                    <p>Valores asociados directamente a la clase resistente seleccionada.</p>
+                  </div>
+                  <div className="metrics-grid material-properties-grid">
+                    <ResultCard label="Flexión fm,k" value={selectedTimberClass.bending_strength_mpa} unit="MPa" />
+                    <ResultCard label="Tracción paralela ft,0,k" value={selectedTimberClass.tensile_strength_parallel_mpa} unit="MPa" />
+                    <ResultCard label="Tracción perpendicular ft,90,k" value={selectedTimberClass.tensile_strength_perpendicular_mpa} unit="MPa" />
+                    <ResultCard label="Compresión paralela fc,0,k" value={selectedTimberClass.compressive_strength_parallel_mpa} unit="MPa" />
+                    <ResultCard label="Compresión perpendicular fc,90,k" value={selectedTimberClass.compressive_strength_perpendicular_mpa} unit="MPa" />
+                    <ResultCard label="Cortante fv,k" value={selectedTimberClass.shear_strength_mpa} unit="MPa" />
+                    <ResultCard label="Módulo paralelo medio E0,medio" value={selectedTimberClass.modulus_mean_gpa} unit="GPa" />
+                    <ResultCard label="Módulo paralelo 5 percentil E0,k" value={selectedTimberClass.modulus_5_percentile_gpa} unit="GPa" />
+                    <ResultCard label="Módulo perpendicular medio E90,medio" value={selectedTimberClass.modulus_perpendicular_mean_gpa} unit="GPa" />
+                    <ResultCard label="Módulo transversal medio Gmedio" value={selectedTimberClass.shear_modulus_mean_gpa} unit="GPa" />
+                    <ResultCard label="Densidad característica ρk" value={selectedTimberClass.density_characteristic_kg_per_m3} unit="kg/m3" />
+                    <ResultCard label="Densidad media ρmedio" value={selectedTimberClass.density_mean_kg_per_m3} unit="kg/m3" />
+                  </div>
+                </section>
+              </>
             )}
 
             {activeTab === "loads" && (
@@ -876,6 +947,7 @@ function App() {
                   </div>
                 </section>
 
+                
                 <section className="form-group">
                   <div className="group-title">
                     <h3>Vista previa de combinaciones</h3>
@@ -893,40 +965,55 @@ function App() {
                   </div>
                 </section>
 
-                <section className="form-group">
-                  <div className="group-title">
-                    <h3>Resumen equivalente de áreas</h3>
-                    <p>Referencia rápida de permanentes y sobrecargas agregadas a partir del catálogo definido.</p>
+                {errors.length > 0 ? (
+                  <div className="message error">
+                    {errors.map((error) => (
+                      <p key={error}>{error}</p>
+                    ))}
                   </div>
-                  <div className="summary-band">
-                    <div>
-                      <span className="metric-label">Permanente base</span>
-                      <strong>{formatNumber(loadSummary.dead_load_kN_per_m2)}</strong>
-                      <span>kN/m2</span>
-                    </div>
-                    <div>
-                      <span className="metric-label">Sobrecarga de uso</span>
-                      <strong>{formatNumber(loadSummary.imposed_load_kN_per_m2)}</strong>
-                      <span>kN/m2</span>
-                    </div>
-                    <div>
-                      <span className="metric-label">Permanente adicional</span>
-                      <strong>{formatNumber(loadSummary.additional_dead_load_kN_per_m2)}</strong>
-                      <span>kN/m2</span>
-                    </div>
-                  </div>
-                </section>
+                ) : null}
 
-                <FormGroup title="Criterio">
+                {requestError ? <div className="message error"><p>{requestError}</p></div> : null}
+
+                <button type="submit" className="submit-button" disabled={isSubmitting}>
+                  {isSubmitting ? "Calculando..." : "Calcular forjado"}
+                </button>
+              </>
+            )}
+
+            {activeTab === "designBasis" && (
+              <>
+                <FormGroup title="Bases generales">
                   <Field
                     label="Base de cálculo"
                     value={form.criteria.design_standard}
                     onChange={(value) => handleChange("criteria", "design_standard", value)}
                   />
                   <Field
-                    label="Límite de flecha L/x"
+                    label="Cálculo simple L/x"
                     value={form.criteria.max_deflection_ratio}
                     onChange={(value) => handleChange("criteria", "max_deflection_ratio", value)}
+                  />
+                </FormGroup>
+
+                <FormGroup title="Flecha SLS characteristic">
+                  <Field
+                    label="Activa L/x"
+                    value={form.criteria.active_deflection_ratio}
+                    onChange={(value) => handleChange("criteria", "active_deflection_ratio", value)}
+                  />
+                  <Field
+                    label="Instantánea L/x"
+                    value={form.criteria.instantaneous_deflection_ratio}
+                    onChange={(value) => handleChange("criteria", "instantaneous_deflection_ratio", value)}
+                  />
+                </FormGroup>
+
+                <FormGroup title="Flecha SLS quasi-permanent">
+                  <Field
+                    label="Final L/x"
+                    value={form.criteria.final_deflection_ratio}
+                    onChange={(value) => handleChange("criteria", "final_deflection_ratio", value)}
                   />
                 </FormGroup>
 
@@ -987,7 +1074,7 @@ function App() {
                       <ResultCard label="Módulo de sección" value={displayedResults.section_modulus_mm3} unit="mm³" />
                       <ResultCard label="Tensión de flexión" value={displayedResults.bending_stress_mpa} unit="MPa" />
                       <ResultCard label="Tensión de cortante" value={displayedResults.shear_stress_mpa} unit="MPa" />
-                      <ResultCard label="Flecha admisible" value={displayedResults.allowable_deflection_mm} unit="mm" />
+                      <ResultCard label="Flecha admisible" value={displayedDeflectionCapacity} unit="mm" />
                     </div>
 
                     <div className="checks-list">
@@ -1429,9 +1516,29 @@ function LineChart({ points, type, unit }) {
   const padding = 26;
   const [hoverPoint, setHoverPoint] = useState(null);
   const invertPositiveDirection = type === "moment";
+  const normalizedPoints = (() => {
+    if (type !== "shear" || points.length < 2) {
+      return points;
+    }
 
-  const xValues = points.map(p => p.x_m);
-  const yValues = points.map(p => p.value);
+    const nextPoints = [...points];
+    const firstPoint = nextPoints[0];
+    const secondPoint = nextPoints[1];
+    if (firstPoint.x_m === secondPoint.x_m && Math.abs(firstPoint.value) > 1e-9) {
+      nextPoints.unshift({ x_m: firstPoint.x_m, value: 0 });
+    }
+
+    const lastPoint = nextPoints[nextPoints.length - 1];
+    const previousPoint = nextPoints[nextPoints.length - 2];
+    if (lastPoint.x_m === previousPoint.x_m && Math.abs(lastPoint.value) > 1e-9) {
+      nextPoints.push({ x_m: lastPoint.x_m, value: 0 });
+    }
+
+    return nextPoints;
+  })();
+
+  const xValues = normalizedPoints.map(p => p.x_m);
+  const yValues = normalizedPoints.map(p => p.value);
   const displayValues = yValues.map((value) => (invertPositiveDirection ? -value : value));
   const minX = Math.min(...xValues);
   const maxX = Math.max(...xValues);
@@ -1448,28 +1555,44 @@ function LineChart({ points, type, unit }) {
     return padding + ((maxY - displayValue) / ySpan) * chartHeight;
   }
 
-  const pointsStr = points.map(point => {
-    const x = padding + ((point.x_m - minX) / xSpan) * chartWidth;
-    const y = getChartY(point.value);
-    return `${x},${y}`;
-  }).join(' ');
+  function getChartX(value) {
+    return padding + ((value - minX) / xSpan) * chartWidth;
+  }
+
+  function buildPathData() {
+    if (!normalizedPoints.length) {
+      return "";
+    }
+
+    return normalizedPoints
+      .map((point, index) => {
+        const x = getChartX(point.x_m);
+        const y = getChartY(point.value);
+        return `${index === 0 ? "M" : "L"} ${x} ${y}`;
+      })
+      .join(" ");
+  }
+
+  const pathData = buildPathData();
+  const axisStartX = normalizedPoints.length ? getChartX(normalizedPoints[0].x_m) : padding;
+  const axisEndX = normalizedPoints.length ? getChartX(normalizedPoints[normalizedPoints.length - 1].x_m) : width - padding;
 
   function interpolatePoint(targetX) {
-    if (points.length === 1) {
-      return points[0];
+    if (normalizedPoints.length === 1) {
+      return normalizedPoints[0];
     }
 
-    if (targetX <= points[0].x_m) {
-      return points[0];
+    if (targetX <= normalizedPoints[0].x_m) {
+      return normalizedPoints[0];
     }
 
-    if (targetX >= points[points.length - 1].x_m) {
-      return points[points.length - 1];
+    if (targetX >= normalizedPoints[normalizedPoints.length - 1].x_m) {
+      return normalizedPoints[normalizedPoints.length - 1];
     }
 
-    for (let index = 0; index < points.length - 1; index += 1) {
-      const left = points[index];
-      const right = points[index + 1];
+    for (let index = 0; index < normalizedPoints.length - 1; index += 1) {
+      const left = normalizedPoints[index];
+      const right = normalizedPoints[index + 1];
       if (targetX >= left.x_m && targetX <= right.x_m) {
         const segmentSpan = right.x_m - left.x_m || 1;
         const ratio = (targetX - left.x_m) / segmentSpan;
@@ -1480,7 +1603,7 @@ function LineChart({ points, type, unit }) {
       }
     }
 
-    return points[points.length - 1];
+    return normalizedPoints[normalizedPoints.length - 1];
   }
 
   function getScreenPoint(point) {
@@ -1518,14 +1641,14 @@ function LineChart({ points, type, unit }) {
       onPointerLeave={handlePointerLeave}
     >
       <line
-        x1={padding}
-        x2={width - padding}
+        x1={axisStartX}
+        x2={axisEndX}
         y1={zeroY}
         y2={zeroY}
         className="axis-line"
       />
-      <polyline
-        points={pointsStr}
+      <path
+        d={pathData}
         className="diagram-line"
       />
       {hoverPoint && (
@@ -1533,8 +1656,8 @@ function LineChart({ points, type, unit }) {
           <line
             x1={hoverPoint.x}
             x2={hoverPoint.x}
-            y1={padding}
-            y2={height - padding}
+            y1={zeroY}
+            y2={hoverPoint.y}
             className="diagram-hover-line"
           />
           <circle
@@ -1728,6 +1851,13 @@ function buildFallbackResponse(payload) {
   const shearPoints = [];
   const momentPoints = [];
   const deflectionPoints = [];
+  const appendPoint = (points, x, value) => {
+    const lastPoint = points[points.length - 1];
+    if (lastPoint && lastPoint.x_m === x && Math.abs(lastPoint.value - value) < 1e-9) {
+      return;
+    }
+    points.push({ x_m: x, value });
+  };
 
   for (let index = 0; index < nodeCount; index += 1) {
     const x = index * step;
@@ -1741,8 +1871,18 @@ function buildFallbackResponse(payload) {
       vertical_displacement_mm: deflection,
       rotation_rad: 0,
     });
-    shearPoints.push({ x_m: x, value: x === length ? 0 : shear });
-    momentPoints.push({ x_m: x, value: moment });
+    if (index === 0) {
+      appendPoint(shearPoints, x, 0);
+      appendPoint(shearPoints, x, maxShear);
+      appendPoint(momentPoints, x, 0);
+    } else if (index === nodeCount - 1) {
+      appendPoint(shearPoints, x, shear);
+      appendPoint(shearPoints, x, 0);
+      appendPoint(momentPoints, x, 0);
+    } else {
+      appendPoint(shearPoints, x, shear);
+      appendPoint(momentPoints, x, moment);
+    }
     deflectionPoints.push({ x_m: x, value: deflection });
   }
 

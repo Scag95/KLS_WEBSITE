@@ -105,6 +105,9 @@ def test_floor_joist_combination_endpoint_returns_combined_results():
         "criteria": {
             "design_standard": "concept-v1",
             "max_deflection_ratio": 300.0,
+            "active_deflection_ratio": 400.0,
+            "instantaneous_deflection_ratio": 350.0,
+            "final_deflection_ratio": 300.0,
             "national_annex_profile": "spain_timber_buildings",
             "service_class": "service_class_1",
             "active_deflection_criterion": "ordinary_elements",

@@ -485,18 +485,28 @@ def build_diagram_series(
     current_shear_kN = 0.0
     current_moment_kNm = 0.0
 
+    def append_point(points: list[DiagramPoint], x_m: float, value: float) -> None:
+        if points and points[-1].x_m == x_m and abs(points[-1].value - value) < 1e-9:
+            return
+        points.append(DiagramPoint(x_m=x_m, value=value))
+
     reactions_by_node = {node.id: 0.0 for node in mesh.nodes}
     for reaction in build_reaction_results(request, mesh, reaction_vector(assemble_global_stiffness(mesh, material, section), displacements, assemble_global_load_vector(request, mesh))):
         node_id = _find_node_id_at_position(mesh, reaction.position_m)
         reactions_by_node[node_id] += reaction.vertical_reaction_kN
 
     for node_index, node in enumerate(mesh.nodes):
-        current_shear_kN += reactions_by_node[node.id]
-        current_shear_kN += nodal_vertical_forces_kN[node.id]
-        current_moment_kNm += nodal_moments_kNm[node.id]
+        append_point(shear_points, node.x_m, current_shear_kN)
+        append_point(moment_points, node.x_m, current_moment_kNm)
 
-        shear_points.append(DiagramPoint(x_m=node.x_m, value=current_shear_kN))
-        moment_points.append(DiagramPoint(x_m=node.x_m, value=current_moment_kNm))
+        updated_shear_kN = current_shear_kN + reactions_by_node[node.id] + nodal_vertical_forces_kN[node.id]
+        updated_moment_kNm = current_moment_kNm + nodal_moments_kNm[node.id]
+
+        append_point(shear_points, node.x_m, updated_shear_kN)
+        append_point(moment_points, node.x_m, updated_moment_kNm)
+
+        current_shear_kN = updated_shear_kN
+        current_moment_kNm = updated_moment_kNm
 
         if node_index == len(mesh.nodes) - 1:
             continue
