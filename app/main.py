@@ -1,7 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 
 from app.api.routes import router
 
@@ -29,8 +27,11 @@ app.add_middleware(
 
 @app.get("/")
 async def read_root():
-    return FileResponse("frontend/preview.html", media_type="text/html")
-
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
+    return {
+        "name": "KLS Timber Floor Joist API",
+        "status": "ok",
+        "docs": "/docs",
+        "health": "/health",
+    }
 
 app.include_router(router)
