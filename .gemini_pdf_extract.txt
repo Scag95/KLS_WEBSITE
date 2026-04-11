@@ -1,0 +1,2903 @@
+
+===== PAGE 1 =====
+  
+CONFIDENTIAL
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 
+ 
+ 
+Design instructions of                        
+Kerto-Ripa® Elements 
+ 
+ 
+
+===== PAGE 2 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 2(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 2
+Revisions 
+The European Technical Approval ETA -07/0029 presupposes that the 
+approval holder, Metsäliitto Coope rative, Metsä Wood, Kerto, provides 
+the structural engineer with desi gn instructions of the Kerto-Ripa® 
+elements. These instructions refe r to the ETA approval dated 31.8.2012. 
+All updates made to the design in structions and calculation methods 
+presented in this document shall be approved by VTT Expert Services Ltd (VTT). 
+The first version of the design in structions has been dated 14.6.2006. 
+Revisions will be made whenever needed. 
+Version Date of revision Approved by VTT 
+1. 14.6.2006 14.6.2006 
+2. 16.6.2008 18.6.2008 
+3. 02.02.2010 02.02.2010 (Section A) 
+4. 19.06.2012 20.06.2012 (Section A) 
+5. 01.11.2012 01.11.2012 
+6. 23.04.2013 27.05.2013 
+7. 29.5.2015 1.6.2015 
+8. 4.3.2016 4.3.2016 
+9. 25.5.2016 26.5.2016 
+ 
+The different sections of these design instructions have been revised as 
+follows. 
+Section First time included Date of revision 
+Product 14.6.2006 27.09.2012 
+A. Design of Kerto-Ripa elements 
+1 14.6.2006 26.05.2008 
+15.01.2010 29.5.2015 
+2 14.6.2006 28.05.2008 
+15.01.2010 15.06.2012 
+3 14.6.2006 26.05.2008 
+02.02.2010 18.06.2012 
+4 14.6.2006 26.05.2008 
+15.01.2010 
+5 14.6.2006 30.05.2008 
+15.01.2010 
+
+===== PAGE 3 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 3(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 3
+Section First time included Date of revision 
+6 14.6.2006 16.06.2008 
+02.02.2010 18.06.2012 
+7 14.6.2006 30.05.2008 
+15.01.2010 
+8 14.6.2006 26.05.2008 
+15.01.2010 
+9 14.6.2006 16.06.2008 
+15.01.2010 01.11.2012 4.3.2016 
+10 14.6.2006 16.06.2008 
+15.01.2010 01.11.2012 15.02.2013 
+11 14.6.2006 30.05.2008 
+15.01.2010 19.06.2012 23.04.2013 29.5.2015 
+B. Design example of Kerto-Ripa elements 
+1 14.6.2006 27.9.2012 
+2 14.6.2006 27.9.2012 
+3 14.6.2006 27.9.2012 
+4 14.6.2006 27.9.2012 
+5 14.6.2006 01.11.2012 
+4.3.2016 
+6 14.6.2006 01.11.2012 
+
+===== PAGE 4 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 4(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 4
+Section First time included Date of revision 
+C. Top slab supported Kerto-Ripa elements 
+1 14.6.2006 13.1.2010 
+01.11.2012 29.5.2015 
+2 14.6.2006 13.1.2010 
+27.9.2012 
+3 14.6.2006 13.1.2010 
+01.11.2012 29.5.2015 25.5.2016 
+4 14.6.2006 13.1.2010 
+27.9.2012 29.5.2015 4.3.2016 
+D. Support reinforced Kerto-Ripa elements 
+1 4.3.2016  
+2 4.3.2016  
+3 4.3.2016  
+4 4.3.2016  
+5 4.3.2016  
+ 
+
+===== PAGE 5 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 5(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 5
+Contents 
+Revisions 2  
+Contents 5  
+Product 6  
+A. Design methods  of Kerto-Ripa elements 8  
+1 Application area of these instructions 8  
+2 Calculation principles 8  
+3 Effective flange width b ef 9  
+4 Effective bending stiffness EI ef 13  
+5 Bending moment resistance R M,k 14  
+6 Shear resistance R V,k 17  
+7 Axial compression and tension resistance R N,k 20  
+8 Calculation of combined stresses 21  
+9 Compression perpendicular to grain at supports 21  
+9.1 Ribbed and thin slab method 22  
+9.2 Thick slab method 23  
+10 Vibration 26  
+10.1 Basic design principles 26  
+10.2 Deflection checking for vertical concentrated static force 27  
+10.3 Transverse stiffness 28  
+11 Structural details of Kerto-Ripa elements 30  
+11.1 Details at supports 30  
+11.2 Lifting points 31  
+11.3 Connections between two adjacent elements 31  
+11.4 Holes in ribs 32  
+B. Design example of Kerto-Ripa elements 33  
+1 General 33  
+2 Effective flange width bef and bending stiffness EIef 33  
+3 Bending moment capacity R M,k 35  
+4 Shear capacity RV,k 35  
+5 Compression perpendicular to grain on supports 36  
+6 Serviceability limit state design 37  
+6.1 Static deflections: 37  
+6.2 Vibration design 38  
+C. Top slab supported Kerto Ripa elements 40  
+1 Application area of this annex 40  
+2 Failure modes evaluated 42  
+3 Load bearing capacity 43  
+3.1 Slab shear capacity 43  
+3.2 Slab bending capacity 44  
+3.3 Rib shear capacity 45  
+3.4 Withdrawal capacity of anchoring screws 46  
+3.5 Pull-through capacity of anchoring screws 47  
+3.6 Capacity of inclined screws 49  
+4 Design example 52  
+D. Support reinforced Kerto-Ripa elements 57  
+
+===== PAGE 6 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 6(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 6
+1 Application area of this annex 57  
+2 Failure modes evaluated 58  
+3 Load bearing capacity 58  
+3.1 Reinforced compression capacity 58  
+3.2 Top level of reinforcement compression capacity 59  
+3.3 Glue line shear capacity 59  
+3.4 Web buckling capacity 60  
+4 Structural detailing 62  
+4.1 Blockings 62  
+4.2 Reinforcement piece 63  
+5 Design example 64  
+ 
+ 
+Product 
+ 
+These design instructio ns apply to Kerto-Ripa® elements, which are 
+stressed skin panels made of Kerto® LVL material using one component 
+polyurethane adhesive as presented in the ETA-07/0029. The adhesive is 
+durable against weather. The pressure  needed in the gluing process is 
+obtained by screws or nails. The screws  or nails do not act together with 
+the glue bond, thus, they do not carry the shear loads between the web and 
+the flange. The flanges are glued to the webs as presen ted in Figure 1. 
+ 
+Figure 1.  An example cross-section of a Kerto-Ripa stressed skin panel. 
+There are four types of Kert o-Ripa elements available: 
+- A Kerto-Ripa ribbed slab which consists of only one upper (i.e. 
+top) slab, or one lower (i.e. botto m) slab. The latter case means 
+that the ribbed slab is used upside down.  
+- A Kerto-Ripa box slab which has both top and bottom slabs.  
+
+
+===== PAGE 7 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 7(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 7
+- A Kerto-Ripa open box slab which is similar to the Kerto-Ripa 
+box slab but has a discontinuous lo wer slab. The lower slab can 
+be centrally or noncentrally pos itioned in respect of the web. 
+- A Kerto-Ripa box slab where the top panel is not a part of the 
+composite cross section 
+Kerto-S is used as the web material a nd Kerto-Q as the flange material of 
+the elements. An exception to this is the Kerto-Ripa open box slab which 
+has lower flange made of Kerto-S. Plywood can be used as top or bottom 
+panel for load distribution. 
+The terms “ribs” and “slabs” are used in these instructions for Kerto-S 
+webs, and Kerto-Q or Kerto- S flanges, respectively.  
+All surfaces of the slabs, which are glued to the ribs, must always be 
+sanded. The sanding is done on one or on both sides of the Kerto slabs so that the nominal thickness is  reduced by 1 mm per side.  
+As a default, slabs should be done using a single continuous plate. Slab 
+may have joints with the following conditions: 
+ There shall be a supporting pi ece align with the joint 
+ The capacity of the Kerto-Ripa -element shall be checked at the 
+location of the joint. If the capac ity of the cross-section excluding 
+the jointed slab is sufficient, the joint may be done using the 
+general Kerto-Ripa assembly tolerances. 
+ If the capacity is not sufficient th e plates shall be installed into 
+contact allowing slab e nd angle. The joint sh all be positioned so 
+that there will be no tension stress present considering all load cases. 
+ 
+
+===== PAGE 8 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 8(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 8 
+A. Design methods of Kerto-Ripa elements 
+ 
+1 Application area of these instructions 
+This document presents the design methods of Kerto-Ripa elements 
+defined in the ETA-07/0029. The design methods are based on the 
+standard EN1995-1-1:2004+AC:2006+ A1:2008+A2:2014 (EC 5) and 
+general principles of structural mechanics. 
+ 
+2 Calculation principles 
+According to the ETA-07/0029, the design calculations of Kerto-Ripa 
+elements should be made by using th e sanded thicknesses of the slabs.  
+The slabs of Kerto-Ripa elements ar e connected to th e ribs by gluing. 
+Thus, the slip between the slab and the rib is assumed to be zero. In 
+addition, the theory of the thin-flanged beams pr esented in the EC 5 
+standard is used. 
+The structural checking of the Kerto-Ripa element comprises of separate 
+design checkings of each rib and its  effective cross-section in the 
+longitudinal direction of the elemen t. The design criteria of these 
+calculations are presented in the Chapters 3 to 10 of the Section A of this 
+document.  
+The bending stiffness of each effective cross-section of the element is 
+calculated according to the effective flange width b ef,. The parameter b ef 
+is calculated in each span accordi ng to the effective span length L ef. With 
+continuous elements, L ef is assumed to be the same as L i, as presented in 
+Figure A1. 
+ 
+Figure A1.  Span lengths L i and effective span lengths  Lef,i of a continuous 
+Kerto-Ripa element.   
+
+
+===== PAGE 9 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 9(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 9 
+In addition to the checking of the ribs of the Kerto-Ripa element, the slabs 
+of the element shall be checked for the bending and shear resistance, as 
+well as for deflection. These checking s are not included in  this document. 
+Optionally plywood plate can be used with Kerto-Ripa element. Plywood 
+plate can act as lateral torsional buck ling support for ribs  but it shall not 
+be included in the composite cross- section. Clearance between plywood 
+plated needs to be big enough to allow moisture and compression 
+deformation. 
+Nevertheless, the following assumptions shall be used:  1) The deflection of a structurally glue d single-span plate can be reduced 
+by 23 %, when the plate is simply supported, under uniformly distributed loading and the ribs ar e connected to each other at the 
+opposite edge with spacing c/c ≤ 600 mm. For multi-span plate 
+reduction is not allowed. 
+2) When calculating the Kerto-Q plate in the transverse direction, the 
+nominal thickness without sanding is used (for example 27 mm 
+instead of 25 mm). 
+3) Shear deflection shall be taken into  account in the deflection checking. 
+ 
+3 Effective flange width b ef 
+In each Kerto-Ripa element, every I,  T,  or C shaped effective cross-
+section located in the middle or in the edge of the element is separately checked in the design. 
+Deflection of Kerto-Ripa element in service limit state (SLS) shall be 
+calculated for combined cross-section of one Kerto-Ripa element. The sum of effective bending stiffness from  every I, T,  or C shaped section 
+is used as effective bending stiffness. 
+The effective width b
+ef of the compressed and tensile flange is calculated 
+as follows:  
+iR iw iL ief b b b b, , , ,    (A.1) 
+where  iLb, is the width of the flange on the left side of the web under 
+        checking and if iL b b, , 5,0 , 
+ ifb, is the distance between adjacent webs of the element 
+
+
+===== PAGE 10 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 10(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 10 
+ iwb, is the width of the web under checking, 
+ iRb, is the width of the flange on the right side of the web under  
+        checking and if iR b b, , 5,0  
+See Figure A2 for parameters iefb,, iLb,, ifb,, iwb, and iRb,. 
+ 
+Figure A2.  Effective cross-sections of a Kerto-Ripa element and 
+parameters used in the calculations.  
+The parameters bL,i and bR,i are calculated in the serviceability limit state 
+(SLS) as follows: 
+• With middle ribs 
+ 
+
+
+205,0
+min, , , ifef
+iSLSL bL
+b  and
+
+
+205,0
+min1, , , ifef
+iSLSR bL
+b  (A.2a)  
+
+===== PAGE 11 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 11(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 11 
+• With edge ribs 
+ 
+
+ifef
+iSLSLbL
+b
+,,,05,0
+min and 
+
+1,,,05,0
+min
+ifef
+iSLSRbL
+b  (A.2b) 
+In addition to the equations (A.2a) and (A.2b), Kerto-Ripa open box slabs 
+need to fulfil the following criteria: 
+• With middle ribs and edge ribs 
+iSLSR iw i actual iSLSL b b b b,, , , ,,                   (A.2c) 
+and 
+iSLSL iw i actual iSLSR b b b b,, , , ,,                   (A.2d) 
+where bactual,i  is the actual width of the bottom flange under 
+checking. See Figure A3 for para meters of the Kerto-Ripa open 
+box slab. 
+ 
+ 
+Figure A3.  Effective cross-sections of a Kerto-Ripa open box element and 
+parameters used in the calculations.  
+
+
+===== PAGE 12 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 12(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 12 
+In the ultimate limit state (ULS), the parameters bL,i and bR,i are calculated 
+as follows: 
+• With middle ribs 
+ 
+
+
+
+
+
+21205,0
+min
+,, ,
+iffef
+i ULSL
+bhL
+b and 
+
+
+
+
+
+
+21205,0
+min
+1,, ,
+iffef
+i ULSR
+bhL
+b  (A.3a) 
+• With edge ribs 
+ 
+
+
+
+
+
+iffef
+i ULSL
+bhL
+b
+,, ,1205,0
+min and 
+
+
+
+
+
+1,, ,1205,0
+min
+iffef
+i ULSR
+bhL
+b  (A.3b) 
+See Figure A2 for parameters ifb,and fh, and Figure A1 for parameter 
+efL. 
+In addition to the equations (A.3a) and (A.3b), Kerto-Ripa open box slabs 
+need to fulfil the following criteria: 
+• With middle ribs and edge ribs 
+
+
+i ULSR iw i actualf
+i ULSLb b bh
+b
+, , , ,, ,5
+min                (A.3c) 
+and 
+ 
+
+
+i ULSL iw i actualf
+i ULSRb b bh
+b
+, , , ,, ,5
+min                 (A.3d) 
+where bactual,i  is the actual width of the bottom flange under 
+checking. See Figure A3 for corresponding parameters. 
+
+===== PAGE 13 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 13(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 13 
+Notes: 
+- At the edges of an element, the Kert o slab can have an offset so that it 
+covers only part of the Kerto rib. An exception to this is the lower slab of 
+a Kerto-Ripa open box slab whic h cannot have an offset.  
+- The top or bottom slabs can have diffe rent depths and, therefore, their 
+effective widths need to be separately defined. 
+- For simplification of the calcula tions, the plate buckling criterion 
+fh122  is always used in the desi gning of both the top and bottom 
+flanges. With Kerto-Ripa open box sl abs, the maximum effective flange 
+width of fh12  is used when checking the plate buckling criteria. 
+- The clear distance between the adj acent Kerto-S ribs is determined by 
+the bending resistance, shear resist ance and deflection of the Kerto-Q 
+slab. The maximum allowed clearance between the adjacent ribs is 1250 
+mm. 
+- In addition to the plate buckling cr iterion, the free edge distance of  
+Kerto-Q plate shall satisfy the following expression: 
+ f if h b 20,   (A.4a) 
+and for Kerto-S plate: 
+f if h b 10,   (A.4b) 
+where hf is the thickness of the flange under compression. 
+ 
+4 Effective bending stiffness EI ef 
+The E mean values of Kerto-S and Kerto-Q are used in both SLS  and ULS  
+design. In the SLS design, the creep is calculated in each load case by the 
+factor defk2 1 . In addition, the shear de formation of the web shall 
+be included in the SLS design, however , it does not have to be taken into 
+account in the vibration design.  
+The effective bending stiffness EI ef of Kerto-Ripa elements is calculated 
+as follows: 
+3 3 2 2 1 1 _ __ _, IEIEIE EIslab box semior slab boxef            
+       2
+3 3 32
+2 2 22
+1 1 1 aAE aAE aAE                (A.5) 
+
+===== PAGE 14 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 14(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 14 
+2
+2 2 22
+1 1 1 2 2 1 1 _ , aAE aAEIEIE EIslab ribbedef   or  (A.6a) 
+        2
+3 3 32
+2 2 2 3 3 2 2 aAE aAEIEIE   (A.6b) 
+where: 
+Ei = Modulus of elasticity E mean,i  
+Ai  = Cross-section area of the member: i ihb 
+Ii = Moment of inertia: 123
+i ihb  
+b1 = Effective width of the top slab (b ef,f1) 
+b2 = Width of the rib (b w) 
+b3 = Effective width of the bottom slab (b ef,f2),   
+h1 = Depth of the top slab (h f1) 
+h2 = Depth of the web (h w) 
+h3 = Depth of the bottom slab (h f2)   
+ai = Distance between the centre of  gravity of the member and the 
+neutral axis of the element 
+a1 2 2 1 5.0 5.0 a h h   (A.7) 
+
+3 3 2 2 1 13 2 3 3 2 1 1 1
+_ _ __ _,22 AE AEAEhhAE hhAEaslab box openor slab box  (A.8) 
+
+2 2 1 12 1 1 1
+_ ,22 AEAEhhAEaslab ribbed   or (A.9a) 
+
+2 2 3 32 3 3 3
+_ ,22 AEAEhhAEaslab ribbed  (A.9b) 
+a3 2 2 35.0 5.0 ah h   (A.10) 
+ 
+5 Bending moment resistance R M,k 
+The bending moment resistance of a Ke rto-Ripa element is taken as the 
+minimum of the following cases. All material values presented  in these 
+equations shall be taken from th e Table 1-2 of the ETA-07/0029.   
+
+===== PAGE 15 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 15(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 15 
+• The bending moment resistance base d on the mean compression stress 
+in the middle of the flange: 
+
+
+
+
+ii meanULSef
+kic kicMa EEIf R
+,,
+,,0, ,,,  (A.11) 
+i=1 or 3, where 1=top slab and 3=bottom slab 
+• The bending moment resistance base d on the mean tension stress in 
+the middle of the flange: 
+
+
+
+
+ii meanULSef
+kit kitMa EEIf R
+,,
+,,0, ,,,  (A.12)  
+i=1 or 3, where 1=top slab and 3=bottom slab 
+Note: The tensile strength (f t,0,k) shall be multiplied by the factor k l, 
+which is calculated as follows: 
+kl = min(1.1 , (3000/L ef)0.06  (A.13) 
+• The bending moment resistance based on the axial edge stress of the 
+web: 
+
+22
+2 2,,
+,2, ,2,,ha EEIf R
+meanULSef
+k m k mM  (A.14) 
+Note: The bending moment strength (f m,k,║) shall be multiplied by the 
+factor k h, which is calculated as follows:  
+kh = min(1.2 , (300/h i )0.12)  (A.15) 
+Note: The free edges of webs under compression in a Kerto-Ripa 
+ribbed slab must be checked fo r lateral torsional buckling in 
+accordance with EC 5, clause 6.3.3, where 
+- The relative slenderness for bending is calculated by the 
+equation (6.30) as follows  
+critmkwm
+mrelf
+,,,
+,   
+
+===== PAGE 16 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 16(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 16 
+where the lower index “ w” refers to the web 
+- The critical bending stress for late ral stability is calculated by 
+the equation (6.31) as follows 
+ 
+y weftor ULSz
+critmW LGI EI
+
+
+,,
+,
+   
+where the parameters EIz,ULS, GItor and Wy are calculated as 
+presented below 
+3
+, ,05.03
+,05.0 ,121
+121
+fef f f w w w ULSz bh E bh E EI       (A.16) 
+
+
+
+
+ww
+w w w torhbbh G GI6.0131 3
+,05.0 
+     
+
+
+
+feff
+f fef fbhh b G
+,3
+, ,05.06.0131             (A.17) 
+
+
+
+22
+2 2,,
+ha EEIW
+meanULSef
+y             (A.18)  
+where the lower index “ f” refers to the top or bottom flange   
+- The kcrit factor is calculated by the equation (6.34) as follows 
+
+
+
+
+2
+,,
+175.056.11
+mrelmrel critk
+  
+4.1 ,4.1 75.0,75.0 ,
+,,,
+
+mrelmrelmrel
+
+ 
+- The checking of resistances is done according to the equation 
+(6.33) which can be presented as follows  
+ kmM crit k bucklingM Rk R,2,, , ,   
+
+===== PAGE 17 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 17(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 17 
+• The bending moment resistance base d on the centric bending stress of 
+the web: 
+
+2,,
+, , ,,
+i
+i meanULSef
+km k centricmMhEEIf R  (A.19) 
+Note: RM,m,centric,k  should be used in the calculations of combined 
+stresses 
+When the webs of a Kerto-Ripa element are single tapered, the 
+compression bending strength parallel  to the tapered edge shall be 
+reduced by the factor k m,α,c as follows: 
+2
+2
+,90,,2
+,,,,
+tan tan5,111
+
+
+
+
+
+
+
+ 
+k ckm
+kvkmc m
+ff
+ffk  (A.20) 
+When the webs of a Kerto-Ripa elem ent are single tapered, the tension 
+bending strength parallel to the tapered edge shall be reduced by the factor 
+km,α,t as follows: 
+2
+2
+,90,,2
+,,,,
+tan tan75,011
+
+
+
+
+
+
+
+ 
+k tkm
+kvkmt m
+ff
+ffk  (A.21) 
+Note: It is recommended to use taperi ng at the compression side, since the 
+fc,90,k value of Kerto-S webs is sign ificantly higher than the  f t,90,k value. 
+ 
+6 Shear resistance R V,k 
+The shear resistance of a Kerto-Ripa element is taken as the minimum of 
+the following cases. All material values  presented in these equations shall 
+be taken from the Table 1-2 of the ETA-07/0029.   
+
+===== PAGE 18 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 18(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 18 
+• The shear resistance based on the jo int between the top slab and the 
+web is calculated as follows:  
+
+
+
+
+
+
+
+  ; min
+1 1 ,, ,,2
+, ,,0, ,,aA EEI bk
+f R
+f meanULSef teff gl
+k slabflatv ktopV  
+  
+
+
+
+
+
+
+
+
+1 1 ,,
+,,,0,aA EEIb
+f
+f meanULSef w
+kSflatv  (A.22) 
+b2,eff,t = effective joint width between the top slab ( t) and the web ( 2) 
+where fv,0,flat,S,k  is the flatwise shear strength of longitudinal veneer 
+(value of Kerto-S is used). 
+• The shear resistance based on the web: 
+
+
+
+
+
+
+
+ 
+222
+2 ,
+1 1 ,,
+, , , , ,
+ahb E
+aA EEIbf R
+w
+w w mean
+f meanULSef w
+k web edgev k webV(A.23) 
+• The shear resistance in the joint between the bottom slab and the web: 
+
+
+
+
+
+
+
+  ; min
+3 3 ,, ,,2
+, ,,0, , ,aA EEI bk
+f R
+f meanULSef beff gl
+k slabflatv k bottomV  
+  
+
+
+
+
+
+
+
+
+3 3 ,,
+,,,0,aA EEIb
+f
+f meanULSef w
+kSflatv  (A.24) 
+b2,eff,b = effective joint width between the bottom slab ( b) and the web 
+(2) 
+where fv,0,flat,S,k  is the flatwise shear strength of longitudinal veneer 
+(value of Kerto-S is used). 
+
+===== PAGE 19 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 19(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 19 
+The effective joint width of equations (A.22) and (A.24) is calculated as 
+follows: 
+• With middle ribs 
+mm b beff 307,0             (A.25a) 
+where beff  is the effective joint width ( b2,eff,t or b2,eff,b) (mm) and b is 
+the contact width of the web (mm) 
+kgl = 1,30 
+• With edge ribs 
+ mm b b beff 157,0; max              (A.25b) 
+where b is the actual contact width (mm) 
+kgl = 1,15 
+The equation (A.25a) is also used wi th edge ribs where the top slab 
+extends 25 mm or further over the ex ternal surface of the edge rib. 
+ The equation (A.25b) is used with ed ge ribs where the top slab extends 
+less than 25 mm over the external surface of the edge rib, or when the top slab has an offset and does not fully cover the edge rib.  With Kerto-S flanges of Kerto-Ripa open slabs, b
+eff equals to b which is 
+the actual contact width of the web and  kgl = 1,00. 
+ 
+Note: When the ribs of Kerto-Ripa ribbed slabs are de signed as visible 
+structures, glue stains should be avoided in th e manufacturing of the 
+elements. This is accomplished by adjusting the effective joint width (b
+2,eff,t or b2,eff,b) so that it is made smaller than the width of the rib ( bw). In 
+this case, longitudinal grooves are carved near the edges of the rib, and 
+glue is applied between the grooves. Thus, the glue can expand to the grooves during the manufacturing process.  
+Example: If the grooves are of 3× 3 mm size, and the distance from 
+the edge of the rib to the outer edge of the groove is 5 mm, the 
+contact width is calculated as follows:  
+bw - 2×(5+3) mm = bw – 16 mm. 
+
+===== PAGE 20 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 20(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 20 
+Note: With continuous Kerto-Ripa elements, the shear force can be 
+reduced close to the intermediate su pports of the structure as follows: 
+- The shear force reduction is made to the shear force curve of 
+the load combinations provided that the loads are acting on the 
+opposite side of the struct ure than the support area. 
+- The shear force curve is disreg arded within the distance of 
+0.9×H from the edge of the suppo rt. The distance of 0.9×H is 
+used to eliminate the effect of the self-weight on the shear force curve. The parameter H is the height of the ribs of the Kerto-
+Ripa element. 
+ 
+7 Axial compression and tension resistance R N,k 
+All material values presented in the following equations for axial 
+compression and tension resistance sha ll be taken from the Table 1-2 of 
+the ETA-07/0029.   
+• The axial tension resistance: 
+iii
+kit kiTEAEf R,,0, ,,    (A.26) 
+i=1-3, where 1=top slab, 2=web and 3=bottom slab 
+• The axial compression resistance: 
+ii
+kic kiCEAEf R1
+,,0, ,,    (A.27) 
+i=1-3, where 1=top slab, 2=web and 3=bottom slab 
+The axial force N is assumed to act al ong the centre line of the effective 
+cross-section. Additional bending mo ment due to the eccentricity of the 
+axial force shall be separately checked. 
+ 
+
+===== PAGE 21 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 21(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 21 
+8 Calculation of combined stresses 
+The following verification shall be done to the top and the bottom slab 
+and to the web: 
+• The mean tension due to the axial tension and bending stresses, when 
+the sum of the stresses is of tensile type: 
+0,1
+,,,
+,,,
+diTdT
+ditMd
+RN
+RM
+ (A.28) 
+i=1-3, where 1=top slab, 2=web and 3=bottom slab  
+• The mean compression due to the axial compression and bending 
+stresses, when the sum of st resses is of compression type: 
+0,1
+,,,
+,,,
+diCdC
+dicMd
+RN
+RM
+ (A.29) 
+i=1-3, where 1=top slab, 2=web and 3=bottom slab  
+• The combined tension and bending st resses at the edge of the web: 
+0,1
+, ,, ,,,
+,,, 
+d centricmMd
+dwebTdT
+dwebtMd
+RM
+RN
+RM
+ (A.30) 
+• The combined compression and bending stresses at the edge of the 
+web, when buckling must be prevented: 
+0,1
+, ,,2
+,,,
+,,,  
+d centricmMd
+dwebCdC
+dwebcMd
+RM
+RN
+RM (A.31) 
+ 
+9 Compression perpendicular to grain at supports 
+The compression perpendicular to the grain is checked for the web and 
+for the bottom slab with thickness greater than 51 mm at supports. Both the web and the bottom slab are regard ed as rectangular cross-sections. 
+The material values used in the following equations shall be taken from 
+the Table 1-2 of the ETA-07/0029. The strength of the supporting material 
+shall be separately checked. The support capacity may be increase with 
+reinforcement pieces, see section D for more information. 
+
+===== PAGE 22 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 22(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 22 
+9.1 Ribbed and thin slab method 
+This design method shall be used for Kerto-Ripa -elements with bottom 
+slab not more than 51 mm thick. This  method applies also with ribbed 
+slab. 
+The resistance based on the stresses at the contact area between the web 
+and the support: 
+ef,suppor t w kc kwebc kc Lb f k R ,90, ,,90, ,90,  (A.32) 
+where   
+kc,90,web,k   = 1.0 generally 
+On discrete supports for uniformly loads or for 
+concentrated loads further away from the support than 
+2hw, the following values may be used: 
+  = 1.2 if Lsupport  ≤ 125 mm 
+  = 1.1 if Lsupport  > 125 mm 
+bw  = width of the web 
+Lef,support  = effective contact length parallel to the grain, 
+obtained by increasing the actual contact length, 
+l=Lsupport , at each side by 15 mm, but not more than a, l 
+or l1/2 as presented in EC 5,  6.1.5(1).  
+See Figure A4 for parameters bw and Lsupport .  
+ 
+Figure A4. Detail of a Kerto-Ripa  ribbed slab at support.  
+
+
+===== PAGE 23 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 23(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 23 
+9.2 Thick slab method 
+This design method shall be used for Kerto-Ripa -elements with bottom 
+slab more than 51 mm thick.  
+• The resistance based on the web: 
+supportef w kwebc c kc Lb f k R, ,,90, 90, ,90,   (A.33) 
+where   
+ 
+ k c,90  = 1.0 generally 
+On discrete supports for uniformly loads or for 
+concentrated loads further away from the support than 2h
+w, the following values may be used: 
+  = 1.2 if Lsupport  ≤ 125 mm 
+    = 1.1 if Lsupport  > 125 mm   
+ b w = width of the web 
+ L ef,support  = effective contact length parallel to the grain, 
+obtained by increasing the actual contact length, l=L
+support , at each side by 15 mm, but not more than a, l 
+or l1/2 as presented in EC 5, 6.1.5(1).  
+See Figure A5 for parameters bw, Lsupport  and Lef,support .  
+• The resistance based on the bottom slab: 
+supportef ef kslab c c k c L b f k R, support, ,,90, 90, ,90,   (A.34) 
+where   
+ 
+ k c,90  = 1.4  
+bef,support  is the effective contact width, which is calculated as 
+follows: 
+- For edge webs 
+mm b bw ef,support 15                     (A.35a) 
+where bw is the width of the web (mm) 
+ 
+
+===== PAGE 24 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 24(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 24 
+- For middle webs 
+mm b bw ef,support 152               (A.35b) 
+  
+Lef,support  is the effective support length, which is calculated as  
+follows:  -
+ At end supports  
+mmamm L Lsupport ef,support30min 30           (A.36a) 
+- At intermediate supports 
+mm L Lsupport ef,support 302             (A.36b) 
+where 
+Lsupport  = length of the support, when blockings are used  
+  =  length of the support - a, when end beams are used 
+ 
+a =  distance from the end of the web to the end of the  
+   flange  
+ 
+According to EC 5, 6.1.5.(1), Lsupport  (= l) shall not be increased 
+more than by a, l or l1/2 at each side.  
+ 
+The parameters of the equations (A.3 4), (A.35a), (A.35b), (A.36a) and 
+(A.36b) are presented in Figures A.5, A.6 and A.7. 
+
+===== PAGE 25 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 25(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 25 
+ 
+Figure A5. Detail of a Kerto-Ripa box sl ab at support when blockings 
+are used at the ends of the slab. Left: The effective length L ef,support  of the 
+contact area between the web and the bottom slab. Right: The effective 
+width b ef,support  of the contact area betw een the support and the bottom 
+slab. 
+ 
+ 
+Figure A6.  The effective support width b ef,support  for edge and middle webs 
+of a Kerto-Ripa box slab, open bo x slab or ribbed slab upside down. 
+ 
+
+
+===== PAGE 26 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 26(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 26 
+ 
+Figure A7.  The effective support length L ef,support  at end supports and 
+intermediate supports of a Kerto-Ripa  box slab, open box slab or ribbed 
+slab upside down. 
+Note: The design checkings presented in the Chapters 9.1 and 9.2 are 
+valid for cases where the loads fr om the Kerto-Ripa element are 
+transferred to the supports by the contact area between the element and 
+the support. Another option would be  to utilize the end beam of the 
+element in the support resistance, which means that the connection 
+between the end beam and the webs of the element must be calculated to 
+resist the full support reaction. As an example of this case, see the Chapter 
+3.6 “Top slab supported Kerto-Ripa elements” of Section C of this 
+document. End beams are explained in the Chapter 11.1. 
+ 
+10 Vibration 
+The requirements for the vibration de sign of Kerto-Ripa elements are 
+presented in the EC 5 standard and its National Annex. 
+10.1 Basic design principles 
+The vibration design of Kerto-Ripa elements is carried out according to 
+the EC 5 and the clause 7.3.3 of  the Finnish Nati onal Annex. The 
+following principles are also applied: 
+- The E mean values are used in the calculations. 
+- The shear deformation is not included in the checking. 
+- The vibration checking is done separately for each span of a 
+continuous element. The span sp ecific bending stiffnesses are 
+defined in the Chapter 2 “Des ign methods of Kerto-Ripa 
+elements” of Section A of this document. 
+
+
+===== PAGE 27 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 27(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 27 
+10.2 Deflection checking for vertical  concentrated static force 
+The value of the vertical concentrated static force F used in the deflection 
+checking of Kerto-Ripa elem ents varies as follows: 
+- For an edge rib of an element at the free edge (no adjacent 
+element), the concentrated force is taken as 0.5 kN 
+- For an edge rib of an element at the joint of two connected 
+elements, the concentrated force is taken as 0.6 kN.  
+This value is obtained by  dividing the 1.0 kN fo rce to the edge ribs 
+of these two adjacent elements. Thus, (EI) L2 = 2×(EI) L1, where the 
+lower index “L1” refers to the no rmal longitudinal stiffness of one 
+edge rib, and the lower index “L2” to the total longitudinal stiffness of the two adjacent edge ribs. When this expression is substituted to the deflection equatio n of a load-bearing slab in two 
+directions, the factor 0.6 is obtained as follows: 
+12
+142LLEI kLFw
+ 
+  
+  
+ 
+
+112141214122422
+22
+2
+6.0426.042595.02 2 4242 42
+LLL L BL L BL L B LL
+wEIkLFEI EI EILFEI EI EILFEI EI EILF
+EIkLFw
+   
+
+    
+- For a middle rib of an element, the concentrated force is taken as 
+1.0 kN 
+In addition, the local deflection of  the slab caused by the vertical 
+concentrated force F = 1.0 kN shall be checked for the requirements of 
+the National Annex of the Eurocode 5 standard. In Finland, the 
+requirement for deflection is 0.5 mm. This limit is fulfilled when t ≥ s / 
+25, where t is the thickness of the Kerto slab and s is the spacing of the 
+Kerto ribs. For instance, the spacing of the ribs should be s < 600 mm 
+when a 25 mm thick Kerto slab is used. 
+
+===== PAGE 28 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 28(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 28 
+10.3 Transverse stiffness 
+The transverse stiffness EI B (i.e. the stiffness perpendicular to the span 
+direction) of the element is primarily calculated based on the EI B of the 
+slabs. Additional stiffness from blocking s, floating floor, etc. is evaluated 
+case by case. When blockings are used as transverse bracings, these are made of the same Kerto-S size as the ribs of the element. Further 
+information on blockings is presented be low in this chapter and in Chapter 
+11.1. 
+In Kerto-Ripa ribbed slabs, blockings are connected to the top slab of the 
+element and to a tension chord (made of 22×100 sawn timber minimum) 
+at the bottom of the element by nails 2.8×75 c/c 200 (minimum). The tension chord is also nailed to the ri bs of the element with the same nails 
+(2 nails 2.8×75 per rib).  
+In Kerto-Ripa open box slabs, bloc kings are connected to the top and 
+bottom slabs of the element by nails 2.8×75 c/c 200 (minimum). The 
+tension chord (made of 22×100 sawn timber minimum) is then connected 
+to the bottom of the bottom slab at the ribs with the same nails (2 nails 2.8×75 per rib).  
+Due to the tension chords, adjacent Kerto-Ripa ribbed and open box slabs 
+are connected to each other both at  the top and at the bottom of the 
+element. The joints of the tension chord must, however, not be located at 
+the joints of the adjacent Kerto-Ripa slabs. See Chapter 11.3 for more 
+information on connections between adjacent elements. 
+At the free edges of all Kerto-Ripa elements, the transverse stiffness of 
+the slab(s) and additional blockings, floating floor, etc. can be utilized 
+only in the direction of the adjacent rib. This means that only 10 % of the total transverse stiffness of the floor is taken into account in the vibration 
+calculation of the edge rib. This approximation is obtained by comparing 
+the deflection of the cantilever ( w
+1) of a multi-span structure with a 
+cantilever, to the deflection of the mid-span ( w2) of a similar multi-span 
+structure as presented in the Figure A8 below. As a result of the 
+comparison, w1 ≈ 10×w2 and thus, the stiffnesses of the structures are (EI) 1 
+≈ 0.1 (EI) 2.  
+         F = 0.5 kN  
+Structure 1 
+                    w 1  
+                        L                L               L               L   
+     
+
+===== PAGE 29 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 29(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 29 
+ 
+                 F = 1.0 kN 
+Structure 2                   
+                                        w2 
+                        L               L                   2 L                                                                 
+     
+Figure A8.  Deflection of two multi-span structures with static 
+concentrated force F. 
+ 
+At the joints of two Kerto-Ripa bo x slabs which are connected to each 
+other only at the top slab, the transverse stiffness of the floor is calculated 
+as the sum of the following: 10 % of th e transverse stiffness of the slabs 
+and blockings, and 100 % of the transv erse stiffness of the floating floor 
+structure above the top slab.  
+Kerto-Ripa box slabs will have the following transverse bracing which 
+shall be assembled during the manufacturing of the elements: 
+• When the span length L of the slab is 8 m or smaller ( L ≤ 8m), one 
+transverse bracing line is assembled in the mid-span. When the span 
+length is greater than 8 m ( L> 8 m), three transver se bracing lines are 
+assembled approximately at the quartiles of the span length. 
+• With box slabs, the transverse stiffness of the top and bottom slabs is 
+calculated as follows: 
+  12113.03 3
+,90 , web tot mean slab slabsB H H E B EI             (A.37) 
+where  
+(EI) B,slabs  = transverse stiffness of the top and bottom slabs 
+Bslab = width of the slab (=1.0m) 
+Htot = total height of the box slab  
+Hweb = height of the rib 
+
+===== PAGE 30 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 30(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 30 
+• The reduction factor 0.13 is determined by the ratio 1nsn
+ 
+where n is the number of transverse bracing lines per box slab, and s 
+is the spacing of the bracing lines in  the box slab. The value 0.13 (1/m) 
+corresponds to the minimum ratio obtained for span lengths from 4 to 16 m. When L = 4..8 m, one bracing lin e is used. When 8 m < L ≤ 16 
+m, three bracing lines are used.  
+-
+ For L = 8 m, n = 1 and s = 4 m, the result of the ratio is 
+13.0 125.081
+1141 
+- For L = 16 m, n = 3 and s = 4 m, the result of the ratio is 
+13.0 1875.0163
+1343 
+ 
+11 Structural details of Kerto-Ripa elements 
+11.1 Details at supports  
+Kerto-Ripa elements shall have end beams or blocking lines at both ends 
+of an element, and at intermediate supports. End beams are continuous beams connected to the ends of the ribs, and blocking lines consist of short 
+beams (blockings) assembled between the ribs. Both structures have a 
+height between 0.6 - 1.0 times the he ight of the ribs, and run through the 
+element in the transverse direction. 
+End beams are made of Kerto-S, Ke rto-Q, Kerto-Kate or plywood and 
+blocking lines are made of Kerto-S or Kerto-Q beams which are nailed, 
+screwed, glued, or nailed/screwed and glued to the ribs and slab(s) of the 
+element. The structural detail of  the element and its design method 
+determine the Kerto product to be used in these cases.  
+See Chapter 10.3 of this section A for more information about blocking 
+lines as transverse bracing of the Kerto-Ripa elements. 
+
+===== PAGE 31 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 31(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 31 
+11.2 Lifting points 
+Kerto-Ripa elements shall also be designed to carry loads which occur 
+during construction and lifting of the elements. The structural engineer 
+shall design the elements according to  the erection instructions presented 
+by the supplier of the elements.  
+Blocking lines need to be assembled close to each lifting point. 
+11.3 Connections between two adjacent elements 
+Kerto-Ripa elements are normally connected to each other with 
+mechanical fasteners. Diagonal sc rewing with spacing of 300 – 400 mm 
+is recommended. The screw size is  Ø5-6mm and lengt h L = 100-120 mm 
+depending on the thickness of the top slab. 
+The basic principles of connecting tw o adjacent Kerto-Ripa elements to 
+each other are presented in Figure A9  below. Details A – D are for ribbed 
+slabs and details E – G for box (and open box) slabs. 
+ 
+ 
+Figure A9.  Principles of connecting two Kerto-Ripa elements  
+
+===== PAGE 32 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 32(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 32 
+When blockings are used as transverse bracing in Kerto-Ripa ribbed slabs, 
+the joints of the tension chord must not be located at the joints of the slabs. 
+See Chapter 10.3 for instructions of connecting the tension chord to the 
+blockings and ribs. 
+The following issue should be considered with details A, B and C of 
+Kerto-Ripa ribbed slabs in  Figure A9. If the ceil ing structures  underneath 
+the element are assembled in the fact ory, and these structures are taken 
+into account in the vibration design of the edge ribs or the element, 
+adjacent elements must be connected to each other at the bottom of the 
+elements.  
+With Kerto-Ripa box slabs, it is r ecommended to have a 5 mm horizontal 
+offset between the outer edge of the Kerto slab and the Kerto edge rib. 
+This is to avoid tolerance problems during the installation of the elements. 
+See details E (top and bottom slab) and F (bottom slab) in Figure A9. 
+ 
+11.4 Holes in ribs 
+Holes can be inserted in the ribs of Kerto-Ripa elements using the 
+following guidelines for the location and dimensioning. 
+ The geometrical rules of VTT cer tificate (184/03) Annex A will 
+be used. 
+ At the location of the hole, the top and bottom slabs of the Kerto-
+Ripa element are not taken into account in the shear capacity. The 
+shear resistance is that given in  VTT Certificate (184/03) Annex 
+A, multiplied by a factor kØ = 0.65 for T- and -sections and kØ = 
+0.75 for I- and C-section. 
+ At the location of the hole, the effective bending stiffness EIef,ULS 
+is calculate according to  chapter 4 so that the hole is reduced from 
+the cross-section. This reduced value of the effective shall be used 
+in the following design checks of the Kerto-Ripa element: bending 
+moment resistance of chapter 5, shear resistance between slab and 
+rib of chapter 6 (formulas (A.22) and (A.24)), axial compression 
+and tension resistance of chapte r 7 and combined stresses of 
+chapter 8. 
+ The effect of the hole on the de flection and vibration design may 
+be neglected. 
+
+
+===== PAGE 33 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 33(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 33 
+B. Design example of Kerto-Ripa elements 
+1 General 
+Bending moment, shear, support reac tion capacity and effective bending 
+stiffness are verified for an intermedia te rib of a symmetrical single span 
+box-slab, where the web height hw = 225 mm, the web thickness bw = 45 
+mm and the thickness of the flanges hf = 25 mm. The web spacing is 
+585 mm, the design span of the el ement is 5500 mm and support lengths 
+are 100 mm in both ends. The elements are used as floor elements of an office space. Loads are g = 0.9 kN/m
+2 and q = 2.5 kN/m2, which give in 
+ultimate limit state design maximum value of the bending moment M
+d = 11 kNm and shear force per web Vd = 8 kN in the medium-term 
+load-duration class and in the service class 1. 
+ 
+Figure B1. Cross-section of the example Ri pa element. Design is done at 
+an intermediate rib area . 
+2 Effective flange width bef and bending stiffness EIef 
+Since the top and bottom elements have the same thickness, they have the 
+same effective flange widths:  In ultimate limit state: 
+
+
+
+
+
+
+
+
+
+
+ mm270
+mm2702540mmmm300 25mm12mm275 mm 550005,0
+min
+21205,0
+min
+,1 1, , 1, ,
+ifef
+ULSR ULSL
+bhL
+b b
+ 
+
+
+===== PAGE 34 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 34(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 34 
+mm585 mm270 mm45 mm2701, , 1, , 1, , ULSR w ULSL ULSef bb b b  
+And in service limit state: 
+
+
+
+
+ mm270mm2702mm540mm275 mm 550005,0
+min
+205,0
+min, 1, , 1, , ifef
+SLSR SLSL bL
+b b
+ 
+mm585 mm270 mm45 mm270, , , SLSR w SLSL SLSef bb b b  
+=> In ultimate limit state bef,ULS,1  = 585 mm and in serviceability limit 
+state bef,SLS,1  = 585mm. 
+ 
+
+023 3 2 2 1 13 2 3 3 2 1 1 1
+2AE AEAEhhAE hhAEa  
+mm 1250 mm2255.0 mm255.0 5.0 5.02 2 1 3 1  ah h aa
+ 
+Effective bending stiffness EIef,ULS: 
+
+2
+1 1 , ,13
+2 2
+,23
+1 ,
+,1 , 212 122 ah b EhbEh b
+E EIULSef mean meanULSef
+mean ULSef
+   12mm225 mm45MPa 1380012mm25 mm585MPa 1050023 3
+2 12 2Nmm10404.5 mm125 mm25 mm585 MPa 105002     
+ 
+Effective bending stiffness EIef,SLS: 
+
+2
+1 1 , ,13
+2 2
+,23
+1 ,
+,1 , 212 122 ah b EhbEh b
+E EISLSef mean meanSLSef
+mean SLSef
+   12mm225 mm45MPa 1380012mm25 mm585MPa 1050023 3
+2 12 2Nmm10404.5 mm125 mm25 mm585 MPa 105002     
+ 
+
+===== PAGE 35 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 35(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 35 
+3 Bending moment capacity R M,k  
+Bending moment capacity based on mean compression stress in the 
+middle of the flange: 
+kNm1,107mm125 MPa 10500Nmm10404.5MPa262 12
+1 1,,
+,1,0, ,,
+
+
+
+
+
+
+
+a EEI
+f R
+meanULSef
+k c kcM
+ 
+Bending moment capacity based on mean tension stress in the middle of 
+the flange: 
+kl = min(1.1 ; (3000/ Lef)0,06 = min(1.1; (3000/5500)0.06 = 0.964 
+kNm2,103mm125 MPa 10500Nmm10 404.5MPa26 964.02 12
+3 3,,
+,3,0, ,,
+
+
+
+
+
+
+
+a EEI
+fk R
+meanULSef
+k c l ktM
+ 
+Bending moment capacity based on axial edge stress of the web: 
+kh = min(1.2 ; (300/ hi )0.12 = min(1.2 ; (300/225)0.12 = 1.035 
+
+
+
+
+22
+2 2,,
+, ,,ha EEI
+fk R
+meanULSef
+km h kmM  
+kNm5.158
+2mm2250 MPa 13800Nmm10 404.5MPa44 035.12 12
+
+
+
+
+
+
+
+  
+RM,k = min( RM,c,k; RM,t,k; RM,m,k ) = min(107.1; 103. 2; 158.5) = 103.2 kNm 
+ 
+4 Shear capacity RV,k 
+Shear capacity based on the joint between the slabs and web: 
+beff = 0.7 b2 + 30 mm = 0.7 ∙ 45 mm + 30 mm = 61.5 mm 
+
+===== PAGE 36 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 36(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 36 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+1 1 ,, 2
+,, ,0,
+1 1 ,, ,,2
+, , ,0, , ,, ; minaA EEIb
+faA EEI bk
+f R R
+f meanULSef
+kSflatv
+f meanULSef teff gl
+k slabflatv bottomV ktopV
+
+
+
+
+
+
+ ;mm125 mm585 mm25 MPa 10500Nmm10 404.5 mm5.613.1MPa3.1 min
+kN26.292 12
+
+kN1.29mm125 mm585 mm25 MPa 10500Nmm10 404.5 mm45MPa3.2
+kN14.292 12
+
+
+
+
+
+
+
+
+ 
+Shear capacity based on the web: 
+kN1.43
+202mm225mm45 MPa 13800
+mm125 mm25 mm585 MPa 10500Nmm10 404.5 mm45MPa1,422
+22 122
+2 ,
+1 1 ,,
+, , , , ,
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+ 
+ahb E
+aA EEIb
+f Rw
+w w mean
+f meanULSef w
+k web edgeV k webV
+ 
+RV,k = min( RV,top,k , RV,top,k , RV,web,k ) = min(29.1; 29.1; 43.1) = 29.1 kN 
+ 
+5 Compression perpendicular to grain on supports 
+The bottom slab thickness is not more than 51 mm, uniform loading and 
+Lsupport  is 100 mm: 
+2.1c,90,web,kk  
+mm115 mm15support ef,support L L  
+
+===== PAGE 37 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 37(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 37 
+kN2.37 115450.62.1, ,,90, ,,90, ,90, supportef w kweb c kweb c k c Lb f k R  
+Design conditions:  
+dM dR M, , dV dRV,  and d c dR V,90, . 
+LVLMk
+LVL dRk R
+,mod,  
+where 
+kmod = 0.8 (for LVL in table 3.1 of EN 1995-1-1) 
+M,LVL   is the partial safety factor fo r LVL according to the actual National 
+Annex of EN 1995-1-1. In Finland M, LVL  = 1.2. 
+Check of design conditions:  
+OK R MdM d    kNm8.682.1kNm2.1038.0 kNm11,
+OK R VdV d   kN4.192.19.1kN28.0 kN8, 
+. kN8.242.1kN2.378.0 kN8,90, OK R Vd c d     
+ 
+6 Serviceability limit state design 
+6.1 Static deflections: 
+The deflection of the element shall be calculated using the total EISLS of 
+the element. 
+2 12 2 12 2 12, , ,
+Nmm10 2132.17 Nmm10 2026.32 Nmm10404.522 2
+      edgeSLS middleSLS SLS totSLSEI EI EI EI
+ 
+Instantaneous moment deflections 
+Dead load: mm12.1
+10 2132.173845.5805.19.05
+3845
+124
+,4
+,, 
+ 
+totSLSgMinstEIgLu  
+Live load: mm12.3
+10 2132.173845.5805.15.25
+3845
+124
+,4
+,, 
+ 
+totSLSqMinstEIgLu  
+
+===== PAGE 38 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 38(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 38 
+Instantaneous shear deflections, only the shear rigidity of the webs is 
+taken in consideration.  
+Dead load: mm30.0
+2254546560085.5 805.19.0
+82 2
+,, 
+GAgLugVinst 
+Live load: mm84.0
+2254546560085.5 805.15.2
+82 2
+,, 
+GAgLuqVinst 
+uinst = uinst,M,g + uinst,M,q + uinst,V,g + uinst,V,q   
+ = 1.12 + 3.12 + 0.30 + 0.84 = 5.38 mm < L/300 = 18.3mm OK 
+Final deflections: 
+kdef = 0.60 (for LVL in table 3.2 of EN 1995-1-1 with service class 1) 
+ψ2 =0.3 (for live loads in office floors EN 1990) 
+ufin = (1 + kdef) ∙ uins,q + (1 + ψ2 ∙ kdef) ∙ uinst,q  
+ = (1 + 0.6) ∙ (1.12 + 0.30) + (1 + 0.3 ∙ 0.6) ∙ (3.12 + 0.84)  
+ = 6.95mm < L/200 = 27.5mm OK 
+ 
+6.2 Vibration design 
+Lowest natural frequency 
+The mass m includes own weight of 90 kg/m2 and the long term part of 
+the live load of 30 kg/m2. 
+Hz4.14
+m585.0) kg/m30 kg/m90(Nm10404.5
+5.52 22 22 06
+2,
+2 1
+ 
+  
+mEI
+LfL SLS
+ 
+Deflection under 1 kN point load: 
+4
+, ,2
+kN1 ,42L SLSb
+L SLS EIEIkEIkFLu 
+ 
+
+===== PAGE 39 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 39(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 39 
+For box slabs, EIb is calculated as: 
+/m Nmm10567.112225 2751000 200012
+2 123 3 3 3
+,0,
+w
+cross meanhhb E 
+641.0
+mm585mm1000Nmm10404.5/m Nmm10567.1
+42 122 12
+
+ k  
+mm122.0
+mm5851Nmm10 404.5 641.042mm 5500 kN0.1
+2 122
+1 
+ kNu  
+In Finnish national annex for EN1995-1- 1, the requirements of vibration 
+design are: 
+f1  9.0 Hz, so 14.4 Hz of this example is ok 
+06.11 ;m5.5 114.0 318.01max 1 ;114.0 318.01max 
+
+
+
+
+
+Lk  
+1.06·0.5 mm = 0.53mm, so 0.13 mm of this example is OK. 
+ 
+
+===== PAGE 40 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 40(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 40 
+C. Top slab supported Kerto Ripa elements 
+1 Application area of this annex 
+This annex concerns the supporting connection of Ripa elements 
+according to ETA-07/0029. The resistan ce of the connection is considered 
+according to the Eurocode 5 in service classes 1 and 2 ultimate limit state 
+design.  
+The beam is supported from the top sl ab through its en tire width. The 
+spacing between the rib and supporting edge has to be equal or smaller 
+than 60 mm in alternative A (see Figure C1) and 20 mm in alternative B (see Figure C2). Hanging loads on the beams close to the support have to 
+be anchored to the effective rib height h
+w,ef (see Figures C1 and C2). 
+All supporting connection screws have to be self-drilling wood screws - 
+neither pre-drilling nor hammering of sc rews is allowed. No gap between 
+the wood parts is allowed and the scre ws are drilled up to the wood surface 
+or slightly into the wood. A moment controlled screwing should be used so that the screwing moment is always below 80 % of the characteristic 
+torsional strength of the screw. 
+ 
+Figure C1. Support of Ripa element from th e top slab: alternative A. The 
+element may not have the bottom slab shown in the figure.  
+According to alternative A of Figure C1, the following structural 
+conditions should be met: 
+ The end cross member is of Kerto-Q. 
+ When the element has bottom slab, a minimum of 3 mm spacing is left 
+for the shrinkage of the rib, or the spacing is determined through 
+shrinkage calculations, between th e end cross member and the bottom 
+slab. 
+
+
+===== PAGE 41 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 41(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 41 
+ The end cross beam is connected to the ribs with self-drilling screws 
+at 30°..60º angles. The screws are 5.0 - 10.0 mm thick general screws defined for inclined screw connec tions in VTT Certificate No 184/03 
+or in VTT-S-09068-11, 7.5 mm Wü rth AMO III screws, 6.0 or 8.0 
+thick Würth Assy VG Plus screws or 6.5 or 8.2 mm thick SFS Intec 
+WT-T screws. In case of WT-T screws, the connection surface 
+between the wood members should be  located within the unthreaded 
+centre part. 
+
+ The screws used in the end cross member inclined screw connection 
+should fulfil the following requirem ents with relation to the width of 
+the rib bw: 
+general screws, diameter d ≤ bw/7.5 
+in case of 7.5 mm AMO III screws bw ≥ 60 mm 
+in case of 6.0 mm VG Plus screws bw ≥ 45 mm 
+in case of 8.0 mm VG Plus screws bw ≥ 57 mm 
+in case of 6.5 mm SFS WT-T screws bw ≥ 39 mm and 
+in case of 8.2 mm SFS WT-T screws bw ≥ 51 mm. 
+ The edge distance of the uppermost inclined screw head is at least 3 d 
+and the spacing between screws in th e vertical direction is at least 12 d, 
+where d is the screw diameter. 
+ For inclined screwing the end distance a3 for flatwise Kerto-Q cross 
+members shall be not less than 4 def.  
+ The slab is connected to the end cross member by anchoring screws 
+with constant spacing, a ≥ 12d. The anchoring screws  shall be partially 
+threaded screws, where the threaded pa rt is totally inside the end cross 
+member and where the diameter is d < t/8, where t is the thickness of 
+the end cross member. If 10 d ≤ a < 12 d then diameter d shall be ≤ t/10. 
+With bore bit screw Würth Assy plus (ETA-11/0190) d = 6 or 8 mm, 
+the diameter d shall be d ≤ t/6 and a > 10 d. 
+ End distance a3 should be ≥12d for anchor screw for edgewise Kerto-
+Q. The end distance a3 may be reduced to ≥10d if the inclined screws 
+reinforce the end of Kerto-Q member. 
+ All screws attached to the edges or ends of the end cross member and 
+the rib are to be located in the centreline of the member. 
+ The top slab screw-glue connection, the first three screws are placed 
+with reduced spacing, as in figure C1. 
+
+===== PAGE 42 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 42(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 42 
+ 
+Figure C2.  Support of boxed or ribbed support from the top slab: 
+alternative B. The ribbed beam doe s not have the bottom slab shown in 
+the figure. 
+According to alternative B of Figure C2, the following structural 
+conditions should be met: 
+ The slab is connected to each rib in a similar way, so that in the end of 
+the beam one or two partially threaded anchor screws are used*. These 
+are located at the rib centre line so that the end distance a3 of the first 
+screw is 12 d and the second 22 d (spacing a1 10d) from the rib end. 
+ The anchoring screws have their threaded part totally inside the rib. 
+ The anchoring screw diameter d < bw/8, where bw is the thickness of 
+the rib. With bore bit screw Würth Assy plus (ETA-11/0190) d = 6 or 
+8 mm, the diameter d should be d ≤ bw /6. 
+ In the top slab, the first screw of the screw-glue connection is located 
+at a 70 - 170 mm distance from the an choring screw or with nail-gluing 
+the first two nails are with re duced spacing (see Figure C2). 
+ Between the rib and the slab, triang ular stiffeners according to ETA-
+07/0029 may be used. 
+2 Failure modes evaluated 
+In the design of a top slab supported  Ripa element, the following shall be 
+evaluated: 
+1. The shear capacity of the slab (rolling shear of Kerto-Q). 
+                                                 
+* Normally, it is advisable to use long anchoring screws with washers. To ensure 
+sufficient shear capacity, the screw should normally extend to the half height of the web 
+member ( hw,ef > 0,5 hw). 
+
+
+===== PAGE 43 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 43(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 43 
+2. The bending capacity of the sl ab using a lever arm distance e (see 
+Figures C1 and C2), in which the assembly tolerances are considered when determining the gap betw een the support and the beam 
+(≤ 20 mm). 
+3.
+ The shear capacity of the rib using the effective rib height hw,ef 
+considering the cracking risk us ing the notched beam analogy. 
+4. The withdrawal capacity of the an choring screws at LVL edge.  
+5. The pull through of anchoring screws , which should be lower than the 
+tension capacity or the withdrawal capacity of the screws. 
+6. In alternative A, inclined screw connection capacity. 
+In addition, the connection of the slab to the support  and the bearing stress 
+of the slab are checked considering the production and assembly 
+tolerances and a worst case scenario used. 
+3 Load bearing capacity  
+The shear force is carried totally by the rib of the Ripa element. In the 
+following design equations, the force fr om a single rib to the top slab and 
+support is considered. 
+3.1 Slab shear capacity 
+The characteristic value of the slab  shear capacity for a single rib is 
+k flat v f kf f hb k V, ,0, 1 ,32  (C.1) 
+where the following symbols have been used: 
+k1 capacity factor, see more details below 
+b in alternative A, the distance between ribs ( b = bw + bf) 
+ in alternative B, the top slab effective width b = bef 
+hf thickness of the top slab 
+fv,0,flat,k characteristic flatwise sh ear strength of Kerto-Q 
+11k              (C.1a) 
+If following is conditions are fulfilled the k1 can be taken as: 
+
+max1 1  ;mm80supporton length  flange1 min,k k          (C.1b) 
+• fv,0,flat,k  = 1,3 N/mm2 shall be used 
+• Kerto-Q slab shall not have a cr oss veneer as the middle veneer; 
+veneer layup for 27 mm shall be (II -III-II), and for the 33 mm (II-IIIII-
+II) 
+
+===== PAGE 44 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 44(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 44 
+• Nominal width of the gap between th e support and the end of the beam 
+of the element shall be not more than 60 mm 
+o k1,max is 2.0 for Kerto-Q 33 mm 
+o k1,max is 2.0 for Kerto-Q 27 mm when the gap is equal or less 
+than 20 mm 
+o k1,max is 1.6 for Kerto-Q 27 mm wh en the gap is greater than 
+20 mm 
+• Anchoring screws shall be not more than 85 mm from the edge of the support 
+•
+ The entire support load shall be take n as design shear force for the top 
+flange without any reductions 
+ The slab shear capacity of  the alternative A is not needed to check, if the 
+horizontal distance between the anchoring screws presented in figure C1 and the support edge is smaller than the top slab thickness h
+f, when the 
+assembly tolerances are taken into account.   
+If the supporting edge is not perpendicular to the grain direction of the 
+slab, the characteristic value of the sl ab shear capacity for a single rib is 
+  k V Vkf k f , .,  
+ (C.1c) 
+where the following symbols have been used: 
+Vf,k characteristic shear capacity parallel to grain, see (C.1) 
+2
+..90.2
+..0.2
+12 2
+..90.2
+..90.
+sinkflat v kflatv kflat vkflat v
+f fk ffk
+
+           (C.1d)  
+α angle between the perpendicular direction of the slab and 
+supporting edge 
+k1 see equations (C.1a) and (C.1b) 
+fv,0,flat,k  = 1.3 N/mm2, flatwise shear streng th parallel to grain 
+fv,90,flat,k  = 0.6 N/mm2, flatwise shear strength perpendicular to grain 
+  
+3.2 Slab bending capacity 
+The bending capacity of the slab is calculated with lever arm e shown in 
+Figures C1 and C2, which is the distance between the support force and the farthest anchoring screw. The char acteristic capacity of support force 
+corresponding to top slab bending capacity is  
+
+===== PAGE 45 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 45(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 45 
+ (C.2) 
+where hf and b are defined as in equation (C1), e is the distance according 
+to Figures C1 and C2 and fm,0,flat,k  is the characteristic flatwise bending 
+strength of Kerto-Q. 
+If the supporting edge is not perpendicular to the grain direction of the 
+slab, the effect of the angle should be taken into account. Reduction factors for the characteristic flatwise bending strength f
+m,0,flat,k  are given in 
+Table C1a. 
+Table C1a. Reduction factors for Kerto-Q member in flatwise bending 
+with an angle α between the perpendicular direction of the slab and 
+supporting edge.  
+ Angle to the grain direction of the face veneers1) 
+ 0° 2.5° 5° 10° 15° 30° 45° 60° 90° 
+Reduction 
+factor 1.00 1.00 0.90 0.70 0.50 0.25 0.20 0.20 0.22 
+1)Intermediate values can be interpolated  
+3.3 Rib shear capacity 
+The shear capacity of the rib is calcu lated for the effective height of the 
+rib hw,ef determined as the distance be tween the tip of tension loaded 
+screws and the upper edge of rib (see Figures C1 and C2). For supporting 
+alternative A, hw,ef is the distance from the fu rthest tip of the inclined 
+screws to the upper edge of the rib. The effect of perpendicular to grain 
+tension stress on the rib's cracking ri sk is considered with the notched 
+beam reduction coefficient kv. The characteristic shear force capacity of 
+the rib 
+ (C.3) 
+where 
+ (C.4) 
+where the following symbols have been used kflat,m,0,f
+km,62
+fehbV 
+k edge,v,0, v efw, w kw,32 fk hb V 
+1
+αα10,8α)α(16
+2
+wwv 
+
+
+
+
+
+hxhk
+
+===== PAGE 46 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 46(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 46 
+bw rib thickness 
+hw,ef effective rib height accord ing to Figures C1 and C2 
+fv,0,edge,k  characteristic edgewise shear strength of Kerto-S 
+hw rib height 
+ h w,ef/hw 
+x horizontal distance between the tension loaded screws in the 
+rib: 
+in Figure C1 (alternative A) distance between the end of rib beam and of the tips of the inclined screws 
+in Figure C2 (alternative B) spacing between the anchoring 
+screws (in case of a single screw x = 0). 
+3.4 Withdrawal capacity of anchoring screws 
+The withdrawal capacity is calculate d using the withdrawal strength of 
+actual screw tested for the edge joints of Kerto-S or Kerto-Q according to EN 1382. For self-drillin g anchoring screws in accordance with EN 14592 
+with the screw diameter 4.5 < d < 8 mm, the inner thread diameter d
+1 < 
+0.7d** and the smooth shank diameter ds < 0.8 d**, the characteristic 
+withdrawal capacity in the edge of Kerto-S or Kerto-Q may be calculated 
+as follows  
+ef kax,9,0
+kt, d f n R  (C.5) 
+where the following symbols have been used 
+n number of anchoring screws per one rib 
+lef threaded length of the screw in Kerto-LVL member edge 
+fax,k characteristic value of the wit hdrawal parameter for Kerto-LVL 
+edge 
+fax,k = 10 N/mm2      (C.6)  
+Anchoring screw force s hould be multiplied with 2.4 for the Kerto-Q 
+27mm and 1.4 for the Kerto-Q 33 mm if the gap between the support and end beam is greater than 20 mm. 
+ 
+Other values for characteristic withdrawal parameter f
+ax,k may also be used 
+if values according to EN 14592 from notified body for edgewise Kerto-
+Q are available.  
+                                                 
+** These requirements are fulfilled for exam ple for the follow general screws: SFS-Intec 
+and Würth Assy screws. 
+
+===== PAGE 47 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 47(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 47 
+Screws according to European Tec hnical Assessment (ETA) should be 
+designed using the design parameters and equations given in the ETA or 
+in VTT statement referring to ETA for Kerto LVL connections. 
+3.5 Pull-through capacity of anchoring screws 
+The characteristic pull -through capacity of the anchoring screws should 
+be taken as: 
+ 8.0
+a3
+2
+k head, kc,m/kg480
+
+
+
+
+hd fn R  (C.7) 
+where: 
+n number of anchoring screws per one rib 
+fhead,k  characteristic pull-through parameter of the screw determined 
+in accordance with EN 14592 fo r timber of the associated 
+density a (kg/m3) or for Kerto-Q in flatwise, when a = 480 
+kg/m3     
+dh  diameter of the screw head      
+Anchoring screw force should be multip lied with 2.4 for the Kerto-Q 27 
+mm and 1.4 for the Kerto-Q 33 mm if  the gap between the support and 
+end beam is greater than 20 mm. 
+Screws according to European Tec hnical Assessment (ETA) should be 
+designed using the design parameters and equations given in the ETA or 
+in VTT statement referring to ETA for Kerto LVL connections. 
+In case of thrust journal screws or in case of cyli nder or hexagonal screw 
+heads with washer, the characteristic  pull-through capacity of the screws 
+may be calculated from  
+
+===== PAGE 48 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 48(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 48 
+
+
+
+442
+,,90, kc,s
+h kflat cdA f n R (C.8) 
+where the following symbols have been used: 
+n number of anchoring screws per one rib 
+fc,90,flat,k  characteristic flatwise comp ression strength perpendicular 
+to grain of Kerto-Q 
+Ah area of the screw head or the washer including the hole 
+ds diameter of the smooth shank of  the screw. If the head of 
+the screw is not in contact with  the timber member the actual 
+size of the opening diameter of the washer shall be used as 
+ds. 
+Anchoring screw force should be multiplied with 2.4 for the Kerto-Q 27 mm and 1.4 for the Kerto-Q 33 mm if the gap between the support 
+and end beam is greater than 20 mm. 
+ The thickness of the thrust journal or the thickness of washer shall be at 
+least h
+t > max(0.3 d; dw/12), where dw is the diameter of the thrust journal 
+or the washer. 
+The washer shape does not need to be  circular. The b earing capacity per 
+anchor screw of a steel pl ate shall be calculated for a circular washer with 
+a diameter which is the minimum of (12 ht; 4dh), where ht is the thickness 
+of the steel plate and dh is the diameter of the screw head. The capacity of 
+the steel plate shall be also checked. 
+The steel plate capacity for washer in  general case may be checked with 
+equation (C.8a) in case of large washer dw ≥ min(12 ht; 4dh) and with 
+equation (C.8b) in cas e of small washer dw < min(12 ht; 4dh). Due the 
+iterative method, the calculation can be started by using ht = 0.3 d as 
+general start value, where d is the screw diameter. See figure C2a. 
+
+
+
+
+
+dflat c yd
+yddflat c hdflat c yd
+w
+tf fff df f
+dd h
+..90...90.2..90.
+28832288 0
+;12;3.0 max    (C.8a) 
+
+
+
+
+
+yddflat c w w
+tff d dd h..90.22
+;12;3.0 max              (C.8b) 
+where d is the screw diameter 
+
+===== PAGE 49 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 49(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 49 
+ dw is the diameter of the thrust journal or the washer 
+ dh is the diameter of the screw head 
+ fc,90,flat,d  is the Kerto-Q design comp ressive strength flatwise 
+perpendicular to grain 
+ fyd is the design yield st rength of the washer 
+ 
+Figure C2a.  Dimensions of steel plate washer  
+The pull through of anchoring screws  shall be the governing mode of 
+failure. So the following condition should be satisfied 
+
+
+ktenskt
+kcf nR
+R
+,9.0,
+,min   (C.9) 
+where Rt,k is the characteristic withdrawal  capacity of anchoring screws 
+and ftens,k is the characteristic value of the screw tensile capacity. 
+3.6 Capacity of inclined screws 
+In case of supporting alternative A,  using general wood screws, ABC 
+Spax-S screws, Würth AMO III scre ws, Würth VG Plus screws or SFS-
+WT-T screws, the characteristic capac ity of the inclined screw connection 
+  sin cosRkT,9.0
+ks,  Fn Rs (C.10) 
+where: 
+ns number of screws in the inclined screw connection; 
+FT,Rk characteristic withdrawal capacity, using eq. (C.11); 
+  angle between screw axis a nd joint line (= screwing angle 
+30°..60º); 
+ kinetic friction coefficient betw een the wood members, the value 
+µ = 0,26 may be used.  
+
+
+===== PAGE 50 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 50(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 50 
+The characteristic withdrawal capacity of the screw  
+
+
+ 
+
+k tens,2 k ax,2,2
+hk head, 1 k ax,1,
+RkT, min
+fsd fd f sd f
+F  (C.11) 
+where: 
+2.0
+ik ax,45, ki,ax,87.0150
+
+
+
+
+sdf f
+ (C.12) 
+d  outer diameter of the thread (screw nominal size); 
+s1  threaded length of the screw in the head side member (Kerto-Q 
+flatwise); 
+s2 threaded length of the screw in the point side member (Kerto-S 
+end); 
+ftens,k  characteristic tensile capacity  of the screw determined in 
+accordance with EN 14592; in Table C2 the tensile capacities of the 
+actual screws are given; 
+fax,45,k  characteristic withdrawal strength parameter of the screw in angle 
+of 45° for the end of Kerto-S or for the flatwise of Ke rto-Q; in Table 
+C1 the withdrawal strength parame ters of the actual screws are 
+given; 
+dh is the head diameter of the screw; 
+fhead,k  is the characteristic pull-through parameter of the screw.  
+The pull through strength of screw head  is determined for Kerto-LVL in 
+accordance with EN 14592 or when the angle between the screw axis and the grain is 45º, it may be  calculated with the following, otherwise it may 
+be assumed as zero: 
+
+
+ 1 57k head,ddfh       N/mm2       , when dh < 2d. (C.13)  
+
+===== PAGE 51 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 51(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 51 
+Table C1. Characteristic withdrawal strength parameters f ax,45,k  (N/mm2) 
+for threaded part of general , ABC Spax-S, Würth AMO III, SFS Intec WT-T and Würth Assy VG Plus screws  for inclined screw connection of 
+supporting alternative A.  
+Screw General / Spax-S AMO III VG Plus SFS-WT-T 
+Member           d =  5.0-7.0 8.0-10.0 7.5 6.0 8.0 6.5 or 8.2 
+Kerto-Q flatwise (1) 14.0 11.0 12.0 17.0 15.0 15.5 
+Kerto-S end, (2) 12.0 9.5 10.5 12.5 12.0 13.5 
+Table C2. Characteristic tensile capacity f tens,k [kN]  for general, ABC 
+Spax-S carbon steel, Würt h AMO III, SFS Intec WT-T and Würth Assy VG 
+Plus screws  
+Screw d [mm] General Spax-S AMO III SFS WT-T VG Plus 
+5.0 3.5 7.9 - - - 
+6.0 5.1 11.3 - - 11.3 
+6.5 - - - 10.0 - 
+7.0 6.9 15.4 - - - 
+7.5 - - 9.0 - - 
+8.0 9.0 17.0 - - 18.9 
+8.2 - - - 19.0 - 
+10.0 14.1 28.0 - - - 
+ 
+
+===== PAGE 52 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 52(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 52 
+4 Design example 
+ 
+Figure C3. Top slab supported Ripa element with end cross beam and 
+inclined screws.  
+It is assumed that according to na tional rules, desi gn value of support 
+force of box beam is 14.0 kN in medi um term load-duration class and in 
+service class 1 thus design force for one rib Fd = 14.0/2 = 7.0 kN .  
+1° Slab shear capacity for one rib: 
+k flat v f kff hb k V, ,0, 1 ,32  
+b = 860/2 = 430 mm, width of Ripa element for one rib 
+hf = 31 mm, thickness of top slab 
+fv,0,flat,k  = 1,3 N/mm2, rolling-shear strength of Kerto-Q 
+
+
+===== PAGE 53 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 53(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 53 
+k1,max = 1.6, Kerto-Q 27 mm, gap 60 mm 
+537.16.1 ;mm80mm431min  ;mm80supporton length  flange1minmax,1 1 
+
+
+
+ k k 
+kN7.17 mm/N3.1 mm31 mm43032537.12
+,  kfV  
+2° Slab bending capacity for one rib: 
+ 
+The location of the support reaction is determined according to the 
+compression strength capacity of th e Kerto-Q top slab and with the 
+supporting beam of Kerto-S. The e dgewise Kerto-S compression capacity 
+of 6 N/mm2 which is about three times  the capacity of the flatwise Kerto-
+Q. Because of this difference the co mpression capacity of Kerto-Q will 
+give required support length ls. 
+mm12
+mm4302.1mm/N2.28.0kN7
+2
+sl  
+mm5.912mm12mm602mm51e  
+fm,0,flat,k  = 32.0 N/mm2, flatwise bending st rength of Kerto-Q   
+kN0.24 mm/N0.32mm5.916mm31 mm43022
+,  kmV  
+3° Rib shear capacity: 
+ 
+bw = 57 mm, thickness of rib 
+fv,0,edge,k  = 4.1 N/mm2, shear strength of Kerto-S  
+hw,ef = 25 + 115 + 160 cos45° = 253 mm 
+ = hw,ef / h w = 253 / 260 = 0.973  kflat,m,0,fehbVf62
+km,
+k edge,v,0, efw, 32
+kw, fk hb Vv w 
+
+===== PAGE 54 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 54(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 54 
+ 
+72.1
+973.0973.01
+260628.0 973.01 973.0 2606
+2
+
+
+
+
+  
+kN5.39
+mmN1.4)00.1 ;72.1min( mm254 mm5732
+2 ,  kwV  
+4° Withdrawal capacity of anchoring screws for one rib: 
+ef kax kt ld f n R ,9.0
+, 
+n = 3 number of anchoring screws for one rib  
+lef = 100 mm threaded length of the screw (Assy Plus 8x140 with 
+large washer head) 
+d = 8.0 mm, nominal diameter of the screw 
+fax,k = 10 N/mm2 
+.5kN21 mm100mm8 mm/N1032 9.0
+,  ktR  
+5° Pull through capacity of anchoring screws:   
+8.0
+a3
+2
+k head, kc,m/kg 480
+
+
+
+hd fn R and
+ 
+fhead,k = 10 N/mm2 
+dh = 22.1 mm 
+ρa = 350 kg/m3 
+ftens,k = 20 kN 
+ kN8.18m/kg 350m/kg 480mm 1.22 mm/N0.1038.0
+33
+2 2
+, 
+
+
+  kcR  
+Rc,k = 18.8 kN < 
+
+ kN7.53 kN20 3kN5.21min9.0 OK
+
+
+
+
+2 18,0)1(6
+wwv
+hxhk
+
+
+ktens,kt,
+kc, minfnRR
+
+===== PAGE 55 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 55(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 55 
+6° Capacity of inclined screws:  
+  sin cos min
+,2 ,2,2
+, 1 ,1,
+9.0
+, 
+
+
+
+
+
+k tensk axh k head k ax
+s ks
+fsd fd fsd f
+n R  
+ns = 2  number of inclined screws for one rib, 
+d = 8.2 mm diameter of inclined screws WT-T-8,2x160, 
+dh = 10 mm diameter of the head 
+s1 = 57 mm threaded length,  
+s2 = 61 mm threaded length,  
+fax,,45,1,k  = 15.5 N/mm2  
+ 2 22.0
+2
+k ax,1, N/mm9.15 028.11 N/mm5.15572.887.015045N/mm5.15  
+
+
+
+  f
+fax,45,2,k  = 13.5 N/mm2  
+ 2 22.0
+2
+k ax,2, N/mm7.13 015.11 N/mm5.13612.887.015045N/mm5.13  
+
+
+
+  f
+ 
+ftens,k = 19 kN  
+ = 0.26 
+2
+k head,mm/N5.121mm28mm10571 57 
+
+
+
+. ddfh 
+ kN3.11 45sin 45cos
+19612.87.13105.12572.89.15
+min22
+9.0
+,  
+
+
+ ksR  
+Rs,k = 11.3 kN 
+Design conditions:  
+connMk
+d anchors d
+LVLMk
+d dRk R kFVk VF
+,mod
+,mod  and     
+where: 
+Vk  is the characterist ic resistance of LVL ( Vf,k; Vm,k and Vw,k) 
+Rk  is the characteristic resistance of connection ( Rt,k; Rc,k and Rs,k) 
+
+===== PAGE 56 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 56(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 56 
+kmod = 0.8 (for LVL in table 3.1 of EN 1995-1-1)  
+M,LVL  is the partial safety factor fo r LVL according to the actual National 
+Annex of EN 1995-1-1  
+M,conn   is the partial safety factor for connections of LVL members 
+according to the actual Nati onal Annex of EN 1995-1-1 
+kanchors   is the multiplier for anchoring screw force that is 2.4 for the Kerto-
+Q 27 mm and 1.4 for the Kerto-Q 33 mm if the gap between the support 
+and end beam is greater than 20 mm. kanchors  = 1.0 for inclined screw 
+connection. 
+In Finland M,LVL = 1.2 and M,conn  = 1.2  
+Check of design conditions:  
+1. Slab shear: 
+kN8.111.2kN7.178.0 kN0.7, df d V F  
+2. Slab bending: 
+kN0.161.2kN0.248.0 kN0.7,  dm d V F  
+3. Rib shear: 
+kN3.261.2kN5.398.0 kN0.7,  dw d V F  
+4. Withdrawal of anchoring screws: 
+kN3.141.2kN5.218.0 9.8kN kN0.74.1,  dt d R F  
+5. Pull-though of anchoring screws: 
+kN5.121.2kN8.188.0 .8kN9 kN0.74.1, dc d R F  
+6. Failure of inclined screw: 
+kN5.71.2kN3.118.0 kN0.70.1,  ds d R F  
+
+===== PAGE 57 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 57(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 57 
+D. Support reinforced Kerto-Ripa elements 
+1 Application area of this annex 
+This annex concerns the support reinforcements of Ripa elements 
+according to ETA-07/0029. The resistance of the following is considered 
+according to the Eurocode 5 in service classes 1 and 2 ultimate limit state 
+design. 
+It is possible to reinforce Kerto-Ripa elements against compression 
+perpendicular to the grain by structur ally gluing reinforcement pieces to 
+the ribs. Not the reinforcement piece nor  the rib need to be sanded for the 
+following design instructions. These re inforcements shall be made from 
+Kerto-S and they may be single or double sided. If double sided 
+reinforcement is used, the pieces sha ll be same size and thicknesses. At 
+intermediate support the reinforcem ent pieces shall be positioned 
+centrally to the centre lin e of the support. There sh all always be at least 
+one crosswise blocking line ne ar the centre of the support. 
+ 
+Figure D1.  Detail of reinforced rib at the centre support 
+
+
+===== PAGE 58 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 58(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 58 
+ 
+Figure D2.  Detail of reinforced rib at the end support 
+2 Failure modes evaluated 
+In the design of a support reinforced Ripa element, the following shall be 
+evaluated: 
+1. Reinforced compression perpendicular to grain capacity 
+2. Top level of the reinforcement co mpression perpendicular to grain 
+capacity 
+3. Glue line shear capacity  
+4. Web buckling capacity  
+In addition, the bearing stress of  the supporting material should be 
+separately checked. 
+3 Load bearing capacity  
+3.1 Reinforced compression capacity 
+The resistance is based on the stress at the contact ar ea between the 
+reinforced web and the support 
+  ef,support r w c,90,web,k c,90 c,90,re,k Lbn b f k R  7.0  (D.1) 
+where the following symbols have been used: 
+kc,90 1.0 for Kerto-S 
+bw width of web 
+n amount of reinforcement pieces 
+br width of reinforcement piece but not more than 51 mm 
+
+
+===== PAGE 59 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 59(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 59 
+Lef,support  effective contact length parallel to the grain. It  is obtained by 
+increasing the actual contact length supportLl at each side by 
+15 mm but not more than a, l or 21las presented in EN 1995-
+1-1 6.1.5(1). 
+ See Figure D1 or Figure D2 for parameters b
+w, br, n and Lsupport . 
+3.2 Top level of reinforcemen t compression capacity 
+The resistance of the web is based on the stress at the top level of the 
+reinforcement piece 
+ ef,top w ,web,kc, c,90,top,k Lb f R 90  (D.2) 
+where the following symbols have been used: 
+bw width of web 
+Lef,top effective contact length at the top level of reinforcement piece 
+  r pos support r ef,top h k ,LL L  min  (D.3) 
+Lsupport  contact length of suppor t parallel to the grain 
+Lr length of reinforcement piece 
+hr height of reinforcement piece 
+ 
+support centrefor   2support endfor   1posk  (D.4) 
+See Figure D1 or Figure D2 for parameters bw, Lr, Lsupport  and hr. 
+3.3 Glue line shear capacity  
+The resistance of the glue line based on the stress at the effective area of 
+gluing 
+ ef,gl k v,90,flat, gl,k A fn R   (D.5) 
+where the following symbols have been used: 
+
+===== PAGE 60 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 60(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 60 
+Aef,gl effective gluing area 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+2
+possupport r
+rpos
+r rr support2
+r pos
+ef,gl
+kL LhkhLh L2h k
+A
+ ; min2min  (D.6) 
+ 
+support centrefor   2support endfor   1
+posk  (D.7) 
+hr height of reinforcement piece 
+Lsupport  contact length of suppor t parallel to the grain 
+Lr length of reinforcement piece 
+The design value of the load-car rying capacity for the glue line Rgl,d is 
+compared against the compression force perpendicular to the grain Fgl,d 
+for loading that is linearly distri buted to the reinforcement pieces: 
+ d c
+r wr
+dgl FbnbbnF,90, ,   (D.8) 
+where the following symbols have been used: 
+Fc,90,d design support force 
+br width of reinforcement piece but not more than 51 mm 
+bw width of web 
+n amount of reinforcement pieces 
+See Figure D1 or Figure D2 for parameters n, Lsupport , Lr, bw, br and hr. 
+3.4 Web buckling capacity  
+The buckling resistance of the web 
+ wb w kweb c c kc Lb fk R, ,,90, , 2.1   (D.9) 
+where the following symbols have been used: 
+kc reduction factor due to buck ling according to EN 1995-1-1 
+equation (6.27) 
+bw width of web 
+Lb,w buckling depth of the web 
+   mm 600 ; min mm 600 ; min, b,r,w b,l,w wb L L L    (D.10) 
+
+===== PAGE 61 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 61(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 61 
+Lb,l,w buckling depth at the left si de of the support centre line 
+Lb,r,w buckling depth at the right side of the support centre line 
+ 
+wc
+bL12   (D.11) 
+bw width of web 
+Lc buckling length of the web 
+ For Kerto-Ripa cross-section wi th structurally glued top panel 
+ 
+
+
+
+
+2 if 02 if 85.0nn hh Lr
+w c  (D.12a) 
+n amount of reinforcement pieces 
+hw height of web 
+hr height of reinforcement piece 
+ For Kerto-Ripa cross-section with  structurally glued bottom panel 
+but no structurally glued top panel 
+ 
+
+2 if 2 if 85.0
+n hn hLww
+c  (D.12b) 
+ For all other Kerto-Ripa cross-section 
+ w ch L  (D.12c) 
+See Figure D3 or Figure D4 for parameters n, Lb,w, hr, hw, bw and Lc. 
+ 
+Figure D3.  Parameters for buckling design of Kerto-Ripa element with 
+structurally glued top panel at centre support 
+
+
+===== PAGE 62 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 62(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 62 
+ 
+Figure D4.  Parameters for buckling design of Kerto-Ripa with 
+structurally glued t op panel at end support 
+4 Structural detailing 
+4.1 Blockings 
+There shall always be at least one crosswise blocking line near the centre 
+line of the support. Blocki ngs shall be at least 45 mm thick Kerto-S and 
+be positioned not more than 100 mm aw ay from the centre of support. 
+Blocking piece shall not be more than  50 mm away from the top of the 
+web and its height shall be at least 0.4x the height of the web. Blocking 
+shall be connected to the webs with  nailing or screwi ng. The fasteners 
+shall be positioned with maximum of 100 mm spacing. 
+See Figure D5 or Figure D6 for po sitioning and fastening detail. The 
+figures also include an area where the blockings shall be positioned. 
+Blockings may be higher than the presented minimum height and they 
+may be closer to the cen tre line of the support. 
+
+
+===== PAGE 63 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 63(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 63 
+ 
+Figure D5.  Positioning and fastening the crosswise blocking at centre 
+support 
+ 
+Figure D6.  Positioning and fastening th e crosswise blocking at end 
+support 
+4.2 Reinforcement piece 
+Reinforcement pieces shall be Kerto- S and they may be single or double 
+sided. Reinforcement pieces do not n eed to be sanded. If double sided 
+reinforcement is used, the pieces shall be same size and thickness. The 
+centre support reinforcement pieces sh all be positioned centrally to the 
+centre line of the support. The maximu m thickness of reinforcement piece 
+is 51 mm.  
+
+
+===== PAGE 64 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 64(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 64 
+If structure has a bottom panel, there shall not be glue between 
+reinforcement piece and bottom panel. The glue shall be spread out to the total area of the reinforcement piece.  To gain enough compression for the 
+glue the reinforcement piece shall be nailed or screwed to beam with the 
+amount that equals c/c 100 mm evenly spread. 
+5 Design example 
+A design example of calculating th e compression perpendicular to the 
+grain capacity with the following desi gn parameters is presented below: 
+ Double span Kerto-Ripa roof elem ent with 12.5 m + 12.5 m spans.  
+ Centre support is investigated , support has 240 mm contact length 
+ Design value for support reaction Fc,90,d = 98 kN. 
+ Web size is 57 mm x 600 mm  L = 25 m Kerto-S 
+ Bottom panel is structurally glued Kerto-Q and top panel is spruce 
+plywood 
+ Reinforcement pieces 2x 39 mm x 200 mm L = 450 mm Kerto-S 
+1.  Ribbed and thin slab capacity 
+The resistance of ribs without reinforcement pieces: 
+kc,90 = 1.1, uniform loads, Kerto-S edgewise, Lsupport  > 125 mm. 
+fc,90,web,k  = 6.0 N/mm2 
+bw = 57 mm, width of the web 
+Lsupport  = 240 mm, support ac tual contact length 
+Lef,support  = Lsupport  + 2 · 15 mm = 270 mm 
+ef,support w k web c c k c Lb f k R , ,90, 90, ,90, = 1.1 · 6.0 N/mm2 · 57 mm · 270 mm 
+= 101.57 kN 
+2. Reinforced compression capacity 
+The resistance of ribs with reinforcement pieces: 
+kc,90 = 1.0 
+fc,90,web,k  = 6.0 N/mm2 
+bw = 57 mm, width of the web 
+n = 2, double sided reinforcement pieces  
+
+===== PAGE 65 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 65(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 65 
+br = 39 mm, width of the reinforcement piece 
+Lsupport  = 240 mm, support ac tual contact length 
+Lef,support  = Lsupport  + 2 · 15 mm = 270 mm 
+ef,support r w c,90,web,k c,90 c,90,re,k Lbn b f k R  7.0 = 1.0 · 6.0 N/mm2 · 
+    (57 mm + 0.7 · 2 · 39 mm) · 270 mm 
+= 180.79 kN 
+3. Top level of reinforceme nt compression capacity 
+fc,90,web,k  = 6.0 N/mm2 
+bw = 57 mm, width of the web 
+Lr = 450 mm, length of the reinforcement piece 
+Lsupport  = 240 mm, support ac tual contact length 
+hr = 200 mm, height of the reinforcement piece 
+support centrefor   2support endfor   1
+posk = 2 
+ r pos supportr ef,top h k ,LL L  min  = min(450 mm, 240 mm + 2 · 200 mm) 
+= 450 mm 
+ef,top w ,edge,kc, c,90,top,k Lb f R  90 = 6.0 N/mm2 · 57 mm · 450 mm 
+= 153.90 kN 
+4. Glue line shear capacity 
+support centrefor   2support endfor   1posk = 2 
+hr = 200 mm, height of the reinforcement piece 
+Lsupport  = 240 mm, support ac tual contact length 
+Lr = 450 mm, length of the reinforcement piece 
+fv,90,flat,k  = 0.6 N/mm2 
+
+===== PAGE 66 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 66(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 66 
+2
+22
+mm 78975
+mm 78975mm 88000min ; min2min
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2
+possupport r
+rpos
+r rr support2
+r pos
+ef,gl
+kL LhkhLh L2h k
+A
+ 
+ef,gl k v,90,flat, gl,k A fn R  = 2 · 0.6 N/mm2 ·78975 mm2 = 94.77 kN 
+5. Web buckling capacity  
+Lb,l,w = 600 mm, buckling depth at the le ft side of the support centre line 
+Lb,l,w = 600 mm, buckling depth at the ri ght side of the support centre line 
+  mm 600 ; min mm 600 ; min, b,r,w b,l,w wb L L L    = 1200 mm 
+n = 2, double sided reinforcement pieces  
+hw = 600 mm, height of the web 
+Kerto-Ripa cross-sectio n with structurally glued bottom panel but no 
+structurally glued top panel: 
+
+2 if 2 if 85.0
+n hn hL
+ww
+c  = 510 mm 
+bw = 57 mm, width of the web 
+wc
+bL12 = 30.99 
+βc = 0.1 (for LVL in equation (6.29) of EN 1995-1-1) 
+fc,90,web,k  = 6.0 N/mm2 
+E90,web,k  = 350 N/mm2 
+k webk web c
+yrelEf
+, ,90, ,90,
+, = 1.29 ≥ 0.3 (equation (6.21) of EN 1995-1-1) 
+
+===== PAGE 67 =====
+  Kerto-Ripa® Elements Design Instructions
+ CONFIDENTIAL 25.5.2016 - 67(67)
+ 
+These design instructions are the pr operty of Metsäliitto Cooperative, Metsä 
+Wood. The instructions have been pr epared in co-operation with VTT. 
+ 67 
+ 2
+, , 3.0 15.0yrel yrel c yk     = 1.38, (equation (6.27) of EN 
+1995-1-1) 
+2
+,21
+yrel y yc
+k kk
+ = 0.53, (equation (6. 26) of EN 1995-1-1) 
+wb w kweb c c kc Lb fk R, ,,90, , 2.1  = 1.2 · 0.53 · 6.0 N/mm2 · 57 mm · 
+1200 mm = 261.10 kN 
+6. Design conditions  
+Design value for support reaction at the centre support Fc,90,d = 98 kN 
+Mk
+d dRk R Fmod  
+kmod = 0.8 (for LVL in Table 3.1 of EN 1995-1-1) 
+γM = partial safety factor for LVL ac cording to the National Annex of EN 
+1995-1-1, In Finland γM = 1.2 
+7. Check of design conditions  
+1. Ribbed and thin slab capacity, no reinforcement 
+kN 67.7 kN 101.571.20.898,90,  d c d R kN F  
+2. Reinforced compression capacity 
+kN5.201 kN 180.791.20.898,,90,  dre c d R kN F  
+3. Top level of reinforcement compression capacity 
+kN 102.6 kN 90.5311.20.898,,90,   dtop c d R kN F  
+4. Glue line shear capacity 
+kN 2.36 kN 77.941.20.8kN 56.6 98,,90,   
+
+
+
+dtop c
+r wr
+d R kNbn bbnF
+ 
+5. Web buckling capacity 
+kN 174.0 kN 10.2611.20.898,  dc d R kN F  
+The support capacity is not high enough without reinforcements 1. The 
+reinforcement has high enough capacity  to transfer the loads 2-5. 

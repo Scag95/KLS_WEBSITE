@@ -113,8 +113,9 @@ class BeamAnalysisRequest(BaseModel):
     project_name: str | None = None
     beam_theory: BeamTheory = BeamTheory.EULER_BERNOULLI
     span: BeamSpanDefinition
-    material: BeamMaterial
-    section: BeamSection
+    material: BeamMaterial | None = None
+    section: BeamSection | None = None
+    stiffness_ei_Nmm2: float | None = Field(default=None, description="Directly specify beam bending stiffness (EI) in N*mm^2.")
     supports: list[BeamSupport] = Field(
         ...,
         min_length=1,
@@ -142,6 +143,9 @@ class BeamAnalysisRequest(BaseModel):
         pinned_or_fixed = [support for support in self.supports if support.support_type != SupportType.FREE]
         if len(pinned_or_fixed) < 2:
             raise ValueError("At least two supports or restraints are required for a stable beam model.")
+
+        if self.stiffness_ei_Nmm2 is None and (self.material is None or self.section is None):
+            raise ValueError("Must provide either stiffness_ei_Nmm2, or both material and section.")
 
         return self
 

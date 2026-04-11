@@ -130,12 +130,16 @@ def generate_uniform_beam_mesh(request: BeamAnalysisRequest) -> FEMMesh:
 
 
 def beam_element_stiffness_matrix(
-    material: BeamMaterial,
-    section: BeamSection,
+    request: BeamAnalysisRequest,
     length_m: float,
 ) -> list[list[float]]:
     length_mm = length_m * MM_PER_M
-    stiffness_factor = (material.modulus_of_elasticity_mpa * section.inertia_mm4) / (length_mm**3)
+    if request.stiffness_ei_Nmm2 is not None:
+        ei = request.stiffness_ei_Nmm2
+    else:
+        ei = request.material.modulus_of_elasticity_mpa * request.section.inertia_mm4
+
+    stiffness_factor = ei / (length_mm**3)
     l = length_mm
 
     template = [
@@ -157,15 +161,14 @@ def element_dof_indices(element: FEMElement) -> list[int]:
 
 
 def assemble_global_stiffness(
+    request: BeamAnalysisRequest,
     mesh: FEMMesh,
-    material: BeamMaterial,
-    section: BeamSection,
 ) -> list[list[float]]:
     total_dofs = len(mesh.nodes) * DOF_PER_NODE
     global_matrix = [[0.0 for _ in range(total_dofs)] for _ in range(total_dofs)]
 
     for element in mesh.elements:
-        local_matrix = beam_element_stiffness_matrix(material, section, element.length_m)
+        local_matrix = beam_element_stiffness_matrix(request, element.length_m)
         dof_indices = element_dof_indices(element)
 
         for local_i, global_i in enumerate(dof_indices):
@@ -391,11 +394,9 @@ def element_end_force_vector(
     request: BeamAnalysisRequest,
     mesh: FEMMesh,
     element: FEMElement,
-    material: BeamMaterial,
-    section: BeamSection,
     global_displacements: list[float],
 ) -> list[float]:
-    local_stiffness = beam_element_stiffness_matrix(material, section, element.length_m)
+    local_stiffness = beam_element_stiffness_matrix(request, element.length_m)
     local_displacements = _element_displacement_vector(element, global_displacements)
     resisting = multiply_matrix_vector(local_stiffness, local_displacements)
     applied = _element_applied_load_vector(request, mesh, element)
@@ -450,8 +451,6 @@ def build_reaction_results(
 def build_diagram_series(
     request: BeamAnalysisRequest,
     mesh: FEMMesh,
-    material: BeamMaterial,
-    section: BeamSection,
     displacements: list[float],
 ) -> list[DiagramSeries]:
     deflection_points = [
@@ -491,7 +490,7 @@ def build_diagram_series(
         points.append(DiagramPoint(x_m=x_m, value=value))
 
     reactions_by_node = {node.id: 0.0 for node in mesh.nodes}
-    for reaction in build_reaction_results(request, mesh, reaction_vector(assemble_global_stiffness(mesh, material, section), displacements, assemble_global_load_vector(request, mesh))):
+    for reaction in build_reaction_results(request, mesh, reaction_vector(assemble_global_stiffness(request, mesh), displacements, assemble_global_load_vector(request, mesh))):
         node_id = _find_node_id_at_position(mesh, reaction.position_m)
         reactions_by_node[node_id] += reaction.vertical_reaction_kN
 
@@ -551,14 +550,14 @@ def build_analysis_summary(
 
 def analyze_beam(request: BeamAnalysisRequest) -> BeamAnalysisResponse:
     mesh = generate_uniform_beam_mesh(request)
-    global_stiffness = assemble_global_stiffness(mesh, request.material, request.section)
+    global_stiffness = assemble_global_stiffness(request, mesh)
     global_load = assemble_global_load_vector(request, mesh)
     displacements = solve_beam_displacements(request, mesh, global_stiffness, global_load)
     reactions = reaction_vector(global_stiffness, displacements, global_load)
 
     node_results = build_node_results(mesh, displacements)
     element_results = build_element_results(mesh)
-    diagram_series = build_diagram_series(request, mesh, request.material, request.section, displacements)
+    diagram_series = build_diagram_series(request, mesh, displacements)
     reaction_results = build_reaction_results(request, mesh, reactions)
     summary = build_analysis_summary(mesh, diagram_series)
 

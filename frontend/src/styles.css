@@ -143,12 +143,12 @@ h1 {
 }
 
 .panel-diagrams-split {
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 1;
 }
 
 .panel-form-split {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 1;
 }
 

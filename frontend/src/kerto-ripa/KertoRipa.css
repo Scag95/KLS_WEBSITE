@@ -1,0 +1,186 @@
+:root {
+  --kr-primary: #8a6a4b;
+  --kr-primary-light: #ab8e72;
+  --kr-primary-dark: #654c34;
+  --kr-bg-subtle: #f8f6f4;
+  --kr-border: #e6dfd8;
+  --kr-text: #2c2724;
+  --kr-text-light: #6a5e55;
+  --kr-shadow-sm: rgba(138, 106, 75, 0.08) 0px 4px 12px;
+  --kr-shadow-md: rgba(138, 106, 75, 0.12) 0px 8px 24px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--kr-text);
+}
+
+.kerto-ripa-wizard {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: white;
+  min-height: 80vh;
+}
+
+.wizard-step {
+  animation: fadeIn 0.4s ease-out both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-header {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.step-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+  color: var(--kr-text);
+}
+
+.step-header p {
+  color: var(--kr-text-light);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* SECTION CARDS GRID */
+.section-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.section-card {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+  border: 2px solid var(--kr-border);
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.section-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--kr-primary-light);
+  box-shadow: var(--kr-shadow-md);
+}
+
+.section-card.selected {
+  border-color: var(--kr-primary);
+  background: var(--kr-bg-subtle);
+  box-shadow: var(--kr-shadow-sm), inset 0 0 0 1px var(--kr-primary);
+}
+
+.card-illustration {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #fcfbf9 100%);
+  border-radius: 12px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.section-icon {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transition: transform 0.4s ease;
+}
+
+.section-card:hover .section-icon {
+  transform: scale(1.05);
+}
+
+/* Wood Textures via CSS Colors */
+.kerto-q {
+  fill: #deccb6;
+  stroke: #b59f84;
+  stroke-width: 1.5;
+  transition: all 0.3s ease;
+}
+
+.kerto-s {
+  fill: #c5a88c;
+  stroke: #9d7d60;
+  stroke-width: 1.5;
+  transition: all 0.3s ease;
+}
+
+.section-card.selected .kerto-q {
+  fill: #cbb499;
+  stroke: var(--kr-primary);
+}
+
+.section-card.selected .kerto-s {
+  fill: #b39170;
+  stroke: var(--kr-primary-dark);
+}
+
+.card-content h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: var(--kr-text);
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  color: var(--kr-text-light);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Selection Ring Animation */
+.selection-ring {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--kr-border);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-card.selected .selection-ring {
+  border-color: var(--kr-primary);
+  background-color: var(--kr-primary);
+}
+
+.section-card.selected .selection-ring::after {
+  content: '';
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translateY(-1px);
+  animation: checkmark 0.2s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+@keyframes checkmark {
+  0% { opacity: 0; transform: rotate(45deg) translateY(5px); }
+  100% { opacity: 1; transform: rotate(45deg) translateY(-1px); }
+}

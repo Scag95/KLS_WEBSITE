@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Step1SectionType from "./kerto-ripa/Step1SectionType";
 
 /** En desarrollo, URL vacía = mismo origen (Vite reenvía /calculate y /analyze al backend). En build, por defecto 127.0.0.1:8000. */
 const API_BASE =
@@ -94,14 +95,26 @@ function timberFormValuesFromGrade(grade) {
 }
 
 const initialForm = {
-  project_name: "Vivienda unifamiliar",
-  geometry: {
-    span_m: "4.00",
-    spacing_m: "0.40",
-    width_mm: "63",
-    depth_mm: "200",
+  project_name: "Forjado Kerto-Ripa",
+  cross_section: {
+    section_type: "ribbed_top",
+    element_width_mm: "585",
+    n_ribs: "2",
+    h_w_mm: "225",
+    b_w_mm: "45",
+    h_f1_mm: "25",
+    h_f2_mm: "",
+    b_actual_mm: ""
   },
-  timber: timberFormValuesFromGrade("C24"),
+  span: {
+    L_ef_mm: "5500",
+    L_support_mm: "100",
+    support_position: "end"
+  },
+  design_basis: {
+    service_class: "service_class_1",
+    load_duration_class: "medium_term"
+  },
   loads: {
     dead_load_kN_per_m2: "1.5",
     imposed_load_kN_per_m2: "2.0",
@@ -116,7 +129,7 @@ const initialForm = {
   },
   supports: [
     { id: 1, support_type: "pinned", position_m: "0.00" },
-    { id: 2, support_type: "roller", position_m: "4.00" },
+    { id: 2, support_type: "roller", position_m: "5.50" },
   ],
 };
 
@@ -299,22 +312,22 @@ function buildActionCatalogPayload(actions) {
       const pattern = action.action_type === "permanent"
         ? { ...basePattern, origin: action.origin }
         : action.action_type === "imposed"
-        ? { ...basePattern, imposed_load_category: action.imposed_load_category }
-        : action.action_type === "snow"
-        ? { ...basePattern, snow_pattern: action.snow_pattern }
-        : { ...basePattern, wind_pattern: action.wind_pattern };
+          ? { ...basePattern, imposed_load_category: action.imposed_load_category }
+          : action.action_type === "snow"
+            ? { ...basePattern, snow_pattern: action.snow_pattern }
+            : { ...basePattern, wind_pattern: action.wind_pattern };
 
       return {
         id: action.id,
         pattern,
         ...(action.action_type !== "permanent"
           ? {
-              combination_factors: {
-                psi0: toNumber(action.psi0),
-                psi1: toNumber(action.psi1),
-                psi2: toNumber(action.psi2),
-              },
-            }
+            combination_factors: {
+              psi0: toNumber(action.psi0),
+              psi1: toNumber(action.psi1),
+              psi2: toNumber(action.psi2),
+            },
+          }
           : {}),
       };
     }),
@@ -322,6 +335,30 @@ function buildActionCatalogPayload(actions) {
 }
 
 function normalizeCombinedResult(body) {
+  // Kerto-Ripa response (has uls_checks / sls_checks)
+  if (body?.uls_checks !== undefined) {
+    const allChecks = [...(body.uls_checks ?? []), ...(body.sls_checks ?? [])];
+    const governingCheck = allChecks.reduce(
+      (worst, c) => (c.utilization > (worst?.utilization ?? 0) ? c : worst),
+      null,
+    );
+    return {
+      _type: "kerto_ripa",
+      summary: {
+        passed: body.summary?.passed ?? allChecks.every(c => c.passed),
+        governing_check: governingCheck?.check ?? "N/A",
+      },
+      uls_checks: body.uls_checks ?? [],
+      sls_checks: body.sls_checks ?? [],
+      geometry: body.geometry,
+      intermediate_values: body.intermediate_values,
+      warnings: body.warnings ?? [],
+      // forward inputs from summary if present
+      inputs: body.summary?.inputs ?? null,
+    };
+  }
+
+  // Legacy floor-joist combinations response
   if (!body?.uls_combinations || !body?.sls_combinations) {
     return body;
   }
@@ -495,7 +532,7 @@ function App() {
   function handleSupportChange(id, field, value) {
     let nextValue = value;
     if (field === "position_m") {
-      const span = Number(form.geometry.span_m);
+      const span = Number(form.span.L_ef_mm) / 1000.0;
       const numericValue = Number(value);
       if (!Number.isNaN(numericValue) && !Number.isNaN(span)) {
         nextValue = String(Math.max(0, Math.min(numericValue, span)));
@@ -517,7 +554,7 @@ function App() {
         ...current,
         supports: [
           ...current.supports,
-          { id: nextId, support_type: "roller", position_m: current.geometry.span_m || "0.00" },
+          { id: nextId, support_type: "roller", position_m: String(Number(current.span.L_ef_mm) / 1000.0) || "0.00" },
         ],
       };
     });
@@ -581,7 +618,7 @@ function App() {
   }
 
   const selectedAction = projectActions.find((action) => action.id === selectedActionId) ?? projectActions[0] ?? null;
-  const selectedTimberClass = TIMBER_CLASS_DATA[form.timber.grade] ?? TIMBER_CLASS_DATA.C24;
+  const selectedTimberClass = null;
   const combinationPreview = buildCombinationPreview(projectActions);
   const showSplitPreview = activeTab === "geometry" || activeTab === "section";
   const combinedCases = getCombinedCases(result);
@@ -610,14 +647,14 @@ function App() {
 
   function validate() {
     const nextErrors = [];
-    const numericGroups = [
-      ["geometry", ["span_m", "spacing_m", "width_mm", "depth_mm"]],
-      ["timber", ["modulus_of_elasticity_mpa", "allowable_bending_stress_mpa", "allowable_shear_stress_mpa"]],
+    const sections = [
+      ["span", ["L_ef_mm"]],
+      ["cross_section", ["element_width_mm", "n_ribs", "h_w_mm", "b_w_mm"]],
       ["loads", ["dead_load_kN_per_m2", "imposed_load_kN_per_m2", "additional_dead_load_kN_per_m2"]],
       ["criteria", ["max_deflection_ratio", "active_deflection_ratio", "instantaneous_deflection_ratio", "final_deflection_ratio"]],
     ];
 
-    numericGroups.forEach(([section, fields]) => {
+    sections.forEach(([section, fields]) => {
       fields.forEach((field) => {
         const value = Number(form[section][field]);
         if (Number.isNaN(value)) {
@@ -626,11 +663,9 @@ function App() {
       });
     });
 
-    if (!form.timber.grade.trim()) {
-      nextErrors.push("La clase de madera es obligatoria.");
-    }
 
-    const span = Number(form.geometry.span_m);
+
+    const span = Number(form.span.L_ef_mm) / 1000.0;
     if (!Number.isNaN(span)) {
       form.supports.forEach((support, index) => {
         const position = Number(support.position_m);
@@ -664,26 +699,33 @@ function App() {
 
     const payload = {
       project_name: form.project_name,
-      geometry: parseNumberFields(form.geometry),
-      timber: {
-        ...parseNumberFields(form.timber),
-        grade: form.timber.grade,
+      cross_section: {
+        section_type: form.cross_section.section_type,
+        element_width_mm: Number(form.cross_section.element_width_mm),
+        n_ribs: Number(form.cross_section.n_ribs),
+        h_w_mm: Number(form.cross_section.h_w_mm),
+        b_w_mm: Number(form.cross_section.b_w_mm),
+        h_f1_mm: form.cross_section.h_f1_mm ? Number(form.cross_section.h_f1_mm) : null,
+        h_f2_mm: form.cross_section.h_f2_mm ? Number(form.cross_section.h_f2_mm) : null,
+        b_actual_mm: form.cross_section.b_actual_mm ? Number(form.cross_section.b_actual_mm) : null
       },
-      supports: form.supports.map((support) => ({
-        support_type: support.support_type,
-        position_m: Number(support.position_m),
+      span: {
+        L_ef_mm: Number(form.span.L_ef_mm),
+        L_support_mm: Number(form.span.L_support_mm),
+        support_position: form.span.support_position
+      },
+      design_basis: form.design_basis,
+      supports: form.supports.map((s) => ({
+        support_type: s.support_type,
+        position_m: Number(s.position_m),
       })),
-      criteria: {
-        ...parseNumberFields(form.criteria),
-        design_standard: form.criteria.design_standard,
-      },
       action_catalog: buildActionCatalogPayload(projectActions),
     };
 
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(apiUrl("/calculate/floor-joist/combinations"), {
+      const response = await fetch(apiUrl("/calculate/kerto-ripa"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -734,21 +776,7 @@ function App() {
           onClick={() => setActiveTab("geometry")}
         >
           <span className="tab-icon">📐</span>
-          Geometría
-        </button>
-        <button
-          className={`tab-button ${activeTab === "section" ? "active" : ""}`}
-          onClick={() => setActiveTab("section")}
-        >
-          <span className="tab-icon">▣</span>
-          Sección
-        </button>
-        <button
-          className={`tab-button ${activeTab === "material" ? "active" : ""}`}
-          onClick={() => setActiveTab("material")}
-        >
-          <span className="tab-icon">🔧</span>
-          Material
+          Sección Transversal
         </button>
         <button
           className={`tab-button ${activeTab === "loads" ? "active" : ""}`}
@@ -783,8 +811,15 @@ function App() {
             {activeTab === "geometry" && (
               <>
                 <FormGroup title="Geometría longitudinal" className="form-group-compact-top">
-                  <Field label="Luz (m)" value={form.geometry.span_m} onChange={(value) => handleChange("geometry", "span_m", value)} />
-                  <Field label="Separación (m)" value={form.geometry.spacing_m} onChange={(value) => handleChange("geometry", "spacing_m", value)} />
+                  <Field label="Luz Efectiva (mm)" value={form.span.L_ef_mm} onChange={(value) => handleChange("span", "L_ef_mm", value)} />
+                  <Field label="Ancho total panel (mm)" value={form.cross_section.element_width_mm} onChange={(value) => handleChange("cross_section", "element_width_mm", value)} />
+                  <Field label="Nº de nervios" value={form.cross_section.n_ribs} onChange={(value) => handleChange("cross_section", "n_ribs", value)} />
+                  <Field label="Base nervio (mm)" value={form.cross_section.b_w_mm} onChange={(value) => handleChange("cross_section", "b_w_mm", value)} />
+                  <Field label="Canto nervio (mm)" value={form.cross_section.h_w_mm} onChange={(value) => handleChange("cross_section", "h_w_mm", value)} />
+                  <Field label="Losa superior hf1 (mm)" value={form.cross_section.h_f1_mm} onChange={(value) => handleChange("cross_section", "h_f1_mm", value)} />
+                  {(form.cross_section.section_type === 'box' || form.cross_section.section_type === 'open_box') && (
+                    <Field label="Losa inferior hf2 (mm)" value={form.cross_section.h_f2_mm} onChange={(value) => handleChange("cross_section", "h_f2_mm", value)} />
+                  )}
                 </FormGroup>
 
                 <section className="form-group">
@@ -823,40 +858,32 @@ function App() {
                     ))}
                   </div>
                 </section>
+
+                <article className="diagram-card beam-view-card">
+                  <div className="diagram-card-header">
+                    <h3>Vista de viga</h3>
+                    <span>{form.supports.length} apoyos</span>
+                  </div>
+                  <BeamSupportPreview
+                    spanM={Number(form.span.L_ef_mm) / 1000.0}
+                    supports={form.supports.map(s => ({
+                      support_type: s.support_type,
+                      position_m: Number(s.position_m),
+                    }))}
+                  />
+                  <div className="diagram-card-footer">
+                    <span>Luz: {formatNumber(Number(form.span.L_ef_mm) / 1000.0)} m</span>
+                    <span>Ancho: {formatNumber(Number(form.cross_section.element_width_mm))} mm</span>
+                  </div>
+                </article>
               </>
             )}
 
             {activeTab === "material" && (
-              <>
-                <FormGroup title="Madera">
-                  <SelectField
-                    label="Clase resistente"
-                    value={form.timber.grade}
-                    onChange={(value) => handleChange("timber", "grade", value)}
-                    options={timberClassOptions}
-                  />
-                </FormGroup>
-                <section className="form-group">
-                  <div className="group-title">
-                    <h3>Propiedades de la clase {form.timber.grade}</h3>
-                    <p>Valores asociados directamente a la clase resistente seleccionada.</p>
-                  </div>
-                  <div className="metrics-grid material-properties-grid">
-                    <ResultCard label="Flexión fm,k" value={selectedTimberClass.bending_strength_mpa} unit="MPa" />
-                    <ResultCard label="Tracción paralela ft,0,k" value={selectedTimberClass.tensile_strength_parallel_mpa} unit="MPa" />
-                    <ResultCard label="Tracción perpendicular ft,90,k" value={selectedTimberClass.tensile_strength_perpendicular_mpa} unit="MPa" />
-                    <ResultCard label="Compresión paralela fc,0,k" value={selectedTimberClass.compressive_strength_parallel_mpa} unit="MPa" />
-                    <ResultCard label="Compresión perpendicular fc,90,k" value={selectedTimberClass.compressive_strength_perpendicular_mpa} unit="MPa" />
-                    <ResultCard label="Cortante fv,k" value={selectedTimberClass.shear_strength_mpa} unit="MPa" />
-                    <ResultCard label="Módulo paralelo medio E0,medio" value={selectedTimberClass.modulus_mean_gpa} unit="GPa" />
-                    <ResultCard label="Módulo paralelo 5 percentil E0,k" value={selectedTimberClass.modulus_5_percentile_gpa} unit="GPa" />
-                    <ResultCard label="Módulo perpendicular medio E90,medio" value={selectedTimberClass.modulus_perpendicular_mean_gpa} unit="GPa" />
-                    <ResultCard label="Módulo transversal medio Gmedio" value={selectedTimberClass.shear_modulus_mean_gpa} unit="GPa" />
-                    <ResultCard label="Densidad característica ρk" value={selectedTimberClass.density_characteristic_kg_per_m3} unit="kg/m3" />
-                    <ResultCard label="Densidad media ρmedio" value={selectedTimberClass.density_mean_kg_per_m3} unit="kg/m3" />
-                  </div>
-                </section>
-              </>
+              <div className="empty-state">
+                <h3>Las propiedades de la madera se derivan de la selección de Kerto</h3>
+                <p>Kerto-S para los nervios y Kerto-Q para alas.</p>
+              </div>
             )}
 
             {activeTab === "loads" && (
@@ -890,10 +917,10 @@ function App() {
                               {action.action_type === "permanent"
                                 ? permanentOriginOptions.find((option) => option.value === action.origin)?.label
                                 : action.action_type === "imposed"
-                                ? `Categoría ${action.imposed_load_category}`
-                                : action.action_type === "snow"
-                                ? `Patrón ${action.snow_pattern}`
-                                : `Patrón ${action.wind_pattern}`}
+                                  ? `Categoría ${action.imposed_load_category}`
+                                  : action.action_type === "snow"
+                                    ? `Patrón ${action.snow_pattern}`
+                                    : `Patrón ${action.wind_pattern}`}
                             </span>
                           </button>
                           <button type="button" className="icon-button action-remove" onClick={() => removeProjectAction(action.id)} disabled={projectActions.length <= 1}>
@@ -947,7 +974,7 @@ function App() {
                   </div>
                 </section>
 
-                
+
                 <section className="form-group">
                   <div className="group-title">
                     <h3>Vista previa de combinaciones</h3>
@@ -1036,76 +1063,147 @@ function App() {
             {activeTab === "results" && (
               <div className="results-preview">
                 {result ? (
-                  <>
-                    {combinedCases.length > 0 && (
-                      <section className="form-group form-group-compact-top">
-                        <div className="field-grid single">
-                          <SelectField
-                            label="Caso de carga"
-                            value={selectedCombinationId}
-                            onChange={setSelectedCombinationId}
-                            options={combinedCases.map((item) => ({ value: item.id, label: item.label }))}
-                          />
+                  result._type === "kerto_ripa" ? (
+                    // ── Kerto-Ripa results ──────────────────────────────────
+                    <>
+                      <div className="summary-band">
+                        <div>
+                          <span className="metric-label">Estado</span>
+                          <strong>{result.summary.passed ? "Cumple" : "No cumple"}</strong>
                         </div>
-                      </section>
-                    )}
-
-                    <div className="summary-band">
-                      <div>
-                        <span className="metric-label">Estado</span>
-                        <strong>{selectedCombinedCase ? (selectedCombinedCase.summary.passed ? "Cumple" : "No cumple") : (result.summary.passed ? "Cumple" : "No cumple")}</strong>
+                        <div>
+                          <span className="metric-label">Verificación gobernante</span>
+                          <strong>{result.summary.governing_check}</strong>
+                        </div>
+                        <div>
+                          <span className="metric-label">Norma</span>
+                          <strong>EN 1995-1-1 / Kerto</strong>
+                        </div>
                       </div>
-                      <div>
-                        <span className="metric-label">Controla</span>
-                        <strong>{displayedGoverningCheck}</strong>
-                      </div>
-                      <div>
-                        <span className="metric-label">Norma</span>
-                        <strong>{result.inputs.criteria.design_standard}</strong>
-                      </div>
-                    </div>
 
-                    <div className="metrics-grid">
-                      <ResultCard label="Carga lineal" value={displayedResults.line_load_kN_per_m} unit="kN/m" />
-                      <ResultCard label="Momento máximo" value={displayedResults.max_moment_kNm} unit="kNm" />
-                      <ResultCard label="Cortante máximo" value={displayedResults.max_shear_kN} unit="kN" />
-                      <ResultCard label="Flecha" value={displayedResults.deflection_mm} unit="mm" />
-                      <ResultCard label="Momento de inercia" value={displayedResults.section_inertia_mm4} unit="mm⁴" />
-                      <ResultCard label="Módulo de sección" value={displayedResults.section_modulus_mm3} unit="mm³" />
-                      <ResultCard label="Tensión de flexión" value={displayedResults.bending_stress_mpa} unit="MPa" />
-                      <ResultCard label="Tensión de cortante" value={displayedResults.shear_stress_mpa} unit="MPa" />
-                      <ResultCard label="Flecha admisible" value={displayedDeflectionCapacity} unit="mm" />
-                    </div>
-
-                    <div className="checks-list">
-                      {displayedChecks.map((check) => (
-                        <article className="check-card" key={check.check}>
-                          <div className="check-card-header">
-                            <h3>{check.check}</h3>
-                            <span className={`status-pill ${check.passed ? "pass" : "fail"}`}>
-                              {check.passed ? "OK" : "No OK"}
-                            </span>
+                      {result.intermediate_values && (
+                        <section className="form-group">
+                          <div className="group-title"><h3>Valores intermedios</h3></div>
+                          <div className="metrics-grid">
+                            {Object.entries(result.intermediate_values).map(([key, val]) => (
+                              <ResultCard key={key} label={key.replace(/_/g, " ")} value={typeof val === "number" ? val : null} unit="" />
+                            ))}
                           </div>
-                          <p>Demanda: {formatNumber(check.demand)} {check.unit}</p>
-                          <p>Capacidad: {formatNumber(check.capacity)} {check.unit}</p>
-                          <p>Utilización: {formatNumber(check.utilization)}</p>
-                        </article>
-                      ))}
-                    </div>
-
-                    <div className="warnings-box">
-                      <h3>Advertencias</h3>
-                      {displayedWarnings.length > 0 ? (
-                        displayedWarnings.map((warning) => (
-                          <p key={warning.code}>
-                            <strong>{warning.code}</strong>: {warning.message}
-                          </p>
-                        ))
-                      ) : (
-                        <p>Sin advertencias en este caso.</p>
+                        </section>
                       )}
-                    </div>
-                  </>
+
+                      <div className="checks-list">
+                        <h3 style={{ margin: "12px 0 8px", fontSize: "0.85rem", opacity: 0.6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Verificaciones ULS</h3>
+                        {result.uls_checks.map((check) => (
+                          <article className="check-card" key={check.check}>
+                            <div className="check-card-header">
+                              <h3>{check.check}</h3>
+                              <span className={`status-pill ${check.passed ? "pass" : "fail"}`}>
+                                {check.passed ? "OK" : "No OK"}
+                              </span>
+                            </div>
+                            <p>Demanda: {formatNumber(check.demand)} {check.unit}</p>
+                            <p>Capacidad: {formatNumber(check.capacity)} {check.unit}</p>
+                            <p>Utilización: {formatNumber(check.utilization * 100)} %</p>
+                          </article>
+                        ))}
+                        <h3 style={{ margin: "16px 0 8px", fontSize: "0.85rem", opacity: 0.6, textTransform: "uppercase", letterSpacing: "0.05em" }}>Verificaciones SLS</h3>
+                        {result.sls_checks.map((check) => (
+                          <article className="check-card" key={check.check}>
+                            <div className="check-card-header">
+                              <h3>{check.check}</h3>
+                              <span className={`status-pill ${check.passed ? "pass" : "fail"}`}>
+                                {check.passed ? "OK" : "No OK"}
+                              </span>
+                            </div>
+                            <p>Demanda: {formatNumber(check.demand)} {check.unit}</p>
+                            <p>Capacidad: {formatNumber(check.capacity)} {check.unit}</p>
+                            <p>Utilización: {formatNumber(check.utilization * 100)} %</p>
+                          </article>
+                        ))}
+                      </div>
+
+                      <div className="warnings-box">
+                        <h3>Advertencias</h3>
+                        {result.warnings.length > 0 ? (
+                          result.warnings.map((w) => (
+                            <p key={w.code}><strong>{w.code}</strong>: {w.message}</p>
+                          ))
+                        ) : (
+                          <p>Sin advertencias.</p>
+                        )}
+                      </div>
+
+                      <DiagramsSection result={result} selectedCase={null} view="results" form={form} />
+                    </>
+                  ) : (
+                    // ── Legacy floor-joist results ───────────────────────────
+                    <>
+                      {combinedCases.length > 0 && (
+                        <section className="form-group form-group-compact-top">
+                          <div className="field-grid single">
+                            <SelectField
+                              label="Caso de carga"
+                              value={selectedCombinationId}
+                              onChange={setSelectedCombinationId}
+                              options={combinedCases.map((item) => ({ value: item.id, label: item.label }))}
+                            />
+                          </div>
+                        </section>
+                      )}
+
+                      <div className="summary-band">
+                        <div>
+                          <span className="metric-label">Estado</span>
+                          <strong>{selectedCombinedCase ? (selectedCombinedCase.summary.passed ? "Cumple" : "No cumple") : (result.summary.passed ? "Cumple" : "No cumple")}</strong>
+                        </div>
+                        <div>
+                          <span className="metric-label">Controla</span>
+                          <strong>{displayedGoverningCheck}</strong>
+                        </div>
+                        <div>
+                          <span className="metric-label">Norma</span>
+                          <strong>{result.inputs?.criteria?.design_standard ?? "EC5"}</strong>
+                        </div>
+                      </div>
+
+                      <div className="metrics-grid">
+                        <ResultCard label="Carga lineal" value={displayedResults?.line_load_kN_per_m} unit="kN/m" />
+                        <ResultCard label="Momento máximo" value={displayedResults?.max_moment_kNm} unit="kNm" />
+                        <ResultCard label="Cortante máximo" value={displayedResults?.max_shear_kN} unit="kN" />
+                        <ResultCard label="Flecha" value={displayedResults?.deflection_mm} unit="mm" />
+                      </div>
+
+                      <div className="checks-list">
+                        {displayedChecks.map((check) => (
+                          <article className="check-card" key={check.check}>
+                            <div className="check-card-header">
+                              <h3>{check.check}</h3>
+                              <span className={`status-pill ${check.passed ? "pass" : "fail"}`}>
+                                {check.passed ? "OK" : "No OK"}
+                              </span>
+                            </div>
+                            <p>Demanda: {formatNumber(check.demand)} {check.unit}</p>
+                            <p>Capacidad: {formatNumber(check.capacity)} {check.unit}</p>
+                            <p>Utilización: {formatNumber(check.utilization)}</p>
+                          </article>
+                        ))}
+                      </div>
+
+                      <div className="warnings-box">
+                        <h3>Advertencias</h3>
+                        {displayedWarnings.length > 0 ? (
+                          displayedWarnings.map((warning) => (
+                            <p key={warning.code}>
+                              <strong>{warning.code}</strong>: {warning.message}
+                            </p>
+                          ))
+                        ) : (
+                          <p>Sin advertencias en este caso.</p>
+                        )}
+                      </div>
+                    </>
+                  )
                 ) : (
                   <div className="empty-state">
                     <h3>Esperando un cálculo</h3>
@@ -1119,35 +1217,32 @@ function App() {
             )}
 
             {activeTab === "section" && (
-              <>
-                <FormGroup title="Sección transversal" className="form-group-compact-top">
-                  <Field label="Ancho (mm)" value={form.geometry.width_mm} onChange={(value) => handleChange("geometry", "width_mm", value)} />
-                  <Field label="Canto (mm)" value={form.geometry.depth_mm} onChange={(value) => handleChange("geometry", "depth_mm", value)} />
-                </FormGroup>
-
-                <div className="results-preview">
-                  <div className="section-summary">
-                    <p>Esta pestaña muestra la pieza en sección transversal con las dimensiones activas.</p>
-                    <p>Si ya hay cálculo, la vista toma la geometría enviada al backend; si no, usa el formulario actual.</p>
-                  </div>
-                </div>
-              </>
+              <div className="empty-state">
+                <h3>Sección paramétrica Kerto-Ripa</h3>
+                <p>La geometría de la pieza depende totalmente del Paso 1 interactivo y se calculará dinámicamente.</p>
+              </div>
             )}
           </form>
         </section>
 
-        {(activeTab === "geometry" || activeTab === "section" || (activeTab === "results" && result)) && (
+        {(activeTab === "geometry" || activeTab === "section") && (
           <section className={`panel panel-diagrams ${showSplitPreview ? "panel-diagrams-split" : "panel-full-width"}`}>
             <div className="panel-heading">
-              <h2>{activeTab === "geometry" ? "Viga y apoyos" : activeTab === "section" ? "Sección transversal" : "Diagramas"}</h2>
+              <h2>{activeTab === "geometry" ? "Tipología y viga" : activeTab === "section" ? "Sección transversal" : "Diagramas"}</h2>
               <p>
                 {activeTab === "geometry"
-                  ? "Vista previa de la viga con la configuración de apoyos"
+                  ? "Selecciona el tipo de panel y revisa la configuración de apoyos"
                   : activeTab === "section"
-                  ? "Vista geométrica de la pieza activa"
-                  : "Análisis estructural automático con elementos finitos"}
+                    ? "Vista geométrica de la pieza activa"
+                    : "Análisis estructural automático con elementos finitos"}
               </p>
             </div>
+            {activeTab === "geometry" && (
+              <Step1SectionType
+                value={form.cross_section.section_type}
+                onChange={(val) => handleChange("cross_section", "section_type", val)}
+              />
+            )}
             <DiagramsSection result={result} selectedCase={selectedCombinedCase} view={activeTab} form={form} />
           </section>
         )}
@@ -1220,26 +1315,51 @@ function formatNumber(value) {
 }
 
 function DiagramsSection({ result, selectedCase = null, view = "results", form }) {
-  // Usar parámetros del cálculo si existe, sino valores por defecto
+  const isKertoRipa = result?._type === "kerto_ripa";
   const activeResults = selectedCase?.results ?? result?.results ?? null;
-  const calculatedParams = result && activeResults ? {
-    length: result.inputs.geometry.span_m,
-    elements: 100, // mantener fijo internamente
-    load: -activeResults.line_load_kN_per_m, // negativo para downward
-    modulus: result.inputs.timber.modulus_of_elasticity_mpa,
-  } : null;
-  const sectionDimensions = result
-    ? {
-        widthMm: result.inputs.geometry.width_mm,
-        depthMm: result.inputs.geometry.depth_mm,
-      }
-    : {
-        widthMm: Number(form?.geometry.width_mm ?? 63),
-        depthMm: Number(form?.geometry.depth_mm ?? 200),
+
+  // For Kerto-Ripa: build params from form (result has no inputs)
+  // For legacy: build from result.inputs
+  const calculatedParams = (() => {
+    if (isKertoRipa && form) {
+      // Use the governing ULS line load as a proxy for the diagram load
+      const governingUls = result.uls_checks?.find(c => c.check.startsWith("shear_ULS"));
+      const V_d = governingUls?.demand ?? 0;
+      const span_m = Number(form.span.L_ef_mm) / 1000.0;
+      // Approximate: line_load = 2*V_d / span (simply supported equiv)
+      const approxLineLoad = span_m > 0 ? (2 * V_d) / span_m : 5.0;
+      return {
+        length: span_m,
+        elements: Math.max(20, Math.ceil(span_m * 10)),
+        load: -approxLineLoad,
+        modulus: 13800,
       };
-  const supports = view === "results" && result
-    ? result.inputs.supports
-    : (form?.supports ?? []).map((support) => ({
+    }
+    if (result && activeResults) {
+      return {
+        length: result.inputs.span.L_ef_mm / 1000.0,
+        elements: 100,
+        load: -activeResults.line_load_kN_per_m,
+        modulus: 13800,
+      };
+    }
+    return null;
+  })();
+
+  const sectionDimensions = {
+    widthMm: isKertoRipa
+      ? Number(form?.cross_section?.element_width_mm ?? 585)
+      : (result ? result.inputs.cross_section.element_width_mm : Number(form?.cross_section?.element_width_mm ?? 585)),
+    depthMm: isKertoRipa
+      ? Number(form?.cross_section?.h_w_mm ?? 225)
+      : (result ? result.inputs.cross_section.h_w_mm : Number(form?.cross_section?.h_w_mm ?? 225)),
+  };
+
+  const supports = isKertoRipa && form
+    ? form.supports.map(s => ({ support_type: s.support_type, position_m: Number(s.position_m) }))
+    : view === "results" && result
+      ? result.inputs.supports
+      : (form?.supports ?? []).map((support) => ({
         support_type: support.support_type,
         position_m: Number(support.position_m),
       }));
@@ -1252,25 +1372,33 @@ function DiagramsSection({ result, selectedCase = null, view = "results", form }
     setLoading(true);
     setError(null);
 
+    // Build stiffness: for KR use EI directly from geometry result; for legacy derive from material+section
+    const eiNmm2 = isKertoRipa
+      ? (result?.geometry?.EI_ef_ULS_Nmm2 ?? null)
+      : null;
+
     const payload = {
-      project_name: result?.inputs.project_name ?? form?.project_name ?? null,
+      project_name: form?.project_name ?? null,
+      beam_theory: "euler_bernoulli",
       span: {
         length_m: params.length,
         element_count: params.elements,
       },
-      material: {
-        modulus_of_elasticity_mpa: params.modulus,
-      },
-      section: {
-        width_mm: result ? result.inputs.geometry.width_mm : 63.0,
-        depth_mm: result ? result.inputs.geometry.depth_mm : 200.0,
-      },
+      ...(eiNmm2 != null
+        ? { stiffness_ei_Nmm2: eiNmm2 }
+        : {
+          material: { modulus_of_elasticity_mpa: params.modulus },
+          section: {
+            width_mm: Number(form?.cross_section?.element_width_mm ?? 585),
+            depth_mm: Number(form?.cross_section?.h_w_mm ?? 225),
+          },
+        }),
       supports: supports.length > 0
         ? supports
         : [
-            { position_m: 0.0, support_type: "pinned" },
-            { position_m: params.length, support_type: "roller" },
-          ],
+          { position_m: 0.0, support_type: "pinned" },
+          { position_m: params.length, support_type: "roller" },
+        ],
       loads: [
         {
           load_type: "distributed",
@@ -1308,7 +1436,7 @@ function DiagramsSection({ result, selectedCase = null, view = "results", form }
 
   // Cargar diagramas cuando cambia el result
   useEffect(() => {
-    if (view === "results" && result && calculatedParams) {
+    if (view === "results" && calculatedParams) {
       loadDiagrams(calculatedParams);
     }
   }, [view, result, selectedCase]);
@@ -1321,8 +1449,8 @@ function DiagramsSection({ result, selectedCase = null, view = "results", form }
           {view === "geometry"
             ? "Vista previa inmediata basada en la geometría y los apoyos definidos"
             : view === "section"
-            ? "Vista geométrica de la sección activa"
-            : "Diagramas sincronizados con la combinación seleccionada"
+              ? "Vista geométrica de la sección activa"
+              : "Diagramas sincronizados con la combinación seleccionada"
           }
           {loading && " - Actualizando..."}
         </p>
@@ -1334,22 +1462,7 @@ function DiagramsSection({ result, selectedCase = null, view = "results", form }
         </div>
       )}
 
-      {view === "geometry" && (
-            <article className="diagram-card beam-view-card">
-              <div className="diagram-card-header">
-                <h3>Viga y apoyos</h3>
-                <span>Configuración actual</span>
-              </div>
-              <BeamSupportPreview
-                spanM={Number(form?.geometry.span_m ?? 4)}
-                supports={supports}
-              />
-              <div className="diagram-card-footer">
-                <span>Luz: {formatNumber(Number(form?.geometry.span_m ?? 4))} m</span>
-                <span>{supports.length} apoyos definidos</span>
-              </div>
-            </article>
-      )}
+      {view === "geometry" && null}
 
       {view === "section" && (
         <SectionCard widthMm={sectionDimensions.widthMm} depthMm={sectionDimensions.depthMm} />
@@ -1399,8 +1512,8 @@ function DiagramsSection({ result, selectedCase = null, view = "results", form }
               {diagramData.diagrams
                 .filter((diagram) => diagram.diagram_type !== "rotation")
                 .map((diagram) => (
-                <DiagramCard key={diagram.diagram_type} diagram={diagram} />
-              ))}
+                  <DiagramCard key={diagram.diagram_type} diagram={diagram} />
+                ))}
             </div>
           )}
         </>
@@ -1427,6 +1540,7 @@ function SectionCard({ widthMm, depthMm }) {
     </article>
   );
 }
+
 
 function BeamSupportPreview({ spanM, supports }) {
   const width = 900;

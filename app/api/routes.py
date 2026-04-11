@@ -11,6 +11,8 @@ from app.schemas.floor_joist import (
     FloorJoistCombinationCalculationRequest,
     FloorJoistCombinationCalculationResponse,
 )
+from app.domain.kertoripa.calculator import calculate_kerto_ripa
+from app.schemas.kertoripa import KertoRipaCalculationRequest, KertoRipaCalculationResponse
 
 router = APIRouter()
 
@@ -40,6 +42,17 @@ def calculate_floor_joist_with_combinations_endpoint(
     payload: FloorJoistCombinationCalculationRequest,
 ) -> FloorJoistCombinationCalculationResponse:
     return calculate_floor_joist_with_combinations(payload)
+
+
+@router.post(
+    "/calculate/kerto-ripa",
+    response_model=KertoRipaCalculationResponse,
+    tags=["calculations"],
+)
+def calculate_kerto_ripa_endpoint(
+    payload: KertoRipaCalculationRequest,
+) -> KertoRipaCalculationResponse:
+    return calculate_kerto_ripa(payload)
 
 
 @router.post(
